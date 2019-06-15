@@ -1,5 +1,7 @@
 const ROUTES = {
-    HOME: "/"
-}
+    HOME: "/",
+    ADMIN: "/admin",
+    SIGN_IN: "/api/redirect"
+};
 
 export default ROUTES

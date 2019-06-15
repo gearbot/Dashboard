@@ -16,3 +16,7 @@ export interface AppState {
 export interface HeaderProps {
     user?: User;
 }
+
+export interface HeaderState {
+    menuActive: boolean
+}

@@ -30,6 +30,8 @@ class App extends Component<UserHolder, AppState> {
                         });
                     }
                 }))
+
+        //TODO: fetch authenticated user
     }
 
 
