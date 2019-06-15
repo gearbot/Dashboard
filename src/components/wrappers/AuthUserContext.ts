@@ -1,5 +1,4 @@
 import {createContext} from "preact";
 
-const AuthUserContext = createContext(null);
-
-export default AuthUserContext;
+export const AuthUserContext = createContext(null);
+export const AuthUserSetter = createContext(null);

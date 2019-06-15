@@ -1,17 +1,17 @@
 import {Component} from "preact";
-import withAuthentication from "./wrappers/WithAuthentication";
 import {HeaderProps} from "../utils/Interfaces";
+import {useContext} from "preact/hooks";
+import {AuthUserContext} from "./wrappers/AuthUserContext";
 
-class HeaderClass extends Component<HeaderProps, {}> {
+export default class Header extends Component<HeaderProps, {}> {
 
     render() {
+        const user = useContext(AuthUserContext);
+        console.log("User: " + user)
         return (
             <div>
-                Header
+                Header {user}
             </div>
         );
     }
 }
-
-const Header = withAuthentication(HeaderClass);
-export default Header;

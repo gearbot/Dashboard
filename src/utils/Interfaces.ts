@@ -1,5 +1,8 @@
 export interface User {
-
+    id: number
+    name: string
+    discriminator: string
+    globalAdmin: boolean
 }
 
 export interface UserHolder {
