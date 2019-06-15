@@ -1,0 +1,2 @@
+# Dashboard
+Gearbot dashboard frontend
