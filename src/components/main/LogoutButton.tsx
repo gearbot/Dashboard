@@ -1,9 +1,9 @@
 import {Component} from "preact";
 import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {get_info} from "../utils/dashAPI";
+import {get_info} from "../../utils/dashAPI";
 import {useContext} from "preact/hooks";
-import {AuthUserSetter} from "./wrappers/AuthUserContext";
+import {AuthUserSetter} from "../wrappers/Context";
 
 export default class LogoutButton extends Component<{}, {}> {
 

@@ -11,6 +11,7 @@ export interface UserHolder {
 
 export interface AppState {
     currentUrl: string;
+    user: User;
 }
 
 export interface HeaderProps {
@@ -19,4 +20,19 @@ export interface HeaderProps {
 
 export interface HeaderState {
     menuActive: boolean
+}
+
+export interface Guild {
+    id: number
+    name: string;
+    permissions: number;
+    icon: string;
+}
+
+export interface GuildMap {
+    [guid: number]: Guild
+}
+
+export interface GuildProps {
+    guild: Guild;
 }

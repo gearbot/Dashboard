@@ -2,7 +2,8 @@ const ROUTES = {
     HOME: "/",
     ADMIN: "/admin",
     SIGN_IN: "/api/redirect",
-    CLOSER: "/pleaseclosethispopupformektxh"
+    CLOSER: "/pleaseclosethispopupformektxh",
+    GUILDS: "/guilds"
 };
 
 export default ROUTES

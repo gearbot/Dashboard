@@ -1,3 +1,6 @@
+import {useContext} from "preact/hooks";
+import {AuthUserSetter} from "../components/wrappers/Context";
+
 const API_ROOT = process.env.API_ROOT;
 const CORS = process.env.CORS == "ENABLED";
 
@@ -37,7 +40,7 @@ export const get_info = async ({method, endpoint, body = false, auth_on_fail = t
                 await sleep(100)
             }
             return await get_info({method: method, endpoint: endpoint, body: body, auth_on_fail: false});
-        }
+        } else return null
     } else {
         return await response.json();
     }

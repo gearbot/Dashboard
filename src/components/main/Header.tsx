@@ -1,12 +1,12 @@
 import {Component} from "preact";
-import {HeaderProps, HeaderState} from "../utils/Interfaces";
+import {HeaderProps, HeaderState} from "../../utils/Interfaces";
 import {useContext, useEffect, useState} from "preact/hooks";
-import {AuthUserContext, AuthUserSetter} from "./wrappers/AuthUserContext";
-import ROUTES from "../utils/routes";
+import {AuthUser, AuthUserSetter} from "../wrappers/Context";
+import ROUTES from "../../utils/routes";
 import {Link} from "preact-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faToolbox} from "@fortawesome/free-solid-svg-icons";
-import {get_info} from "../utils/dashAPI";
+import {get_info} from "../../utils/dashAPI";
 import LogoutButton from "./LogoutButton";
 
 //navigation for authenticated users
@@ -57,14 +57,14 @@ export default class Header extends Component<HeaderProps, HeaderState> {
     constructor(props, state) {
         super(props, state);
         this.setState({"menuActive": false});
-        get_info({method: "GET", endpoint: "whoami", auth_on_fail: false}).then(info => useContext(AuthUserSetter)(info));
+
     }
 
     toggleActive = (event) => this.setState({"menuActive": !this.state.menuActive});
 
     render() {
 
-        const user = useContext(AuthUserContext);
+        const user = useContext(AuthUser);
         console.log("User: " + user);
         return <nav class="navbar is-light" role="navigation" aria-label="main navbar">
             <div class="navbar-brand">
