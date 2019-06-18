@@ -5,10 +5,11 @@ import ROUTES from "../utils/routes";
 import Home from "./Home";
 import Header from "./Header";
 import {AuthUserContext, AuthUserSetter} from "./wrappers/AuthUserContext";
-import {useState} from "preact/hooks";
+import {useContext, useState} from "preact/hooks";
+import {get_info} from "../utils/dashAPI";
+import PopupCloser from "./PopupCloser";
 
 const VERSION = 1;
-
 
 class App extends Component<UserHolder, AppState> {
 
@@ -29,9 +30,7 @@ class App extends Component<UserHolder, AppState> {
                             }
                         });
                     }
-                }))
-
-        //TODO: fetch authenticated user
+                }));
     }
 
 
@@ -46,6 +45,7 @@ class App extends Component<UserHolder, AppState> {
                         <Header/>
                         <Router onChange={setUrl} url={url}>
                             <Home path={ROUTES.HOME}/>
+                            <PopupCloser path={ROUTES.CLOSER} />
                         </Router>
                     </div>
                 }/>
