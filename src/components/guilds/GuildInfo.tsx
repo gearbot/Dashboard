@@ -10,8 +10,37 @@ export default class GuildInfo extends Component<{}, {}> {
     render() {
         const guildInfo = useContext(Guild);
         return (
-            <div>
-
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Members</p>
+                        <p class="title">{guildInfo.members}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Online</p>
+                        <p class="title">{guildInfo.member_statuses.online}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">AFK</p>
+                        <p class="title">{guildInfo.member_statuses.idle}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">DND</p>
+                        <p class="title">{guildInfo.member_statuses.dnd}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Offline</p>
+                        <p class="title">{guildInfo.member_statuses.offline}</p>
+                    </div>
+                </div>
             </div>
         );
     }

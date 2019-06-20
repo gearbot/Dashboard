@@ -73,6 +73,8 @@ export interface Statuses {
 export interface Role {
     id: string;
     name: string;
+    color: number;
+    members: number
 }
 
 export interface DetailedGuildInfo {
