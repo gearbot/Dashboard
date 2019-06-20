@@ -1,7 +1,7 @@
 import {Component} from "preact";
 import withAuthorization from "../components/wrappers/WithAuthorization";
 import {get_info} from "../utils/dashAPI";
-import Guild from "../components/guilds/Guild";
+import GuildCard from "../components/guilds/GuildCard";
 import {GuildListRouteState} from "../utils/Interfaces";
 
 class GuildListRoute extends Component<{}, GuildListRouteState> {
@@ -27,7 +27,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
         if (guilds) {
             Object.keys(guilds).map(key => {
                 const guild = guilds[key];
-                processed.push(<Guild guild={guild} />)
+                processed.push(<GuildCard guild={guild} />)
             })
         }
         return (

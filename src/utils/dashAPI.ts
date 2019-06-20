@@ -36,11 +36,11 @@ export const get_info = async ({method, endpoint, body = false, auth_on_fail = t
                     ready = true
                 }
             });
-            while (!ready) {
+            while (w && !ready) {
                 await sleep(100)
             }
             return await get_info({method: method, endpoint: endpoint, body: body, auth_on_fail: false});
-        } else return null
+        } else throw "Unauthorized"
     } else {
         return await response.json();
     }
