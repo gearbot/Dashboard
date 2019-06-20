@@ -31,3 +31,20 @@ $body-background-color: #EAEAEA;
 		}
 	}
 }
+
+
+
+.serverImage {
+	border-radius: 50%;
+	max-height: 2em;
+	vertical-align: text-bottom;
+}
+
+.serverTitle {
+	text-align: center;
+}
+
+.tabs {
+	display: inline-flex;
+	margin: auto;
+}

@@ -36,7 +36,7 @@ class App extends Component<UserHolder, AppState> {
                 }));
 
         this.setState({user: JSON.parse(localStorage.getItem("user"))});
-        get_info({method: "GET", endpoint: "whoami", auth_on_fail: false}).then(info => {
+        get_info({method: "GET", endpoint: "whoami"}).then(info => {
             localStorage.setItem("user", JSON.stringify(info));
             useContext(AuthUserSetter)(info)
         });

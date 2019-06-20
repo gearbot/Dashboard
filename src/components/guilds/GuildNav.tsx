@@ -34,8 +34,10 @@ export default class GuildNav extends Component<GuildNavProps, {}> {
         ;
 
         return (
-            <div class="tabs is-toggle is-toggle-rounded">
-                {links}
+            <div class="level has-text-centered">
+                <div class="tabs is-toggle is-toggle-rounded is-centered">
+                    {links}
+                </div>
             </div>
         );
     }

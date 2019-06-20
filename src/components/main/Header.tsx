@@ -38,7 +38,7 @@ const NavUserAuth = () => (
 );
 
 const login = () => {
-    get_info({method: "GET", endpoint: "whoami"}).then(info => useContext(AuthUserSetter)(info))
+    get_info({method: "GET", endpoint: "whoami", auth_on_fail:true}).then(info => useContext(AuthUserSetter)(info))
 };
 
 //login for non authenticated users

@@ -11,7 +11,6 @@ export default class LogoutButton extends Component<{}, {}> {
         get_info({
             method: "GET",
             endpoint: "logout",
-            auth_on_fail: false
         }).then(
             useContext(AuthUserSetter)(null)
         )

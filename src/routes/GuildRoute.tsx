@@ -7,6 +7,7 @@ import GuildNav from "../components/guilds/GuildNav";
 import Router from "preact-router";
 import GuildInfo from "../components/guilds/GuildInfo";
 import ROUTES from "../utils/routes";
+import HackerMan from "../components/main/HackerMan";
 
 const INITIAL_STATE = {
     guild: null,
@@ -37,19 +38,24 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
     }
 
     render() {
+        const {loading, guild, authorized} = this.state;
+
         return (
-            <Guild.Provider value={this.state.guild} children={
+
+            <Guild.Provider value={guild} children={
                 <div class="container is-fluid">
                     {
-                        this.state.loading ?
+                        loading ?
                             <div>Loading...</div> :
+                            authorized ?
                             <div class="container">
-                                <h1 class="title">{this.state.guild.name}</h1>
+                                <h1 class="title serverTitle"><img src={guild.server_icon} class="serverImage"/>{guild.name}<img src={guild.server_icon} class="serverImage"/></h1>
                                 <GuildNav tab={this.props.tab}/>
                                 <Router>
                                     <GuildInfo path={ROUTES.GUILD_INFO}/>
                                 </Router>
-                            </div>
+                            </div> :
+                                <HackerMan/>
                     }
                 </div>
             }/>

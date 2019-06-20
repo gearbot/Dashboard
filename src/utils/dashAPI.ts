@@ -1,6 +1,3 @@
-import {useContext} from "preact/hooks";
-import {AuthUserSetter} from "../components/wrappers/Context";
-
 const API_ROOT = process.env.API_ROOT;
 const CORS = process.env.CORS == "ENABLED";
 
@@ -9,8 +6,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export const get_info = async ({method, endpoint, body = false, auth_on_fail = true}) => {
-    console.log("CORS: ", CORS)
+export const get_info = async ({method, endpoint, body = false, auth_on_fail = false}) => {
     const options: any = {
         method: method,
         cache: "no-cache",
