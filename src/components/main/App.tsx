@@ -9,6 +9,8 @@ import PopupCloser from "./PopupCloser";
 import ROUTES from "../../utils/routes";
 import GuildListRoute from "../../routes/GuildListRoute";
 import {get_info} from "../../utils/dashAPI";
+import GuildInfoRoute from "../../routes/GuildInfoRoute";
+import "../../style/styles.scss"
 
 const VERSION = 1;
 
@@ -45,27 +47,18 @@ class App extends Component<UserHolder, AppState> {
 
     render() {
         const [url, setUrl] = useState(null);
-        const [guildMap, setGuildMap] = useState(null);
-        const [guild, setGuild] = useState(null);
         return (
             <AuthUser.Provider value={this.state.user} children={
                 <AuthUserSetter.Provider value={this.setUser} children={
-                    <GuildList.Provider value={guildMap} children={
-                        <GuildListSetter.Provider value={setGuildMap} children={
-                            <Guild.Provider value={guild} children={
-                                <GuildSetter.Provider value={setGuild} children={
-                                    <div>
-                                        <Header/>
-                                        <Router onChange={setUrl} url={url}>
-                                            <Home path={ROUTES.HOME}/>
-                                            <PopupCloser path={ROUTES.CLOSER}/>
-                                            <GuildListRoute path={ROUTES.GUILDS}/>
-                                        </Router>
-                                    </div>
-                                }/>
-                            }/>
-                        }/>
-                    }/>
+                    <div>
+                        <Header/>
+                        <Router onChange={setUrl} url={url}>
+                            <Home path={ROUTES.HOME}/>
+                            <PopupCloser path={ROUTES.CLOSER}/>
+                            <GuildListRoute path={ROUTES.GUILDS}/>
+                            <GuildInfoRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
+                        </Router>
+                    </div>
                 }/>
             }/>
         );

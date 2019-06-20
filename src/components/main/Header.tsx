@@ -13,7 +13,8 @@ import LogoutButton from "./LogoutButton";
 const NavigationAuth = ({user}) => (
 
     <div class="navbar-start">
-        {user.globalAdmin ? (
+        <Link class="navbar-item" href={ROUTES.GUILDS}>Guilds</Link>
+        {user.bot_admin_status ? (
                 <Link activeClassName="active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon icon={faToolbox}/>Admin</Link>
             )
             : null}
@@ -65,7 +66,8 @@ export default class Header extends Component<HeaderProps, HeaderState> {
     render() {
 
         const user = useContext(AuthUser);
-        console.log("User: " + user);
+        console.log("User:");
+        console.log(user);
         return <nav class="navbar is-light" role="navigation" aria-label="main navbar">
             <div class="navbar-brand">
                 <Link class="navbar-item" href={ROUTES.HOME}>

@@ -1,14 +1,14 @@
 import {Component} from "preact";
 import withAuthorization from "../components/wrappers/WithAuthorization";
 import {get_info} from "../utils/dashAPI";
-import {useContext} from "preact/hooks";
-import {GuildListSetter, GuildList} from "../components/wrappers/Context";
 import Guild from "../components/guilds/Guild";
+import {GuildListRouteState} from "../utils/Interfaces";
 
-class GuildListRoute extends Component<{}, {}> {
+class GuildListRoute extends Component<{}, GuildListRouteState> {
 
     constructor(props, state) {
         super(props, state);
+        this.setState({guilds: undefined});
         get_info({
             method: "GET",
             endpoint: "guilds"
@@ -16,13 +16,13 @@ class GuildListRoute extends Component<{}, {}> {
             guilds =>
             {
                 console.log(guilds)
-                useContext(GuildListSetter)(guilds)
+                this.setState({guilds: guilds})
             }
         )
     }
 
     render() {
-        const guilds = useContext(GuildList);
+        const guilds = this.state.guilds;
         const processed = [];
         if (guilds) {
             Object.keys(guilds).map(key => {
@@ -32,7 +32,7 @@ class GuildListRoute extends Component<{}, {}> {
         }
         return (
             guilds ?
-               processed:
+                <div class="cardflex">{processed}</div>:
                 <div>Loading...</div>
         );
     }

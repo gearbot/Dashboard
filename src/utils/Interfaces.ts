@@ -36,3 +36,11 @@ export interface GuildMap {
 export interface GuildProps {
     guild: Guild;
 }
+
+export interface GuildInfoRouteProps {
+    gid: number;
+}
+
+export interface GuildListRouteState {
+    guilds: GuildMap;
+}

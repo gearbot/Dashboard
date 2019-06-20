@@ -10,9 +10,20 @@ export default class Guild extends Component<GuildProps, {}> {
     }
 
     render() {
-        const {id, name, permissions, icon} = this.props.guild;
+        const {id, name, icon} = this.props.guild;
         return (
-            <Link href={`${ROUTES.GUILDS}/${id}`}>{name}</Link>
+            <Link href={`${ROUTES.GUILDS}/${id}`} class="card tile is-child mycard">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        {name}
+                    </p>
+                </header>
+                <div class="card-image">
+                    <figure class="image">
+                        <img src={icon} alt="Guild icon"/>
+                    </figure>
+                </div>
+            </Link>
         );
     }
 }

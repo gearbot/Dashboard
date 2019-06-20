@@ -9,3 +9,24 @@
 @import "../../node_modules/bulma/sass/components/tabs.sass";
 @import "../../node_modules/bulma/sass/components/card.sass";
 @import "../../node_modules/bulma/sass/components/modal.sass";
+
+$body-background-color: #EAEAEA;
+
+.mycard {
+	float:left;
+	margin: 1em;
+	flex-grow: 1;
+	flex-basis: 0;
+	flex-shrink: 1;
+}
+
+.card-image {
+	figure {
+		min-width: 20em;
+		img {
+			display: block;
+			margin: auto;
+			max-width: 20em;
+		}
+	}
+}
