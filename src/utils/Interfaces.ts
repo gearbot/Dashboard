@@ -12,6 +12,7 @@ export interface UserHolder {
 export interface AppState {
     currentUrl: string;
     user: User;
+    languages: LangMap;
 }
 
 export interface HeaderProps {
@@ -94,6 +95,46 @@ export interface DetailedGuildInfo {
     user_perms: number
 }
 
-export interface GuildNavProps {
+export interface NavProps {
     tab: string;
+}
+
+export interface GeneralSettings {
+    LANG: string;
+    NEW_USER_THRESHOLD: number;
+    PERM_DENIED_MESSAGE: boolean;
+    PREFIX: string;
+    TIMESTAMPS: boolean
+    TIMEZONE: string
+}
+
+export interface LangMap {
+    [code: string]: string
+}
+
+export interface LoadingInterface {
+    loading: boolean
+}
+
+export interface GuildSettingsGeneralState extends LoadingInterface{
+    old_values: GeneralSettings;
+    new_values: GeneralSettings;
+}
+
+export interface SettingsComponentProps {
+    value: any;
+    setter: any;
+    name: string;
+    info: string;
+    changed: boolean;
+    api_name;
+}
+
+export interface ValidatingSettingsComponentProps extends SettingsComponentProps{
+    validator: any;
+}
+
+export interface RangedIntComponentProps extends SettingsComponentProps{
+    min: number;
+    max: number
 }

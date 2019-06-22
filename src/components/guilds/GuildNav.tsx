@@ -1,5 +1,5 @@
 import {Component} from "preact";
-import {DetailedGuildInfo, GuildNavProps} from "../../utils/Interfaces";
+import {DetailedGuildInfo, NavProps} from "../../utils/Interfaces";
 import ROUTES from "../../utils/routes";
 import {useContext} from "preact/hooks";
 import {Guild} from "../wrappers/Context";
@@ -9,9 +9,9 @@ const menu_options = {
     Info: {route: "info", perms: 1 << 0},
     Infractions: {route: "infractions", perms: 1 << 1},
     Settings: {route: "settings", perms: 1 << 2},
-}
+};
 
-export default class GuildNav extends Component<GuildNavProps, {}> {
+export default class GuildNav extends Component<NavProps, {}> {
 
     constructor(props, state) {
         super(props, state);
@@ -19,6 +19,9 @@ export default class GuildNav extends Component<GuildNavProps, {}> {
 
     render() {
         const guild: DetailedGuildInfo = useContext(Guild);
+
+        const test = <Guild />
+        test.prop
 
         const links = [];
         for (let name in menu_options) {

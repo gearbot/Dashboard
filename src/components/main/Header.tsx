@@ -66,8 +66,6 @@ export default class Header extends Component<HeaderProps, HeaderState> {
     render() {
 
         const user = useContext(AuthUser);
-        console.log("User:");
-        console.log(user);
         return <nav class="navbar is-light" role="navigation" aria-label="main navbar">
             <div class="navbar-brand">
                 <Link class="navbar-item" href={ROUTES.HOME}>

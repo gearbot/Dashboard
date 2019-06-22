@@ -5,9 +5,10 @@ import {get_info} from "../utils/dashAPI";
 import {Guild} from "../components/wrappers/Context";
 import GuildNav from "../components/guilds/GuildNav";
 import Router from "preact-router";
-import GuildInfo from "../components/guilds/GuildInfo";
+import GuildInfo from "./GuildInfo";
 import ROUTES from "../utils/routes";
 import HackerMan from "../components/main/HackerMan";
+import GuildSettings from "./GuildSettings";
 
 const INITIAL_STATE = {
     guild: null,
@@ -53,6 +54,7 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
                                 <GuildNav tab={this.props.tab}/>
                                 <Router>
                                     <GuildInfo path={ROUTES.GUILD_INFO}/>
+                                    <GuildSettings path={`${ROUTES.GUILD_SETTINGS}/:tab?`}/>
                                 </Router>
                             </div> :
                                 <HackerMan/>
