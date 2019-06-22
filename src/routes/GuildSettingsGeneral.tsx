@@ -122,7 +122,9 @@ export default class GuildSettingsGeneral extends Component<{}, GuildSettingsGen
         return (
             loading ?
                 <div>Loading...</div>:
-                assembled
+                <div>
+                    {assembled}
+                </div>
         );
     }
 }

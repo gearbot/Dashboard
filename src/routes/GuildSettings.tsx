@@ -13,11 +13,15 @@ export default class GuildSettings extends Component<NavProps, {}> {
 
     render() {
         return (
-            <div class="level">
-                <GuildSettingsNav tab={this.props.tab}/>
-                <Router>
-                    <GuildSettingsGeneral path={ROUTES.GUILD_SETTINGS_GENERAL}/>
-                </Router>
+            <div class="flexcontainer">
+                <div class="flexitem">
+                    <GuildSettingsNav tab={this.props.tab}/>
+                </div>
+                <div class="flexitem2">
+                    <Router>
+                        <GuildSettingsGeneral path={ROUTES.GUILD_SETTINGS_GENERAL}/>
+                    </Router>
+                </div>
             </div>
         );
     }

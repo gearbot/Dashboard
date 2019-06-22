@@ -127,7 +127,7 @@ export interface SettingsComponentProps {
     name: string;
     info: string;
     changed: boolean;
-    api_name;
+    api_name: string;
 }
 
 export interface ValidatingSettingsComponentProps extends SettingsComponentProps{

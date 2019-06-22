@@ -50,3 +50,19 @@ $body-background-color: #EAEAEA;
 	display: inline-flex;
 	margin: auto;
 }
+
+.flexcontainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+}
+
+.flexitem {
+	flex-grow:0;
+}
+
+.flexitem2 {
+	flex-grow:10;
+	width: 100%
+}
