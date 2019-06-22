@@ -19,10 +19,6 @@ export default class GuildNav extends Component<NavProps, {}> {
 
     render() {
         const guild: DetailedGuildInfo = useContext(Guild);
-
-        const test = <Guild />
-        test.prop
-
         const links = [];
         for (let name in menu_options) {
             const {route, perms} = menu_options[name];
@@ -33,9 +29,6 @@ export default class GuildNav extends Component<NavProps, {}> {
                     </li>
                 )
         }
-
-        ;
-
         return (
             <div class="level has-text-centered">
                 <div class="tabs is-toggle is-toggle-rounded is-centered">

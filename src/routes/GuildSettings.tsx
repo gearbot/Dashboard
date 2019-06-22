@@ -1,9 +1,11 @@
 import {Component} from "preact";
-import Router from "preact-router";
+import Router, {route} from "preact-router";
 import ROUTES from "../utils/routes";
 import GuildSettingsNav from "../components/guilds/GuildSettingsNav";
 import {NavProps} from "../utils/Interfaces";
 import GuildSettingsGeneral from "./GuildSettingsGeneral";
+import {useContext} from "preact/hooks";
+import {Guild} from "../components/wrappers/Context";
 
 export default class GuildSettings extends Component<NavProps, {}> {
 
@@ -12,6 +14,10 @@ export default class GuildSettings extends Component<NavProps, {}> {
     }
 
     render() {
+        const guild = useContext(Guild);
+        if (guild != null && (!this.props.tab || this.props.tab == "")){
+            route(`${ROUTES.GUILDS}/${guild.id}/settings/general`)
+        }
         return (
             <div class="flexcontainer">
                 <div class="flexitem">
