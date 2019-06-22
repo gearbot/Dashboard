@@ -23,7 +23,7 @@ export default class GuildSettings extends Component<NavProps, {}> {
                 <div class="flexitem">
                     <GuildSettingsNav tab={this.props.tab}/>
                 </div>
-                <div class="flexitem2">
+                <div class="container is-fluid flexitem2">
                     <Router>
                         <GuildSettingsGeneral path={ROUTES.GUILD_SETTINGS_GENERAL}/>
                     </Router>

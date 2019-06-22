@@ -24,10 +24,11 @@ export default class GuildSettingsNav extends Component<NavProps, {}> {
     }
 
     render() {
-        const guild_id = useContext(Guild).id
+        const guild_id = useContext(Guild).id;
         const links = [];
         for (let name in menu_options) {
-            links.push(<li><Link href={`${ROUTES.GUILDS}/${guild_id}/settings/${menu_options[name]}`}>{name}</Link></li>)
+            const tab_name = menu_options[name];
+            links.push(<li><Link href={`${ROUTES.GUILDS}/${guild_id}/settings/${tab_name}`} class={this.props.tab == tab_name ? "is-active" : ""}>{name}</Link></li>)
 
         }
 
