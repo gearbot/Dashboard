@@ -9,7 +9,7 @@ export default class LanguageSelector extends Component<SettingsComponentProps, 
     }
 
     render() {
-        const {value, setter, name, info, api_name} = this.props;
+        const {value, setter, name, info, api_name, changed} = this.props;
         const langs = useContext(Languages);
         const assembed = [];
         for (let code in langs) {
@@ -18,7 +18,7 @@ export default class LanguageSelector extends Component<SettingsComponentProps, 
         return (
             <div class="field">
                 <label class="label">{name}</label>
-                <div class="select">
+                <div class={changed? "select is-success" : "select"}>
                     <select onchange={(event) => setter(api_name, event.target.value)} title={info}>
                     {assembed}
                     </select>
