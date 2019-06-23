@@ -41,7 +41,7 @@ class App extends Component<UserHolder, AppState> {
             endpoint: "whoami"
         }).then(
             info => {
-                localStorage.setItem("user", JSON.stringify(info));
+
                 useContext(AuthUserSetter)(info)
             });
 
@@ -53,7 +53,10 @@ class App extends Component<UserHolder, AppState> {
         )
     }
 
-    setUser = user => this.setState({user: user});
+    setUser = user => {
+        this.setState({user: user});
+        localStorage.setItem("user", JSON.stringify(user));
+    };
 
 
     render() {

@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {get_info} from "../../utils/dashAPI";
 import {useContext} from "preact/hooks";
 import {AuthUserSetter} from "../wrappers/Context";
+import {route} from "preact-router";
 
 export default class LogoutButton extends Component<{}, {}> {
 
@@ -12,7 +13,10 @@ export default class LogoutButton extends Component<{}, {}> {
             method: "GET",
             endpoint: "logout",
         }).then(
-            useContext(AuthUserSetter)(null)
+            () => {
+                useContext(AuthUserSetter)(null)
+                route("/");
+            }
         )
     };
 
