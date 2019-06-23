@@ -80,7 +80,13 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
             endpoint: `guilds/${guild.id}/config/${this.props.name}`,
             body: this.get_to_submit()
         }).then(
-            info => console.log(info)
+            info => {
+                this.setState({
+                    old_values: {...info.new_values},
+                    new_values: {...info.new_values},
+                    saving: false
+                })
+            }
         )
     };
 
