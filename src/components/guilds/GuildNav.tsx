@@ -8,7 +8,7 @@ import {Link} from "preact-router";
 const menu_options = {
     Info: {route: "info", perms: 1 << 0},
     Infractions: {route: "infractions", perms: 1 << 1},
-    Settings: {route: "settings", perms: 1 << 2},
+    Settings: {route: "settings/general", perms: 1 << 2},
 };
 
 export default class GuildNav extends Component<NavProps, {}> {
@@ -24,7 +24,7 @@ export default class GuildNav extends Component<NavProps, {}> {
             const {route, perms} = menu_options[name];
             if ((guild.user_perms & perms) > 0)
                 links.push(
-                    <li class={this.props.tab == route ? "is-active" : ""}>
+                    <li class={this.props.tab == route.split("/")[0] ? "is-active" : ""}>
                         <Link href={`${ROUTES.GUILDS}/${guild.id}/${route}`}>{name}</Link>
                     </li>
                 )

@@ -6,14 +6,14 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export const get_info = async ({method, endpoint, body = false, auth_on_fail = false}) => {
+export const get_info = async ({method, endpoint, body = {}, auth_on_fail = false}) => {
     const options: any = {
         method: method,
         cache: "no-cache",
         credentials: CORS ? "include" : "same-origin",
         mode: CORS ? "cors" : "same-origin"
     };
-    if (body) {
+    if (Object.keys(body).length > 0) {
         options["headers"] = {
             "Content-Type": "application/json"
         };

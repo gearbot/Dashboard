@@ -9,6 +9,8 @@ import GuildInfo from "./GuildInfo";
 import ROUTES from "../utils/routes";
 import HackerMan from "../components/main/HackerMan";
 import GuildSettings from "./GuildSettings";
+import TODOComponent from "../components/TODOComponent";
+import {menu_options} from "../components/guilds/GuildNavOptions";
 
 const INITIAL_STATE = {
     guild: null,
@@ -40,7 +42,6 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
 
     render() {
         const {loading, guild, authorized} = this.state;
-
         return (
 
             <Guild.Provider value={guild} children={
@@ -54,6 +55,7 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
                                 <GuildNav tab={this.props.tab}/>
                                 <Router>
                                     <GuildInfo path={ROUTES.GUILD_INFO}/>
+                                    <TODOComponent path={ROUTES.GUILD_INFRACTIONS}/>
                                     <GuildSettings path={`${ROUTES.GUILD_SETTINGS}/:tab?`}/>
                                 </Router>
                             </div> :

@@ -1,3 +1,5 @@
+import {Component} from "preact";
+
 export interface User {
     id: string
     name: string
@@ -116,9 +118,30 @@ export interface LoadingInterface {
     loading: boolean
 }
 
-export interface GuildSettingsGeneralState extends LoadingInterface{
+export interface GuildSettingsSectionState extends LoadingInterface{
     old_values: GeneralSettings;
     new_values: GeneralSettings;
+    saving: boolean;
+}
+
+
+export interface ConfigField {
+    name: string;
+    api_name: string
+    info: string;
+    Component: Component
+    visible? (values): boolean;
+    validator?(value): boolean | string;
+    extra_props?: any;
+}
+
+export interface FieldMap {
+    [name: string]: ConfigField
+}
+
+export interface GuildSettingsSectionProps {
+    name: string
+    fields: ConfigField[];
 }
 
 export interface SettingsComponentProps {
@@ -128,13 +151,10 @@ export interface SettingsComponentProps {
     info: string;
     changed: boolean;
     api_name: string;
+    disabled: boolean;
+    validator?(value): boolean | string;
 }
 
-export interface ValidatingSettingsComponentProps extends SettingsComponentProps{
-    validator: any;
-}
-
-export interface RangedIntComponentProps extends SettingsComponentProps{
-    min: number;
-    max: number
+export interface BasicInputComponentProps extends SettingsComponentProps{
+    type: string
 }
