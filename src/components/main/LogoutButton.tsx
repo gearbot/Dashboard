@@ -9,6 +9,7 @@ import {route} from "preact-router";
 export default class LogoutButton extends Component<{}, {}> {
 
     signout = () => {
+        document.cookie = "state_key=; Max-Age=-99999999;"
         get_info({
             method: "GET",
             endpoint: "logout",
