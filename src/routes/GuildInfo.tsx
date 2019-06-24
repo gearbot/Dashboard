@@ -16,31 +16,31 @@ export default class GuildInfo extends Component<{}, {}> {
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="heading">Members</p>
-                            <p class="title">{guildInfo.members}</p>
+                            <p class="title">{guildInfo.members.toLocaleString()}</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="heading">Online</p>
-                            <p class="title">{guildInfo.member_statuses.online}</p>
+                            <p class="title">{guildInfo.member_statuses.online.toLocaleString()}</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="heading">AFK</p>
-                            <p class="title">{guildInfo.member_statuses.idle}</p>
+                            <p class="title">{guildInfo.member_statuses.idle.toLocaleString()}</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="heading">DND</p>
-                            <p class="title">{guildInfo.member_statuses.dnd}</p>
+                            <p class="title">{guildInfo.member_statuses.dnd.toLocaleString()}</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="heading">Offline</p>
-                            <p class="title">{guildInfo.member_statuses.offline}</p>
+                            <p class="title">{guildInfo.member_statuses.offline.toLocaleString()}</p>
                         </div>
                     </div>
                 </div>

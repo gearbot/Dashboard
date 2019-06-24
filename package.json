@@ -10,18 +10,9 @@
     "build": "preact build --template src/index.html",
     "serve": "preact build --template src/index.html && preact serve",
     "dev": "preact watch --template src/index.html",
-    "lint": "eslint src",
     "test": "jest"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-synacor"
-  },
-  "eslintIgnore": [
-    "build/*"
-  ],
   "devDependencies": {
-    "eslint": "^4.9.0",
-    "eslint-config-synacor": "^2.0.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
     "node-sass": "^4.11.0",
