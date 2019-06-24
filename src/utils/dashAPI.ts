@@ -2,6 +2,7 @@ const API_ROOT = process.env.API_ROOT;
 const CORS = process.env.CORS == "ENABLED";
 
 
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -19,6 +20,7 @@ export const get_info = async ({method, endpoint, body = {}, auth_on_fail = fals
         };
         options["body"] = JSON.stringify(body)
     }
+    console.log(`${API_ROOT}/${endpoint}`);
     const response = await fetch(`${API_ROOT}/${endpoint}`, options);
     if (response.status == 401) {
         console.log("Unauthorized");
