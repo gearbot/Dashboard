@@ -7,11 +7,11 @@ export default class CheckmarkField extends Component<SettingsComponentProps, {}
     }
 
     render() {
-        const {value, setter, name, info, api_name} = this.props;
+        const {value, setter, name, info, api_name, disabled} = this.props;
         return (
             <div class="field">
                 <label class="checkbox">
-                    <input type="checkbox" checked={value} onclick={(event) => setter(api_name, event.target.checked)} title={info}/>
+                    <input type="checkbox" checked={value} onclick={(event) => setter(api_name, event.target.checked)} title={info} disabled={disabled}/>
                         {name}
                 </label>
             </div>
