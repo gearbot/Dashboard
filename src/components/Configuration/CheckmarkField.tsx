@@ -2,10 +2,6 @@ import {Component} from "preact";
 import {SettingsComponentProps} from "../../utils/Interfaces";
 export default class CheckmarkField extends Component<SettingsComponentProps, {}> {
 
-    constructor(props, state) {
-        super(props, state);
-    }
-
     render() {
         const {value, setter, name, info, api_name, disabled} = this.props;
         return (

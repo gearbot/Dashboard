@@ -94,6 +94,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         const assembled = [];
         const {loading, old_values, new_values, saving} = this.state;
         if (!loading) {
+            const guild = useContext(Guild);
             for (let key in this.props.fields) {
                 let {name, api_name, info, Component, visible, validator, extra_props} = this.props.fields[key];
                 extra_props = extra_props || {};
@@ -104,7 +105,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                     // @ts-ignore
                     assembled.push(<Component name={name} api_name={api_name} info={info} value={new_values[api_name]}
                                               setter={this.setter} changed={changed} validator={validator}
-                                              disabled={saving} {...extra_props}/>)
+                                              disabled={saving || ((guild.user_perms & (1 << 3)) == 0)} {...extra_props}/>)
                 }
             }
         }

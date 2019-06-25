@@ -49,6 +49,13 @@ const fields = {
             }
         },
         {
+            name: "Timezone",
+            api_name: "TIMEZONE",
+            info: "The timezone to use for timestamps",
+            Component: TimezoneSelector,
+            visible: (values) => values["TIMESTAMPS"],
+        },
+        {
             name: "Permissions denied message",
             api_name: "PERM_DENIED_MESSAGE",
             info: "Whether or not to notify a user the command he tries to use isn't available to them or to ignore them",
@@ -59,13 +66,6 @@ const fields = {
             api_name: "TIMESTAMPS",
             info: "Whether or not to prepend timestamps to logs or not.",
             Component: CheckmarkField,
-        },
-        {
-            name: "Timezone",
-            api_name: "TIMEZONE",
-            info: "The timezone to use for timestamps",
-            Component: TimezoneSelector,
-            visible: (values) => values["TIMESTAMPS"],
         }
     ]
 };

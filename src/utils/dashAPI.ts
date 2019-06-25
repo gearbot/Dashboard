@@ -20,13 +20,11 @@ export const get_info = async ({method, endpoint, body = {}, auth_on_fail = fals
         };
         options["body"] = JSON.stringify(body)
     }
-    console.log(`${API_ROOT}/${endpoint}`);
     const response = await fetch(`${API_ROOT}/${endpoint}`, options);
     if (response.status == 401) {
         console.log("Unauthorized");
         if (auth_on_fail) {
             const w = window.open(`${API_ROOT}/discord/login`, "Discord login", "location=0 status=0,width=400,height=800");
-            console.log(w);
             let ready = false;
             const interval = window.setInterval(() => {
                 if (w.closed) {

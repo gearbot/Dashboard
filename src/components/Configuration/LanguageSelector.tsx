@@ -4,10 +4,6 @@ import {useContext} from "preact/hooks";
 import {Languages} from "../wrappers/Context";
 export default class LanguageSelector extends Component<SettingsComponentProps, {}> {
 
-    constructor(props, state) {
-        super(props, state);
-    }
-
     render() {
         const {value, setter, name, info, api_name, changed, disabled} = this.props;
         const langs = useContext(Languages);
