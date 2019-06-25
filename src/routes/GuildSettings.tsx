@@ -8,6 +8,7 @@ import TimezoneSelector from "../components/Configuration/TimezoneSelector";
 import LanguageSelector from "../components/Configuration/LanguageSelector";
 import ConfigSection from "../components/Configuration/ConfigSection";
 import BasicInput from "../components/Configuration/BasicInput";
+import RoleConfigurator from "../components/Configuration/RoleConfigurator";
 
 
 const validateRangedInt = (value, min, max) =>
@@ -67,6 +68,26 @@ const fields = {
             info: "Whether or not to prepend timestamps to logs or not.",
             Component: CheckmarkField,
         }
+    ],
+    roles: [
+        {
+            name: "Admin roles",
+            api_name: "ADMIN_ROLES",
+            info: "People with any of these roles are considered admins and thus have lvl 3 permissions",
+            Component: RoleConfigurator,
+            extra_props: {
+                type: "admin"
+            }
+        },
+        {
+            name: "Mod roles",
+            api_name: "MOD_ROLES",
+            info: "People with any of these roles are considered moderators and thus have lvl 2 permissions",
+            Component: RoleConfigurator,
+            extra_props: {
+                type: "mod"
+            }
+        }
     ]
 };
 
@@ -80,7 +101,7 @@ export default class GuildSettings extends Component<NavProps, {}> {
     render() {
         const sections = [];
         for (let name in fields){
-            sections.push(<ConfigSection name="general" fields={fields.general} path={`${ROUTES.GUILD_SETTINGS}/${name}`}/>)
+            sections.push(<ConfigSection name={name} fields={fields[name]} path={`${ROUTES.GUILD_SETTINGS}/${name}`}/>)
         }
         return (
             <div class="flexcontainer">

@@ -9,7 +9,7 @@ export default class LanguageSelector extends Component<SettingsComponentProps, 
         const langs = useContext(Languages);
         const assembed = [];
         for (let code in langs) {
-            assembed.push(<option value={code} selected={langs[code] == value}>{langs[code]}</option>)
+            assembed.push(<option value={code} selected={code == value}>{langs[code]}</option>)
         }
         return (
             <div class="field">

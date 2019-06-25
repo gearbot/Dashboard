@@ -4,11 +4,7 @@ import {Link} from "preact-router/match";
 import ROUTES from "../../utils/routes";
 import GuildLogo from "./GuildLogo";
 
-export default class GuildCard extends Component<GuildProps> {
-
-    constructor(props, state) {
-        super(props, state);
-    }
+export default class GuildCard extends Component<GuildProps, {}> {
 
     render() {
         const {id, name, icon} = this.props.guild;

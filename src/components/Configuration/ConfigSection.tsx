@@ -19,6 +19,18 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
     }
 
     componentDidMount(): void {
+        this.remount();
+    }
+
+
+    componentDidUpdate(previousProps: Readonly<GuildSettingsSectionProps>, previousState: Readonly<GuildSettingsSectionState>, snapshot: any): void {
+        if (previousProps.name != this.props.name){
+            this.remount();
+        }
+    }
+
+    remount = () => {
+        this.setState({loading: true});
         const guild = useContext(Guild);
         get_info({
             method: "GET",
@@ -31,6 +43,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
             })
         )
     }
+
 
     setter = (key, value) => {
         const current = this.state.new_values;
@@ -60,7 +73,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         for (let k in this.props.fields) {
             let field = this.props.fields[k];
             if (to_submit[field.api_name] !== undefined)
-                can_submit =  can_submit && field.validator(this.state.new_values[field.api_name]) === true;
+                can_submit =  can_submit && (!field.validator || field.validator(this.state.new_values[field.api_name]) === true);
 
             return can_submit;
         }
@@ -72,7 +85,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
             window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122"
             return;
         }
-        this.setState({saving: true});
+        this.setState({...this.state, saving: true});
 
         const guild = useContext(Guild);
         get_info({

@@ -32,11 +32,10 @@ $body-background-color: #EAEAEA;
 			display: block;
 			margin: auto;
 			height: 100%;
+			border-radius: 50%;
 		}
 	}
 }
-
-
 
 .serverImage {
 	border-radius: 50%;
@@ -46,6 +45,11 @@ $body-background-color: #EAEAEA;
 
 .serverTitle {
 	text-align: center;
+	image, svg {
+		border-radius: 50%;
+		height: 2em !important;
+		vertical-align: text-bottom;
+	}
 }
 
 .tabs {
@@ -67,4 +71,17 @@ $body-background-color: #EAEAEA;
 .flexitem2 {
 	flex-grow:10;
 	width: 100%
+}
+
+.roleMarker {
+	width: 1.4em;
+	height: 1.4em;
+	border-radius: 50%;
+	float:left;
+	margin-right: 0.6em;
+}
+
+.roleLevel {
+	padding: 0.15em 1em;
+	border-radius: 1.5em;
 }

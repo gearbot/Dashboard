@@ -1,5 +1,6 @@
 import {Component} from "preact";
 import {SizeProp} from "@fortawesome/fontawesome-svg-core";
+import {Interface} from "readline";
 
 export interface User {
     id: string
@@ -78,7 +79,9 @@ export interface Role {
     id: string;
     name: string;
     color: number;
-    members: number
+    members: number;
+    is_admin: boolean;
+    is_mod: boolean;
 }
 
 export interface DetailedGuildInfo {
@@ -163,4 +166,14 @@ export interface BasicInputComponentProps extends SettingsComponentProps{
 export interface GuildLogoProps {
     link: string;
     size: SizeProp;
+}
+
+export interface RoleListProps extends SettingsComponentProps{
+    type: string;
+
+}
+
+export interface RoleComponentProps {
+    role: Role;
+    remover?(value:string):void;
 }

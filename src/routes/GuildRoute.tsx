@@ -10,7 +10,6 @@ import ROUTES from "../utils/routes";
 import HackerMan from "../components/main/HackerMan";
 import GuildSettings from "./GuildSettings";
 import TODOComponent from "../components/TODOComponent";
-import {menu_options} from "../components/guilds/GuildNavOptions";
 import GuildLogo from "../components/guilds/GuildLogo";
 
 const INITIAL_STATE = {
