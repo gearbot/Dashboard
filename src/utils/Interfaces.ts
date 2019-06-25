@@ -177,3 +177,15 @@ export interface RoleComponentProps {
     role: Role;
     remover?(value:string):void;
 }
+
+export interface RolePickerComponents {
+    roles: Role[];
+    selected?: string;
+    button_text: string;
+    receiver(r:string): void;
+    disabled: boolean;
+}
+
+export interface RolePickerState {
+    selected?: string;
+}
