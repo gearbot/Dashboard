@@ -25,11 +25,13 @@ $body-background-color: #EAEAEA;
 
 .card-image {
 	figure {
-		min-width: 20em;
-		img {
+		width: 20em;
+		height: 18em;
+		margin: auto;
+		img, svg {
 			display: block;
 			margin: auto;
-			max-width: 20em;
+			height: 100%;
 		}
 	}
 }
@@ -38,7 +40,7 @@ $body-background-color: #EAEAEA;
 
 .serverImage {
 	border-radius: 50%;
-	max-height: 2em;
+	height: 2em;
 	vertical-align: text-bottom;
 }
 

@@ -1,4 +1,5 @@
 import {Component} from "preact";
+import {SizeProp} from "@fortawesome/fontawesome-svg-core";
 
 export interface User {
     id: string
@@ -157,4 +158,9 @@ export interface SettingsComponentProps {
 
 export interface BasicInputComponentProps extends SettingsComponentProps{
     type: string
+}
+
+export interface GuildLogoProps {
+    link: string;
+    size: SizeProp;
 }

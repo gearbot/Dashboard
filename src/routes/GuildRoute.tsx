@@ -11,6 +11,7 @@ import HackerMan from "../components/main/HackerMan";
 import GuildSettings from "./GuildSettings";
 import TODOComponent from "../components/TODOComponent";
 import {menu_options} from "../components/guilds/GuildNavOptions";
+import GuildLogo from "../components/guilds/GuildLogo";
 
 const INITIAL_STATE = {
     guild: null,
@@ -51,7 +52,7 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
                             <div>Loading...</div> :
                             authorized ?
                             <div class="container">
-                                <h1 class="title serverTitle"><img src={guild.server_icon} class="serverImage"/> {guild.name}</h1>
+                                <h1 class="title serverTitle"><span class="serverImage"> <GuildLogo link={guild.server_icon} size="2x"/></span> {guild.name}</h1>
                                 <GuildNav tab={this.props.tab}/>
                                 <Router>
                                     <GuildInfo path={ROUTES.GUILD_INFO}/>

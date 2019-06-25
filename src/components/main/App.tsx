@@ -12,7 +12,7 @@ import {get_info} from "../../utils/dashAPI";
 import "../../style/styles.scss"
 import GuildRoute from "../../routes/GuildRoute";
 
-const VERSION = 15;
+const VERSION = 20;
 
 class App extends Component<UserHolder, AppState> {
 
@@ -41,9 +41,11 @@ class App extends Component<UserHolder, AppState> {
             endpoint: "whoami"
         }).then(
             info => {
-
                 useContext(AuthUserSetter)(info)
-            });
+            }).catch( ex =>
+        {
+            useContext(AuthUserSetter)(null)
+        });
 
         get_info({
             method: "GET",
@@ -55,7 +57,10 @@ class App extends Component<UserHolder, AppState> {
 
     setUser = user => {
         this.setState({user: user});
-        localStorage.setItem("user", JSON.stringify(user));
+        if (user)
+            localStorage.setItem("user", JSON.stringify(user));
+        else
+            localStorage.removeItem("user")
     };
 
 

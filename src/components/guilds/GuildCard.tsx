@@ -2,6 +2,7 @@ import {Component} from "preact";
 import {GuildProps} from "../../utils/Interfaces";
 import {Link} from "preact-router/match";
 import ROUTES from "../../utils/routes";
+import GuildLogo from "./GuildLogo";
 
 export default class GuildCard extends Component<GuildProps> {
 
@@ -21,7 +22,7 @@ export default class GuildCard extends Component<GuildProps> {
                 </header>
                 <div class="card-image">
                     <figure class="image">
-                        <img src={icon} alt="Guild icon"/>
+                        <GuildLogo link={icon} size="10x"/>
                     </figure>
                 </div>
             </Link>
