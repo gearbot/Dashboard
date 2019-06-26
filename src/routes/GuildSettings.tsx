@@ -9,6 +9,7 @@ import LanguageSelector from "../components/Configuration/LanguageSelector";
 import ConfigSection from "../components/Configuration/ConfigSection";
 import BasicInput from "../components/Configuration/BasicInput";
 import RoleConfigurator from "../components/Configuration/RoleConfigurator";
+import MuteComponent from "../components/Configuration/MuteComponent";
 
 
 const validateRangedInt = (value, min, max) =>
@@ -87,7 +88,19 @@ const fields = {
             extra_props: {
                 type: "mod"
             }
-        }
+        },
+        {
+            name: "Trusted roles",
+            api_name: "TRUSTED_ROLES",
+            info: "People with any of these roles are considered trusted and thus have lvl 1 permissions",
+            Component: RoleConfigurator
+        },
+        // {
+        //     name: "Mute role",
+        //     api_name: "MUTE_ROLE",
+        //     info: "The role used to mute people",
+        //     Component: MuteComponent
+        // }
     ]
 };
 

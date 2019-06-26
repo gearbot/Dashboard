@@ -12,7 +12,7 @@ export default class RolePicker extends Component<RolePickerComponents, RolePick
 
         const clicker = (event) => {
             event.preventDefault();
-            receiver(this.state.selected)
+            receiver(this.state.selected);
             this.setState({selected: null})
         };
         return (
@@ -26,7 +26,7 @@ export default class RolePicker extends Component<RolePickerComponents, RolePick
                     </div>
                 </div>
                 <div class="control">
-                    <button type="submit" class="button is-primary"
+                    <button class="button is-primary"
                             onclick={clicker} disabled={!this.state.selected}>{button_text}</button>
                 </div>
             </div>

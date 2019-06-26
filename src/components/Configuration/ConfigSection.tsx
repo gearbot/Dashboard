@@ -24,7 +24,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
 
 
     componentDidUpdate(previousProps: Readonly<GuildSettingsSectionProps>, previousState: Readonly<GuildSettingsSectionState>, snapshot: any): void {
-        if (previousProps.name != this.props.name){
+        if (previousProps.name != this.props.name) {
             this.remount();
         }
     }
@@ -73,7 +73,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         for (let k in this.props.fields) {
             let field = this.props.fields[k];
             if (to_submit[field.api_name] !== undefined)
-                can_submit =  can_submit && (!field.validator || field.validator(this.state.new_values[field.api_name]) === true);
+                can_submit = can_submit && (!field.validator || field.validator(this.state.new_values[field.api_name]) === true);
 
             return can_submit;
         }
@@ -95,8 +95,8 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         }).then(
             info => {
                 this.setState({
-                    old_values: {...info.new_values},
-                    new_values: {...info.new_values},
+                    old_values: {...info.modified_values},
+                    new_values: {...info.modified_values},
                     saving: false
                 })
             }
@@ -130,7 +130,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-link" disabled={!this.can_submit() || saving}>Submit</button>
+                            <button class="button is-link" disabled={!this.can_submit() || saving}>Save</button>
                         </div>
                     </div>
                 </form>

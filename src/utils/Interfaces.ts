@@ -181,11 +181,16 @@ export interface RoleComponentProps {
 export interface RolePickerComponents {
     roles: Role[];
     selected?: string;
-    button_text: string;
+    button_text?: string;
     receiver(r:string): void;
     disabled: boolean;
 }
 
 export interface RolePickerState {
     selected?: string;
+}
+
+export interface MuteComponentState {
+    cleaned: boolean;
+    setup: boolean;
 }

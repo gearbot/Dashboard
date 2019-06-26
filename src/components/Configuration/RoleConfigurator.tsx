@@ -12,8 +12,8 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
         const {value, setter, name, info, api_name, changed, disabled, type} = this.props;
         const guild = useContext(Guild);
         const assembled = [];
-        const already_picked = [...value];
-        const local = [...value];
+        const already_picked = value ? [...value] : [];
+        const local = value ? [...value] : [];
         const to_pick = [];
         const remover = (role_id) => {
             if (disabled) return;
@@ -30,7 +30,7 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
                 assembled.push(<RoleComponent role={role}/>)
             }
         }
-        value.forEach((role) => {
+        value && value.forEach((role) => {
             assembled.push(<RoleComponent role={guild.role_list[role]} remover={remover}/>)
         });
 

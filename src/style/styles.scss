@@ -16,7 +16,7 @@
 $body-background-color: #EAEAEA;
 
 .mycard {
-	float:left;
+	float: left;
 	margin: 1em;
 	flex-grow: 1;
 	flex-basis: 0;
@@ -28,6 +28,7 @@ $body-background-color: #EAEAEA;
 		width: 20em;
 		height: 18em;
 		margin: auto;
+
 		img, svg {
 			display: block;
 			margin: auto;
@@ -45,6 +46,7 @@ $body-background-color: #EAEAEA;
 
 .serverTitle {
 	text-align: center;
+
 	image, svg {
 		border-radius: 50%;
 		height: 2em !important;
@@ -65,11 +67,11 @@ $body-background-color: #EAEAEA;
 }
 
 .flexitem {
-	flex-grow:0;
+	flex-grow: 0;
 }
 
 .flexitem2 {
-	flex-grow:10;
+	flex-grow: 10;
 	width: 100%
 }
 
@@ -77,7 +79,7 @@ $body-background-color: #EAEAEA;
 	width: 1.4em;
 	height: 1.4em;
 	border-radius: 50%;
-	float:left;
+	float: left;
 	margin-right: 0.6em;
 }
 
