@@ -49,7 +49,7 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
 
 
         return (
-            <div style={{float: "left"}}>
+            <div>
                 <h2 class="subtitle">{name}</h2>
                 <p>{info}</p>
                 {assembled}

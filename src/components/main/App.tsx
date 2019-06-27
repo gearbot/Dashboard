@@ -12,7 +12,7 @@ import {get_info} from "../../utils/dashAPI";
 import "../../style/styles.scss"
 import GuildRoute from "../../routes/GuildRoute";
 
-const VERSION = 20;
+const VERSION = 22;
 
 class App extends Component<UserHolder, AppState> {
 

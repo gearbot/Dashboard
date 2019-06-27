@@ -5,7 +5,7 @@ export default class RolePicker extends Component<RolePickerComponents, RolePick
 
     render() {
         const {roles, selected, button_text, receiver, disabled} = this.props;
-        const assembed = [<option value={0} selected={!this.state.selected}>Select a role </option>];
+        const assembed = [<option value={"0"} selected={!this.state.selected}>Select a role </option>];
         roles.forEach((role) => {
             assembed.push(<option value={role.id} selected={selected == role.id}>{role.name}</option>)
         });
@@ -27,7 +27,7 @@ export default class RolePicker extends Component<RolePickerComponents, RolePick
                 </div>
                 <div class="control">
                     <button class="button is-primary"
-                            onclick={clicker} disabled={!this.state.selected}>{button_text}</button>
+                            onclick={clicker} disabled={!this.state.selected || this.state.selected=="0"}>{button_text}</button>
                 </div>
             </div>
 

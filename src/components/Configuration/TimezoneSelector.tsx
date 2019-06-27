@@ -93,7 +93,7 @@ export default class TimezoneSelector extends Component<SettingsComponentProps, 
         const assembed = [];
         for (let key in zones) {
             const {name, zone} = zones[key];
-            assembed.push(<option value={value} selected={zone == value}>{name}</option>)
+            assembed.push(<option value={zone} selected={zone == value}>{name}</option>)
         }
         return (
             <div class="field">

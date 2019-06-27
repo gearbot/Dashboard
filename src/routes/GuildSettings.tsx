@@ -95,12 +95,18 @@ const fields = {
             info: "People with any of these roles are considered trusted and thus have lvl 1 permissions",
             Component: RoleConfigurator
         },
-        // {
-        //     name: "Mute role",
-        //     api_name: "MUTE_ROLE",
-        //     info: "The role used to mute people",
-        //     Component: MuteComponent
-        // }
+        {
+            name: "Self assignable roles",
+            api_name: "TRUSTED_ROLES",
+            info: "People with any of these roles are considered trusted and thus have lvl 1 permissions",
+            Component: RoleConfigurator
+        },
+        {
+            name: "Mute role",
+            api_name: "MUTE_ROLE",
+            info: "The role used to mute people",
+            Component: MuteComponent
+        }
     ]
 };
 
