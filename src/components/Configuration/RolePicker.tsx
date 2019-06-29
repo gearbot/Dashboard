@@ -4,10 +4,11 @@ import {RolePickerComponents, RolePickerState} from "../../utils/Interfaces";
 export default class RolePicker extends Component<RolePickerComponents, RolePickerState> {
 
     render() {
-        const {roles, selected, button_text, receiver, disabled} = this.props;
+        const {roles, selected, button_text, receiver, disabled, extra_check} = this.props;
         const assembed = [<option value={"0"} selected={!this.state.selected}>Select a role </option>];
         roles.forEach((role) => {
-            assembed.push(<option value={role.id} selected={selected == role.id}>{role.name}</option>)
+            const role_disabled = extra_check  && !role[extra_check];
+            assembed.push(<option value={role.id} selected={selected == role.id} disabled={role_disabled}>{role.name}</option>)
         });
 
         const clicker = (event) => {

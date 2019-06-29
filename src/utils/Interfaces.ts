@@ -98,7 +98,8 @@ export interface DetailedGuildInfo {
     role_list: Role[]
     emojis: Emoji[];
     member_statuses: Statuses;
-    user_perms: number
+    user_perms: number;
+    user_level: number;
 }
 
 export interface NavProps {
@@ -157,6 +158,7 @@ export interface SettingsComponentProps {
     api_name: string;
     disabled: boolean;
     validator?(value): boolean | string;
+    all_values: any;
 }
 
 export interface BasicInputComponentProps extends SettingsComponentProps{
@@ -170,7 +172,7 @@ export interface GuildLogoProps {
 
 export interface RoleListProps extends SettingsComponentProps{
     type: string;
-
+    extra_check: string;
 }
 
 export interface RoleComponentProps {
@@ -184,6 +186,7 @@ export interface RolePickerComponents {
     button_text?: string;
     receiver(r:string): void;
     disabled: boolean;
+    extra_check?: string;
 }
 
 export interface RolePickerState {
@@ -193,4 +196,9 @@ export interface RolePickerState {
 export interface MuteComponentState {
     cleaned: boolean;
     setup: boolean;
+}
+
+export interface PermLevelSelectorProps extends SettingsComponentProps {
+    min: number;
+    min_value?: string;
 }

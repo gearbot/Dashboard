@@ -62,7 +62,7 @@ export default class GuildInfo extends Component<{}, {}> {
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="heading">Roles</p>
-                            <p class="title">{guildInfo.role_list.length}</p>
+                            <p class="title">{Object.keys(guildInfo.role_list).length}</p>
                         </div>
                     </div>
 

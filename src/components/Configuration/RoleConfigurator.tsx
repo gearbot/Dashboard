@@ -9,7 +9,7 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
 
 
     render() {
-        const {value, setter, name, info, api_name, changed, disabled, type} = this.props;
+        const {value, setter, name, info, api_name, changed, disabled, type, extra_check} = this.props;
         const guild = useContext(Guild);
         const assembled = [];
         const already_picked = value ? [...value] : [];
@@ -50,10 +50,10 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
 
         return (
             <div>
-                <h2 class="subtitle">{name}</h2>
-                <p>{info}</p>
+                <h4 class="mytitle">{name}</h4>
+                <h5 class={"mysubtitle"}>{info}</h5>
                 {assembled}
-                <RolePicker roles={to_pick} button_text={"Add"} receiver={receiver} disabled={disabled}/>
+                <RolePicker roles={to_pick} button_text={"Add"} receiver={receiver} disabled={disabled} extra_check={extra_check}/>
             </div>
         );
     }

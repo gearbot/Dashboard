@@ -7,6 +7,8 @@ import {Guild} from "../wrappers/Context";
 
 const menu_options = {
     General: "general",
+    Permissions: "permissions",
+    "Dashboard Permissions": "dash_security",
     Roles: "roles",
     "Log channels": "log_channels",
     "Message logs": "message_logs",

@@ -103,6 +103,13 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         )
     };
 
+    reset = (event) => {
+        event.preventDefault();
+        this.setState({
+            new_values: {...this.state.old_values}
+        })
+    }
+
     render() {
         const assembled = [];
         const {loading, old_values, new_values, saving} = this.state;
@@ -117,7 +124,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                 if (visible(new_values)) {
                     // @ts-ignore
                     assembled.push(<Component name={name} api_name={api_name} info={info} value={new_values[api_name]}
-                                              setter={this.setter} changed={changed} validator={validator}
+                                              setter={this.setter} changed={changed} validator={validator} all_values={new_values}
                                               disabled={saving || ((guild.user_perms & (1 << 3)) == 0)} {...extra_props}/>)
                 }
             }
@@ -128,9 +135,12 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                 <form onsubmit={this.on_submit}>
                     {assembled}
 
-                    <div class="field">
+                    <div class="field is-grouped">
                         <div class="control">
                             <button class="button is-link" disabled={!this.can_submit() || saving}>Save</button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-link" disabled={!this.can_submit() || saving} onclick={this.reset}>Reset</button>
                         </div>
                     </div>
                 </form>

@@ -18,7 +18,7 @@ export default class MuteComponent extends Component<SettingsComponentProps, Mut
             get_info({
                 method: "POST",
                 endpoint: `guilds/${guild.id}/setup_mute`,
-                body: {role: value}
+                body: {role_id: value}
             })
         };
 
@@ -28,7 +28,7 @@ export default class MuteComponent extends Component<SettingsComponentProps, Mut
             get_info({
                 method: "POST",
                 endpoint: `guilds/${guild.id}/cleanup_mute`,
-                body: {role: value}
+                body: {role_id: value}
             })
         };
 
