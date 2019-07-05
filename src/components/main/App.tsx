@@ -18,7 +18,7 @@ class App extends Component<UserHolder, AppState> {
 
 
     componentDidMount(): void {
-        set_theme_colors(localStorage.getItem('theme') || "light", false);
+        set_theme_colors(localStorage.getItem('theme') || "dark", false);
 
         //check for a new version, self destruct and reload if one is found
         fetch("/assets/version.txt").then(
