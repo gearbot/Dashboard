@@ -135,7 +135,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                 <form onsubmit={this.on_submit}>
                     {assembled}
 
-                    <div class="field is-grouped">
+                    <div class="field is-grouped" style={{marginTop: "1em"}}>
                         <div class="control">
                             <button class="button is-link" disabled={!this.can_submit() || saving}>Save</button>
                         </div>

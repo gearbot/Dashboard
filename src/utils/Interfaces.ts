@@ -3,10 +3,11 @@ import {SizeProp} from "@fortawesome/fontawesome-svg-core";
 import {Interface} from "readline";
 
 export interface User {
-    id: string
-    name: string
-    discriminator: string
-    globalAdmin: boolean
+    id: string;
+    username: string;
+    discrim: string;
+    globalAdmin: boolean;
+    avatar_url: string;
 }
 
 export interface UserHolder {
@@ -78,7 +79,7 @@ export interface Statuses {
 export interface Role {
     id: string;
     name: string;
-    color: number;
+    color: string;
     members: number;
     is_admin: boolean;
     is_mod: boolean;
@@ -201,4 +202,8 @@ export interface MuteComponentState {
 export interface PermLevelSelectorProps extends SettingsComponentProps {
     min: number;
     min_value?: string;
+}
+
+export interface ThemeState {
+    theme: "light" | "dark";
 }

@@ -32,7 +32,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
         }
         return (
             guilds ?
-                <div class="cardflex">{processed}</div>:
+                <div class="cardgrid">{processed}</div>:
                 <div>Loading...</div>
         );
     }

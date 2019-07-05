@@ -1,23 +1,25 @@
 import {Component} from "preact";
 import {HeaderProps, HeaderState} from "../../utils/Interfaces";
-import {useContext, useEffect, useState} from "preact/hooks";
+import {useContext} from "preact/hooks";
 import {AuthUser, AuthUserSetter} from "../wrappers/Context";
 import ROUTES from "../../utils/routes";
 import {Link} from "preact-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faToolbox} from "@fortawesome/free-solid-svg-icons";
 import {get_info} from "../../utils/dashAPI";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../main/LogoutButton";
+import UserMenu from "./UserMenu";
 
 //navigation for authenticated users
 const NavigationAuth = ({user}) => (
 
     <div class="navbar-start">
-        <Link class="navbar-item" href={ROUTES.GUILDS}>Guilds</Link>
-        {user.bot_admin_status ? (
-                <Link activeClassName="active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon icon={faToolbox}/>Admin</Link>
-            )
-            : null}
+        <Link activeClassName="is-active" class="navbar-item" href={ROUTES.GUILDS}>Guilds</Link>
+        {
+            user.bot_admin_status ?
+                <Link activeClassName="is-active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon icon={faToolbox}/>Admin</Link>
+            : null
+        }
     </div>
 );
 
@@ -26,14 +28,6 @@ const NavigationNonAuth = () => (
     <div class="navbar-start">
 
 
-    </div>
-);
-//Right side for logged in users
-const NavUserAuth = () => (
-    <div class="navbar-item">
-        <div class="buttons">
-            <LogoutButton/>
-        </div>
     </div>
 );
 
@@ -66,7 +60,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
     render() {
 
         const user = useContext(AuthUser);
-        return <nav class="navbar is-light" role="navigation" aria-label="main navbar">
+        return <nav class="navbar" role="navigation" aria-label="main navbar">
             <div class="navbar-brand">
                 <Link class="navbar-item" href={ROUTES.HOME}>
                     <img src="/assets/logo.png" class="logo"/>
@@ -86,9 +80,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
                 }
 
                 <div class="navbar-end">
-                    {
-                        user ? <NavUserAuth/> : <UserLogin/>
-                    }
+                    <UserMenu />
                 </div>
             </div>
         </nav>;

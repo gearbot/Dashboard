@@ -9,7 +9,7 @@ import {route} from "preact-router";
 export default class LogoutButton extends Component<{}, {}> {
 
     signout = () => {
-        document.cookie = "state_key=; Max-Age=-99999999;"
+        document.cookie = "state_key=; Max-Age=-99999999;";
         get_info({
             method: "GET",
             endpoint: "logout",
@@ -23,7 +23,7 @@ export default class LogoutButton extends Component<{}, {}> {
 
     render() {
         return (
-            <button class="button is-light" onclick={this.signout}>
+            <button class="button" onclick={this.signout}>
                 <FontAwesomeIcon icon={faSignOutAlt}/> Sign Out
             </button>
         );

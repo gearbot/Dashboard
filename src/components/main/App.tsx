@@ -2,15 +2,15 @@ import {Component} from "preact";
 import {AppState, UserHolder} from "../../utils/Interfaces";
 import Router from "preact-router";
 import Home from "../../routes/Home";
-import Header from "./Header";
+import Header from "../navigation/Header";
 import {AuthUser, AuthUserSetter, Languages} from "../wrappers/Context";
 import {useContext, useState} from "preact/hooks";
 import PopupCloser from "./PopupCloser";
 import ROUTES from "../../utils/routes";
 import GuildListRoute from "../../routes/GuildListRoute";
 import {get_info} from "../../utils/dashAPI";
-import "../../style/styles.scss"
 import GuildRoute from "../../routes/GuildRoute";
+import {set_theme_colors} from "../../utils/theme";
 
 const VERSION = 23;
 
@@ -18,6 +18,8 @@ class App extends Component<UserHolder, AppState> {
 
 
     componentDidMount(): void {
+        set_theme_colors(localStorage.getItem('theme') || "light", false);
+
         //check for a new version, self destruct and reload if one is found
         fetch("/assets/version.txt").then(
             response => response.text().then(
@@ -66,11 +68,12 @@ class App extends Component<UserHolder, AppState> {
 
     render() {
         const [url, setUrl] = useState(null);
+        const show_background =  url && !(url.toString().endsWith(ROUTES.HOME));
         return (
             <AuthUser.Provider value={this.state.user} children={
                 <AuthUserSetter.Provider value={this.setUser} children={
                     <Languages.Provider value={this.state.languages} children={
-                        <div>
+                        <div class={show_background ? "bot_background": ""}>
                             <Header/>
                             <Router onChange={setUrl} url={url}>
                                 <Home path={ROUTES.HOME}/>

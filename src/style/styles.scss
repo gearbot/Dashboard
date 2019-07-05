@@ -1,3 +1,74 @@
+
+$body-background-color: var(--body-background);
+$navbar-background-color: var(--navbar-background);
+$navbar-item-hover-background-color: var(--nav-item-hover-background);
+$body-color: var(--body-color);
+$strong-color: var(--strong-color);
+$navbar-item-color: var(--body-color);
+$navbar-item-hover-color: var(--link-color);
+$navbar-item-hover-background-color: var(--navbar-item-hover-background-color);
+$navbar-item-active-color: var(--navbar-item-active-color);
+$navbar-tab-hover-border-bottom-color: var(--link-color);
+$navbar-tab-active-color: var(--link-color);
+$navbar-tab-active-border-bottom-color: var(--link-color);
+$navbar-dropdown-background-color: var(--navbar-background);
+$navbar-dropdown-arrow: var(--link-color);
+$navbar-dropdown-item-hover-color: var(--navbar-dropdown-item-hover-color);
+$navbar-dropdown-item-hover-background-color: var(--navbar-item-hover-background-color);
+$navbar-dropdown-item-active-color: var(--link-color);
+$navbar-dropdown-item-active-background-color: var(--navbar-dropdown-item-active-background-color);
+$navbar-divider-background-color: var(--navbar-divider-background-color);
+$title-color: var(--text-color);
+$subtitle-color: var(--body-color);
+$subtitle-strong-color: var(--text-color);
+$button-color: var(--text-color);
+$button-background-color: var(--button-background-color);
+$button-border-color: var(--border-color);
+$button-hover-color: var(--text-color);
+$button-hover-border-color: var(--button-hover-border-color);
+$button-focus-color: var(--text-color);
+$button-focus-border-color: var(--link-color);
+$button-active-color: var(--text-color);
+$button-active-border-color: var(--body-color);
+$button-text-color: var(--body-color);
+$button-static-color: var(--button-static-color);
+$button-static-background-color: var(--button-static-background-color);
+$button-static-border-color: var(--button-static-border-color);
+$button-disabled-background-color: var(--button-disabled-background-color);
+$button-disabled-border-color: var(--button-disabled-border-color);
+$label-color: var(--text-color);
+$card-color: var(--body-color);
+$card-background-color: var(--card-background-color);
+$card-header-color: var(--text-color);
+$card-footer-border-top: 1px solid var(--border-color);
+$card-shadow: 0 2px 3px rgba(var(--border-color), 0.1), 0 0 0 1px rgba(var(--border-color), 0.1);
+$tabs-border-bottom-color: var(--border-color);
+$switch-background: var(--switch-background);
+$tabs-border-bottom-color: var(--border-color);
+$tabs-link-color: var(--text-color);
+$tabs-link-hover-color: var(--strong-color);
+$tabs-link-active-border-bottom-color: var(--link-color);
+$tabs-link-active-color: var(--link-color);
+$tabs-boxed-link-hover-background-color: var(--body-color);
+$tabs-boxed-link-hover-border-bottom-color: var(--border-color);
+$tabs-boxed-link-active-border-color: var(--border-color);
+$tabs-toggle-link-border-color: var(--border-color);
+$tabs-toggle-link-hover-border-color: var(--border-hover-color);
+$tabs-toggle-link-active-background-color: var(--link-color);
+$tabs-toggle-link-active-border-color: var(--link-color);
+$tabs-toggle-link-hover-background-color: var(--link-hover-color);
+$menu-item-color: var(--text-color);
+$menu-item-hover-color: var(--strong-color);
+$menu-item-hover-background-color: var(--link-hover-color);
+$menu-item-active-background-color: var(--link-color);
+$menu-label-color: var(--text-light);
+$input-background-color: var(--input-background);
+$input-color: var(--input-color);
+$input-border-color: var(--border-color);
+$input-shadow: inset 0 1px 2px rgba(var(--shadow-color), 0.1);
+$input-hover-color: var(--input-hover-color);
+$input-hover-border-color: var(--border-hover-color);
+
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/all";
 @import "../../node_modules/bulma/sass/elements/button.sass";
@@ -11,22 +82,75 @@
 @import "../../node_modules/bulma/sass/components/level.sass";
 @import "../../node_modules/bulma/sass/components/menu.sass";
 @import "../../node_modules/bulma/sass/form/all";
+@import "../../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css";
+
+* {
+	transition: var(--transition-speed);
+}
 
 
-$body-background-color: #EAEAEA;
+html {
+	overflow-y: auto;
+}
+
+body:before {
+	content: "";
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	width: 100%;
+	background-size: 100%;
+	background-image: url('../assets/background.png');
+	background-repeat: no-repeat;
+	opacity: var(--background-opacity);
+}
+
+
+.userHolder {
+	position: relative;
+	width: 3em;
+	height: 2em;
+	display: inline-block;
+	margin-right: 0.5em;
+	.userGear {
+		position: absolute;
+		height: 3em;
+		width: 3em;
+		max-height: 5em;
+		max-width: 5em;
+		top: -0.3em;
+		left: 0;
+	}
+
+
+	.userImage {
+		border-radius: 50%;
+		position: absolute;
+		width: 2.2em;
+		height: 2.2em;
+		max-height: 5em;
+		max-width: 5em;
+		padding: 0.1em;
+		top: 0.1em;
+		left: 0.4em;
+	}
+}
+
+.cardgrid {
+	display: grid;
+	grid-template-columns: repeat(5,1fr)
+}
 
 .mycard {
 	float: left;
 	margin: 1em;
-	flex-grow: 1;
-	flex-basis: 0;
-	flex-shrink: 1;
 }
 
 .card-image {
 	figure {
-		width: 20em;
-		height: 18em;
 		margin: auto;
 
 		img, svg {

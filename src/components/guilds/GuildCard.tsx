@@ -1,6 +1,6 @@
 import {Component} from "preact";
 import {GuildProps} from "../../utils/Interfaces";
-import {Link} from "preact-router/match";
+import {Link} from "preact-router";
 import ROUTES from "../../utils/routes";
 import GuildLogo from "./GuildLogo";
 
