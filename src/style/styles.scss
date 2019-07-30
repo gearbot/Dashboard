@@ -1,4 +1,3 @@
-
 $body-background-color: var(--body-background);
 $navbar-background-color: var(--navbar-background);
 $navbar-item-hover-background-color: var(--nav-item-hover-background);
@@ -68,6 +67,10 @@ $input-border-color: var(--border-color);
 $input-shadow: inset 0 1px 2px rgba(var(--shadow-color), 0.1);
 $input-hover-color: var(--input-hover-color);
 $input-hover-border-color: var(--border-hover-color);
+$input-disabled-color: var(--input-color-disabled);
+$input-disabled-background-color: var(--input-background-disabled);
+$input-disabled-border-color: var(--input-border-color-disabled);
+
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/all";
@@ -103,7 +106,7 @@ body:before {
 	z-index: -1;
 	width: 100%;
 	background-size: 100%;
-	background-image: url('../assets/background.png');
+	background-image: url('../assets/background.svg');
 	background-repeat: no-repeat;
 	opacity: var(--background-opacity);
 }
@@ -115,6 +118,7 @@ body:before {
 	height: 2em;
 	display: inline-block;
 	margin-right: 0.5em;
+
 	.userGear {
 		position: absolute;
 		height: 3em;
@@ -140,13 +144,35 @@ body:before {
 }
 
 .cardgrid {
+	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(5,1fr)
+	grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+	grid-auto-flow: dense;
+}
+
+.cardgridlogs {
+
+
+	.card {
+		height: fit-content;
+		.card-header {
+			padding: 1em;
+		}
+	}
 }
 
 .mycard {
-	float: left;
+	//float: left;
 	margin: 1em;
+
+	border: 0.25em solid var(--border-color);
+	border-radius: 1em;
+
+
+	.card-header {
+		border-bottom: 0.25em solid var(--border-color);
+		box-shadow: none;
+	}
 }
 
 .card-image {
@@ -155,9 +181,9 @@ body:before {
 
 		img, svg {
 			display: block;
-			margin: auto;
 			height: 100%;
 			border-radius: 50%;
+			margin: 0.1em auto auto;
 		}
 	}
 }
@@ -217,3 +243,43 @@ body:before {
 	margin-top: 1em;
 }
 
+.helpbutton {
+	border-radius: 50%;
+	margin-left: 0.2em;
+	display: inline-block;
+
+}
+
+.helpholder {
+	margin-left: 0.5rem;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1rem;
+}
+
+.helpcontent {
+	display: none;
+}
+
+.helpholder:hover {
+	.helpcontent {
+		position: fixed;
+		padding: 0.7em;
+		border-radius: 5%;
+		background-color: hsla(0, 0%, 20%, 0.7);
+		color: #fff;
+		content: attr(data-tooltip);
+		text-align: center;
+		display: inline-block;
+		margin-left: 0.5em;
+		z-index: 5;
+		width: fit-content;
+		font-weight: normal;
+		max-width: 50em;
+
+	}
+}
+
+.sliding {
+	animation: slide-down 0.4s ease;
+}

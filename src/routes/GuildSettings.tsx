@@ -11,23 +11,21 @@ import BasicInput from "../components/Configuration/BasicInput";
 import RoleConfigurator from "../components/Configuration/RoleConfigurator";
 import MuteComponent from "../components/Configuration/MuteComponent";
 import PermLevelSelector from "../components/Configuration/PermLevelSelector";
+import LogChannels from "../components/Configuration/LogChannels";
 
 
 const validateRangedInt = (value, min, max) =>
-    value ? value > max ? `This value can not be greater then ${max}` : value < min ? `This value can not be smaller then ${min}` : true : "Please enter a value"
+    value ? value > max ? `This value can not be greater then ${max}` : value < min ? `This value can not be smaller then ${min}` : true : "Please enter a value";
 
 
 const fields = {
-    general:
-        {
+    general: {
             Component: ConfigSection,
             extra_props: {
                 fields:
                     [
                         {
-                            name: "Prefix",
-                            api_name: "PREFIX",
-                            info: "The bot prefix",
+                            name: "PREFIX",
                             Component: BasicInput,
                             validator: (value) => {
                                 if (!value || value == "")
@@ -41,15 +39,11 @@ const fields = {
                             }
                         },
                         {
-                            name: "Language",
-                            api_name: "LANG",
-                            info: "The language the bot should use for this server",
+                            name: "LANG",
                             Component: LanguageSelector,
                         },
                         {
-                            name: "New user age",
-                            api_name: "NEW_USER_THRESHOLD",
-                            info: "How old a user max is to be consider new, in seconds",
+                            name: "NEW_USER_THRESHOLD",
                             Component: BasicInput,
                             validator: (value) => validateRangedInt(value, 0, 60 * 60 * 24 * 14),
                             extra_props: {
@@ -57,22 +51,16 @@ const fields = {
                             }
                         },
                         {
-                            name: "Timezone",
-                            api_name: "TIMEZONE",
-                            info: "The timezone to use for timestamps",
+                            name: "TIMEZONE",
                             Component: TimezoneSelector,
                             visible: (values) => values["TIMESTAMPS"],
                         },
                         {
-                            name: "Permissions denied message",
-                            api_name: "PERM_DENIED_MESSAGE",
-                            info: "Whether or not to notify a user the command he tries to use isn't available to them or to ignore them",
+                            name: "PERM_DENIED_MESSAGE",
                             Component: CheckmarkField,
                         },
                         {
-                            name: "Show timestamps",
-                            api_name: "TIMESTAMPS",
-                            info: "Whether or not to prepend timestamps to logs or not.",
+                            name: "TIMESTAMPS",
                             Component: CheckmarkField,
                         }
                     ]
@@ -84,60 +72,29 @@ const fields = {
         extra_props: {
             fields: [
                 {
-                    name: "Level 4 roles",
-                    api_name: "LVL4_ROLES",
-                    info: "People with any of these roles have  level 4 permissions",
+                    name: "LVL4_ROLES",
                     Component: RoleConfigurator,
 
                 },
                 {
-                    name: "Admin roles",
-                    api_name: "ADMIN_ROLES",
-                    info: "People with any of these roles are considered admins and thus have lvl 3 permissions",
+                    name: "ADMIN_ROLES",
                     Component: RoleConfigurator,
                     extra_props: {
                         type: "admin"
                     }
                 },
                 {
-                    name: "Mod roles",
-                    api_name: "MOD_ROLES",
-                    info: "People with any of these roles are considered moderators and thus have lvl 2 permissions",
+                    name: "MOD_ROLES",
                     Component: RoleConfigurator,
                     extra_props: {
                         type: "mod"
                     }
                 },
                 {
-                    name: "Trusted roles",
-                    api_name: "TRUSTED_ROLES",
-                    info: "People with any of these roles are considered trusted and thus have lvl 1 permissions",
+                    name: "TRUSTED_ROLES",
                     Component: RoleConfigurator
                 },
 
-            ]
-        }
-    },
-    roles: {
-        Component: ConfigSection,
-        extra_props: {
-            fields: [
-                {
-                    name: "Self assignable roles",
-                    api_name: "SELF_ROLES",
-                    info: "These are the roles people can add to themselves through the !selfroles command. Integration roles (created by bots, twitch, boosting, ...) or roles above the bot's highest role will not work.",
-                    Component: RoleConfigurator,
-                    extra_props: {
-                        extra_check: "can_be_self_role"
-                    }
-                },
-
-                {
-                    name: "Mute role",
-                    api_name: "MUTE_ROLE",
-                    info: "The role used to mute people",
-                    Component: MuteComponent
-                }
             ]
         }
     },
@@ -146,18 +103,14 @@ const fields = {
         extra_props: {
             fields: [
                 {
-                    name: "Dashboard access",
-                    api_name: "ACCESS",
-                    info: "Minimum permission level required to access the dashboard for this guild.",
+                    name: "ACCESS",
                     Component: PermLevelSelector,
                     extra_props: {
                         min: 1
                     }
                 },
                 {
-                    name: "Dashboard Infraction access",
-                    api_name: "INFRACTION",
-                    info: "Minimum permission level required to access the infractions from the dashboard for this guild.",
+                    name: "INFRACTION",
                     Component: PermLevelSelector,
                     extra_props: {
                         min: 1,
@@ -165,9 +118,7 @@ const fields = {
                     }
                 },
                 {
-                    name: "Dashboard config read access",
-                    api_name: "VIEW_CONFIG",
-                    info: "Minimum permission level required to access gain read-only access to this guilds config from the dashboard.",
+                    name: "VIEW_CONFIG",
                     Component: PermLevelSelector,
                     extra_props: {
                         min: 1,
@@ -175,9 +126,7 @@ const fields = {
                     }
                 },
                 {
-                    name: "Dashboard config write access",
-                    api_name: "ALTER_CONFIG",
-                    info: "Minimum permission level required to alter this guilds config from the dashboard.",
+                    name: "ALTER_CONFIG",
                     Component: PermLevelSelector,
                     extra_props: {
                         min: 2,
@@ -186,7 +135,36 @@ const fields = {
                 }
             ]
         }
-    }
+    },
+    roles: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: [
+                {
+                    name: "SELF_ROLES",
+                    Component: RoleConfigurator,
+                    extra_props: {
+                        extra_check: "can_be_self_role"
+                    }
+                },
+
+                {
+                    name: "MUTE_ROLE",
+                    Component: MuteComponent,
+                }
+            ]
+        }
+    },
+    log_channels: {
+        Component: LogChannels
+    },
+    message_logs: {},
+    censoring: {},
+    infractions: {},
+    perm_overrides: {},
+    raid_handling: {},
+    anti_spam: {}
+
 };
 
 
@@ -206,7 +184,7 @@ export default class GuildSettings extends Component<NavProps, {}> {
         return (
             <div class="flexcontainer">
                 <div class="flexitem">
-                    <GuildSettingsNav tab={this.props.tab}/>
+                    <GuildSettingsNav tab={this.props.tab} tabs={Object.keys(fields)}/>
                 </div>
                 <div class="container is-fluid flexitem2">
                     <Router>

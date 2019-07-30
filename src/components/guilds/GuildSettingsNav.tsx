@@ -4,20 +4,7 @@ import {Link} from "preact-router";
 import ROUTES from "../../utils/routes";
 import {useContext} from "preact/hooks";
 import {Guild} from "../wrappers/Context";
-
-const menu_options = {
-    General: "general",
-    Permissions: "permissions",
-    "Dashboard Permissions": "dash_security",
-    Roles: "roles",
-    "Log channels": "log_channels",
-    "Message logs": "message_logs",
-    Censoring: "censoring",
-    Infractions: "infractions",
-    "Permission overrides": "perm_overrides",
-    "Raid settings": "raid_handling",
-    "Anti spam": "anti_spam"
-};
+import {Text} from 'preact-i18n';
 
 export default class GuildSettingsNav extends Component<NavProps, {}> {
 
@@ -28,15 +15,23 @@ export default class GuildSettingsNav extends Component<NavProps, {}> {
     render() {
         const guild_id = useContext(Guild).id;
         const links = [];
-        for (let name in menu_options) {
-            const tab_name = menu_options[name];
-            links.push(<li><Link href={`${ROUTES.GUILDS}/${guild_id}/settings/${tab_name}`} class={this.props.tab == tab_name ? "is-active" : ""}>{name}</Link></li>)
+        for (let i in this.props.tabs) {
+            const tab_name = this.props.tabs[i];
+            links.push(
+                <li>
+                    <Link href={`${ROUTES.GUILDS}/${guild_id}/settings/${tab_name}`}
+                          class={this.props.tab == tab_name ? "is-active" : ""}>
+                        <Text id={`config.tabs.${tab_name}`}/>
+                    </Link>
+                </li>)
 
         }
 
         return (
             <aside class="menu">
-                <p class="menu-label">Settings</p>
+                <p class="menu-label">
+                    <Text id="config.parts.settings"/>
+                </p>
                 <ul class="menu-list">
                     {links}
                 </ul>

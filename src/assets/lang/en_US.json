@@ -1,0 +1,200 @@
+{
+  "navbar": {
+    "guilds": "Guilds",
+    "admin": "Admin",
+    "login": "Log in",
+    "logout": "Sign Out"
+  },
+  "home": {
+    "content": "GearBot homepage, please pretend there is something super clever and informative here"
+  },
+  "config": {
+    "parts": {
+      "select_role": "Select a role",
+      "add": "Add",
+      "save": "Save",
+      "reset": "Reset",
+      "public": "Public",
+      "trusted": "Trusted",
+      "moderator": "Moderator",
+      "admin": "Admin",
+      "lvl4": "Level 4",
+      "owner": "Server owner",
+      "nobody": "Nobody",
+      "settings": "Settings",
+      "delete": "Delete",
+      "select_channel": "Please select a channel",
+      "add_channel": "Add logging channel"
+    },
+    "tabs": {
+      "general": "General",
+      "permissions": "Permissions",
+      "dash_security": "Dashboard security",
+      "roles": "Roles",
+      "log_channels": "Log channels",
+      "message_logs": "Message logs",
+      "censoring": "Censoring",
+      "infractions": "Infractions",
+      "perm_overrides": "Permission overrides",
+      "raid_handling": "Raid handling",
+      "anti_spam": "Anti-spam"
+    },
+    "basic": {
+      "prefix": "Prefix",
+      "new_user_threshold": "New user threshold",
+      "language": "Language",
+      "timezone": "Timezone",
+      "perm_denied_message": "Permission denied message",
+      "timestamps": "Timestamps"
+    },
+    "permissions": {
+      "lvl4_roles": "Level 4 roles",
+      "admin_roles": "Admin roles",
+      "mod_roles": "Mod roles",
+      "trusted_roles": "Trusted roles",
+      "self_roles": "Self-assignable roles"
+    },
+    "roles": {
+      "mute_role": "Mute role"
+    },
+    "dash_security": {
+      "access": "Dashboard access",
+      "infraction": "Dashboard Infraction access",
+      "view_config": "Dashboard config read access",
+      "alter_config": "Dashboard config write access"
+    },
+    "mute": {
+      "setup_triggered": "The bot has been signaled to setup the mute role",
+      "setup": "Execute mute role setup with this role",
+      "cleanup_triggered": "The bot has been signaled to cleanup all overrides with this role",
+      "cleanup": "Remove all channel overrides with this role"
+    },
+    "log_channels": {
+      "censored_messages": {
+        "category": "Censor logs",
+        "censor_fail": "Censor failures",
+        "censored": "Censored messages"
+      },
+      "channel_changes": {
+        "category": "Channel changelogs",
+        "channel_log": "Channel creation/deletion",
+        "perm_overrides": "Permission changes",
+        "simple_change": "Channel changes",
+        "slowmode_log": "Slowmode changes"
+      },
+      "config_changes": {
+        "category": "Configuration changes",
+        "config_change": "General",
+        "config_dash_security_change": "Dashboard security",
+        "mute_role_changes": "Mute settings",
+        "perm_role_changes": "Permission changes",
+        "logging_change": "Logging changes"
+      },
+      "future_logs": {
+        "category": "Future logs"
+      },
+      "message_logs": {
+        "category": "Message logs",
+        "edit_logging": "Edited messages",
+        "message_removed": "Removed messages",
+        "pins": "Pin changes",
+        "purged_log": "Mass deletions"
+      },
+      "misc": {
+        "category": "Miscellaneous",
+        "command_used": "Command used"
+      },
+      "mod_actions": {
+        "category": "Moderation actions",
+        "ban": "Ban",
+        "errors": "Error",
+        "forceban_log": "Forced ban",
+        "inf_delete_log": "Infraction deletion",
+        "kick_log": "Kick",
+        "mute_log": "Mute",
+        "mute_reapply_log": "Mute reapplication",
+        "softban_log": "Cleankick",
+        "tempban_lifted": "Tempban lifted",
+        "tempban_log": "Tempban",
+        "unban": "Unban",
+        "unmute_modlog": "Unmute",
+        "unmuted": "Mute expired",
+        "verification_log": "Verification level changed",
+        "warning": "warning"
+      },
+      "name_changes": {
+        "category": "Name changes",
+        "nickname": "Nickname changes",
+        "username_changed": "Username changes"
+      },
+      "raid_logs": {
+        "category": "Raid logs",
+        "failures": "Configuration issues",
+        "state_changes": "Shield state changes"
+      },
+      "role_changes": {
+        "category": "Role changes",
+        "perm_update": "Permission changes",
+        "role_log": "Creation/deletion",
+        "simple_change": "Role changes"
+      },
+      "spam_violation": {
+        "category": "Spam logs",
+        "spam_violate": "Spam rule violation"
+      },
+      "travel_logs": {
+        "category": "Travel logs",
+        "join_logging": "Join logs",
+        "leave_logging": "Leave logs"
+      },
+      "voice_changes": {
+        "category": "General voice state changes",
+        "connected_to_voice": "User connected",
+        "disconnected_voice": "User disconnected",
+        "moved_voice": "User moved"
+      },
+      "voice_changes_detailed": {
+        "category": "Detailed voice state changes",
+        "voice_change_afk_false": "afk",
+        "voice_change_afk_true": "No longer afk",
+        "voice_change_deaf_true": "Server deafened",
+        "voice_change_deaf_false": "Server undeafened",
+        "voice_change_mute_false": "Server unmuted",
+        "voice_change_mute_true": "Server muted",
+        "voice_change_self_deaf_true": "Deafened",
+        "voice_change_self_deaf_false": "Undeafened",
+        "voice_change_self_mute_false": "Unmuted",
+        "voice_change_self_mute_true": "Muted"
+      }
+    }
+  },
+  "help": {
+    "prefix": "The prefix to use in this server.",
+    "new_user_threshold": "New user threshold",
+    "language": "The language to use for this server. Any not yet translated strings will fall back to english.",
+    "timezone": "The timezone to use for logs, note embeds do not use as discord converts those to your client timezone",
+    "perm_denied_message": "If the bot should send a message informing the user he isn't allowed to use that command or silently ignore them",
+    "timestamps": "Should timestamps be prepended to the logs?",
+    "lvl4_roles": "People with any of these roles have  level 4 permissions",
+    "admin_roles": "People with any of these roles are considered admins and thus have lvl 3 permissions",
+    "mod_roles": "People with any of these roles are considered moderators and thus have lvl 2 permissions",
+    "trusted_roles": "People with any of these roles are considered trusted and thus have lvl 1 permissions",
+    "self_roles": "These are the roles people can add to themselves through the !selfroles command. Integration roles (created by bots, twitch, boosting, ...) or roles above the bot's highest role will not work.",
+    "mute_role": "The role used to mute people",
+    "dashboard_access": "The minimum required level to access the dashboard for this server, can not be public or higher then your current access level",
+    "dashboard_infraction": "The minimum required level to see infractions on the dashboard, can not be lower then dashboard access (set above) or higher then your current access level",
+    "dashboard_view_config": "The minimum required level to see the server's configuration on the dashboard, can not be lower then dashboard access (set above) or higher then your current access level",
+    "dashboard_alter_config": "The minimum required level to alter the server's configuration on the dashboard, can not be lower then dashboard config read access (set above) or higher then your current access level"
+  },
+  "info": {
+    "members": "Members",
+    "online": "Online",
+    "afk": "AFK",
+    "dnd": "DND",
+    "offline": "Offline",
+    "text_channels": "Text channels",
+    "voice_channels": "Voice channels",
+    "roles": "Roles",
+    "emoji": "Emoji"
+  }
+}

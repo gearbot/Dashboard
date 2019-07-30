@@ -7,17 +7,17 @@ import {Link} from "preact-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faToolbox} from "@fortawesome/free-solid-svg-icons";
 import {get_info} from "../../utils/dashAPI";
-import LogoutButton from "../main/LogoutButton";
 import UserMenu from "./UserMenu";
+import { Text } from 'preact-i18n';
 
 //navigation for authenticated users
 const NavigationAuth = ({user}) => (
 
     <div class="navbar-start">
-        <Link activeClassName="is-active" class="navbar-item" href={ROUTES.GUILDS}>Guilds</Link>
+        <Link activeClassName="is-active" class="navbar-item" href={ROUTES.GUILDS}><Text id="navbar.guilds" /></Link>
         {
             user.bot_admin_status ?
-                <Link activeClassName="is-active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon icon={faToolbox}/>Admin</Link>
+                <Link activeClassName="is-active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon icon={faToolbox}/><Text id="navbar.admin" /></Link>
             : null
         }
     </div>
@@ -40,7 +40,7 @@ const UserLogin = () => (
     <div class="navbar-item">
         <div class="buttons">
             <a class="button is-light" activeClassName="active" onclick={login}>
-                <FontAwesomeIcon icon={faSignInAlt} className="fab"/> Log in
+                <FontAwesomeIcon icon={faSignInAlt} className="fab"/> <Text id="navbar.login"/>
             </a>
         </div>
     </div>

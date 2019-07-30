@@ -5,6 +5,7 @@ import {get_info} from "../../utils/dashAPI";
 import {useContext} from "preact/hooks";
 import {AuthUserSetter} from "../wrappers/Context";
 import {route} from "preact-router";
+import {Text} from 'preact-i18n';
 
 export default class LogoutButton extends Component<{}, {}> {
 
@@ -24,7 +25,7 @@ export default class LogoutButton extends Component<{}, {}> {
     render() {
         return (
             <button class="button" onclick={this.signout}>
-                <FontAwesomeIcon icon={faSignOutAlt}/> Sign Out
+                <FontAwesomeIcon icon={faSignOutAlt}/> <Text id={"header.logout"}/>
             </button>
         );
     }

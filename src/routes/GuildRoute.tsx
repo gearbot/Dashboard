@@ -11,6 +11,7 @@ import HackerMan from "../components/main/HackerMan";
 import GuildSettings from "./GuildSettings";
 import TODOComponent from "../components/TODOComponent";
 import GuildLogo from "../components/guilds/GuildLogo";
+import Loading from "../components/main/Loading";
 
 const INITIAL_STATE = {
     guild: null,
@@ -48,7 +49,7 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
                 <div class="container is-fluid">
                     {
                         loading ?
-                            <div>Loading...</div> :
+                            <Loading/> :
                             authorized ?
                             <div class="container">
                                 <h1 class="title serverTitle"><span class="serverImage"> <GuildLogo link={guild.server_icon} size="2x"/></span> {guild.name}</h1>

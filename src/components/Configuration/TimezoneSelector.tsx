@@ -1,5 +1,7 @@
 import {Component} from "preact";
 import {SettingsComponentProps} from "../../utils/Interfaces";
+import {Text} from 'preact-i18n';
+import InfoTooltip from "./InfoTooltip";
 
 const zones = [
     {"name": "(GMT-12:00) International Date Line West", "zone": "Etc/GMT+12"},
@@ -89,7 +91,7 @@ const zones = [
 export default class TimezoneSelector extends Component<SettingsComponentProps, {}> {
 
     render() {
-        const {value, setter, name, info, api_name, changed, disabled} = this.props;
+        const {value, setter, name, changed, disabled} = this.props;
         const assembed = [];
         for (let key in zones) {
             const {name, zone} = zones[key];
@@ -97,9 +99,12 @@ export default class TimezoneSelector extends Component<SettingsComponentProps, 
         }
         return (
             <div class="field">
-                <label class="label">{name}</label>
+                <label class="label">
+                    <Text id='config.basic.timezone'/>
+                    <InfoTooltip name="timezone"/>
+                </label>
                 <div class={changed ? "select is-success" : "select"}>
-                    <select onchange={(event) => setter(api_name, event.target.value)} title={info} disabled={disabled}>
+                    <select onchange={(event) => setter(name, event.target.value)} disabled={disabled}>
                         {assembed}
                     </select>
                 </div>

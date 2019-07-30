@@ -32,6 +32,9 @@ const THEME_COLORS = {
         "input-hover-color": "hsl(0, 0%, 5%)",
         "background-opacity": "0.3",
         "shadow-color": "hsl(0, 0%, 0%)",
+        "input-color-disabled": "hsl(0, 0%, 48%)",
+        "input-background-disabled": "hsl(0, 0%, 96%)",
+        "input-border-color-disabled": "hsl(0, 0%, 96%)"
     },
     dark: {
         "body-background": "#2c2f35",
@@ -65,6 +68,9 @@ const THEME_COLORS = {
         "input-hover-color": "hsl(0, 0%, 90%)",
         "background-opacity": "0.25",
         "shadow-color": "hsl(0, 0%, 100%)",
+        "input-color-disabled": "hsl(0, 0%, 52%)",
+        "input-background-disabled": "hsl(0, 0%, 4%)",
+        "input-border-color-disabled": "hsl(0, 0%, 4%)"
     }
 };
 

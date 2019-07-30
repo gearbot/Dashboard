@@ -4,12 +4,14 @@ import {useContext} from "preact/hooks";
 import {Guild} from "../wrappers/Context";
 import RoleComponent from "./RoleComponent";
 import RolePicker from "./RolePicker";
+import {Text} from 'preact-i18n';
+import InfoTooltip from "./InfoTooltip";
 
 export default class RoleConfigurator extends Component<RoleListProps, {}> {
 
 
     render() {
-        const {value, setter, name, info, api_name, changed, disabled, type, extra_check} = this.props;
+        const {value, setter, name, disabled, type, extra_check} = this.props;
         const guild = useContext(Guild);
         const assembled = [];
         const already_picked = value ? [...value] : [];
@@ -20,7 +22,7 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
             const index = value.indexOf(role_id);
             if (index > -1) {
                 local.splice(index, 1);
-                setter(api_name, local)
+                setter(name, local)
             }
         };
         for (let role_id in guild.role_list) {
@@ -43,17 +45,17 @@ export default class RoleConfigurator extends Component<RoleListProps, {}> {
 
         const receiver = (rid) => {
             local.push(rid);
-            setter(api_name, local);
+            setter(name, local);
             this.setState({selected: 0})
         };
 
 
         return (
             <div>
-                <h4 class="mytitle">{name}</h4>
-                <h5 class={"mysubtitle"}>{info}</h5>
+                <h4 class="mytitle"><Text id={`config.permissions.${name.toLowerCase()}`}/><InfoTooltip name={name.toLowerCase()}/></h4>
+
                 {assembled}
-                <RolePicker roles={to_pick} button_text={"Add"} receiver={receiver} disabled={disabled} extra_check={extra_check}/>
+                <RolePicker roles={to_pick} button_text={<Text id="config.parts.add"/>} receiver={receiver} disabled={disabled} extra_check={extra_check}/>
             </div>
         );
     }

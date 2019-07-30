@@ -3,6 +3,8 @@ import {GuildSettingsSectionProps, GuildSettingsSectionState} from "../../utils/
 import {useContext} from "preact/hooks";
 import {Guild} from "../wrappers/Context";
 import {get_info} from "../../utils/dashAPI";
+import {Text} from 'preact-i18n';
+
 
 const INITIAL_STATE = {
     loading: true,
@@ -57,10 +59,10 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         let {old_values, new_values} = this.state;
         let to_submit = {};
         for (let key in this.props.fields) {
-            let api_name = this.props.fields[key].api_name;
-            let new_value = new_values[api_name];
-            if (old_values[api_name] != new_value) {
-                to_submit[api_name] = new_value
+            let name = this.props.fields[key].name;
+            let new_value = new_values[name];
+            if (old_values[name] != new_value) {
+                to_submit[name] = new_value
             }
         }
         return to_submit;
@@ -72,8 +74,8 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         let can_submit = Object.keys(to_submit).length > 0 && !this.state.saving;
         for (let k in this.props.fields) {
             let field = this.props.fields[k];
-            if (to_submit[field.api_name] !== undefined)
-                can_submit = can_submit && (!field.validator || field.validator(this.state.new_values[field.api_name]) === true);
+            if (to_submit[field.name] !== undefined)
+                can_submit = can_submit && (!field.validator || field.validator(this.state.new_values[field.name]) === true);
 
             return can_submit;
         }
@@ -82,7 +84,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
     on_submit = (event) => {
         event.preventDefault();
         if (!this.can_submit()) {
-            window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122"
+            window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122";
             return;
         }
         this.setState({...this.state, saving: true});
@@ -108,7 +110,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         this.setState({
             new_values: {...this.state.old_values}
         })
-    }
+    };
 
     render() {
         const assembled = [];
@@ -116,15 +118,16 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         if (!loading) {
             const guild = useContext(Guild);
             for (let key in this.props.fields) {
-                let {name, api_name, info, Component, visible, validator, extra_props} = this.props.fields[key];
+                let {name, info, Component, visible, validator, extra_props} = this.props.fields[key];
                 extra_props = extra_props || {};
                 visible = visible || ((v) => true);
                 validator = validator || ((v) => true);
-                const changed = old_values[api_name] != new_values[api_name];
+                const changed = old_values[name] != new_values[name];
                 if (visible(new_values)) {
                     // @ts-ignore
-                    assembled.push(<Component name={name} api_name={api_name} info={info} value={new_values[api_name]}
-                                              setter={this.setter} changed={changed} validator={validator} all_values={new_values}
+                    assembled.push(<Component name={name} info={info} value={new_values[name]}
+                                              setter={this.setter} changed={changed} validator={validator}
+                                              all_values={new_values}
                                               disabled={saving || ((guild.user_perms & (1 << 3)) == 0)} {...extra_props}/>)
                 }
             }
@@ -137,10 +140,12 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
 
                     <div class="field is-grouped" style={{marginTop: "1em"}}>
                         <div class="control">
-                            <button class="button is-link" disabled={!this.can_submit() || saving}>Save</button>
+                            <button class="button is-link" disabled={!this.can_submit() || saving}><Text
+                                id="config.parts.save"/></button>
                         </div>
                         <div class="control">
-                            <button class="button is-link" disabled={!this.can_submit() || saving} onclick={this.reset}>Reset</button>
+                            <button class="button is-link" disabled={!this.can_submit() || saving} onclick={this.reset}>
+                                <Text id="config.parts.reset"/></button>
                         </div>
                     </div>
                 </form>

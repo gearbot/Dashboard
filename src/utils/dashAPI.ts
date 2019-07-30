@@ -3,7 +3,7 @@ const CORS = process.env.CORS == "ENABLED";
 
 
 
-function sleep(ms) {
+export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 

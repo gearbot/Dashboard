@@ -1,6 +1,5 @@
 import {Component} from "preact";
 import {SizeProp} from "@fortawesome/fontawesome-svg-core";
-import {Interface} from "readline";
 
 export interface User {
     id: string;
@@ -15,9 +14,10 @@ export interface UserHolder {
 }
 
 export interface AppState {
-    currentUrl: string;
     user: User;
-    languages: LangMap;
+    generalInfo: GeneralApiInfo;
+    lang_strings: any;
+    loading: boolean
 }
 
 export interface HeaderProps {
@@ -85,13 +85,23 @@ export interface Role {
     is_mod: boolean;
 }
 
+export interface Channel {
+    name: string;
+    can_log: boolean;
+}
+
+export interface ChannelMap {
+    [id: string]: Channel
+}
+
 export interface DetailedGuildInfo {
     id: string;
     name: string;
     server_icon: string;
     owner: Owner;
     members: number;
-    text_channels: number;
+    text_channels: ChannelMap;
+    additional_text_channels: ChannelMap
     voice_channels: number;
     creation_date: string;
     age_days: number;
@@ -105,6 +115,7 @@ export interface DetailedGuildInfo {
 
 export interface NavProps {
     tab: string;
+    tabs: string[]
 }
 
 export interface GeneralSettings {
@@ -120,11 +131,20 @@ export interface LangMap {
     [code: string]: string
 }
 
+export interface LoggingMap {
+    [code: string]: string[];
+}
+
+export interface GeneralApiInfo {
+    languages: LangMap;
+    logging: LoggingMap
+}
+
 export interface LoadingInterface {
     loading: boolean
 }
 
-export interface GuildSettingsSectionState extends LoadingInterface{
+export interface GuildSettingsSectionState extends LoadingInterface {
     old_values: GeneralSettings;
     new_values: GeneralSettings;
     saving: boolean;
@@ -133,11 +153,13 @@ export interface GuildSettingsSectionState extends LoadingInterface{
 
 export interface ConfigField {
     name: string;
-    api_name: string
     info: string;
     Component: Component
-    visible? (values): boolean;
+
+    visible?(values): boolean;
+
     validator?(value): boolean | string;
+
     extra_props?: any;
 }
 
@@ -154,15 +176,19 @@ export interface SettingsComponentProps {
     value: any;
     setter: any;
     name: string;
-    info: string;
     changed: boolean;
-    api_name: string;
     disabled: boolean;
+
     validator?(value): boolean | string;
+
     all_values: any;
 }
 
-export interface BasicInputComponentProps extends SettingsComponentProps{
+export interface GuildRoleSelectorProps extends SettingsComponentProps {
+    extra_check?: string;
+}
+
+export interface BasicInputComponentProps extends SettingsComponentProps {
     type: string
 }
 
@@ -171,21 +197,24 @@ export interface GuildLogoProps {
     size: SizeProp;
 }
 
-export interface RoleListProps extends SettingsComponentProps{
+export interface RoleListProps extends SettingsComponentProps {
     type: string;
     extra_check: string;
 }
 
 export interface RoleComponentProps {
     role: Role;
-    remover?(value:string):void;
+
+    remover?(value: string): void;
 }
 
 export interface RolePickerComponents {
     roles: Role[];
     selected?: string;
     button_text?: string;
-    receiver(r:string): void;
+
+    receiver(r: string): void;
+
     disabled: boolean;
     extra_check?: string;
 }
@@ -206,4 +235,69 @@ export interface PermLevelSelectorProps extends SettingsComponentProps {
 
 export interface ThemeState {
     theme: "light" | "dark";
+}
+
+export interface LogChannelInfo {
+    channel: string;
+    CATEGORIES: string[];
+    DISABLED_KEYS: string[];
+}
+
+export interface LogChannelProps {
+    info: LogChannelInfo;
+    selectedChannels: string[];
+    disabled: boolean;
+    index: string;
+
+    infoSetter(i: LogChannelInfo): void;
+
+    remover();
+
+}
+
+export interface LogCategoryProps {
+    info: LogChannelInfo;
+    channel: string;
+    index: string;
+
+    infoSetter(i: LogChannelInfo): void;
+}
+
+export interface ChannelSelectorProps {
+    selected?: string;
+    selectedChannels: string[];
+    disabled: boolean;
+    requirement?: string;
+
+    setter(new_value: string): void;
+
+    remover();
+
+}
+
+export interface MainRouterProps {
+    url: any;
+    setUrl: any;
+}
+
+export interface InfoTooltipProps {
+    name: string
+    placeholder?: string;
+}
+
+export interface CollapsibleCardProps {
+    header: any;
+    body: any;
+    style?: object;
+}
+
+export interface CollapsibleCardState {
+    expanded: boolean;
+}
+
+export interface LogChannelSectionState {
+    loading: boolean;
+    old_values?: any[]
+    new_values?: any[]
+    saving: boolean;
 }

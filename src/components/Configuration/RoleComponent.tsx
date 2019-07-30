@@ -32,7 +32,7 @@ export default class RoleComponent extends Component<RoleComponentProps, {}> {
         if (this.contrast([r, g, b], [249, 249, 249]) > this.contrast([r, g, b], [54, 57, 63]))
             bgcolor = "#f9f9f9";
 
-        console.log(name, color, this.contrast([r, g, b], [249, 249, 249]), this.contrast([r, g, b], [54, 57, 63]), bgcolor, this.contrast([r, g, b], [249, 249, 249]) > this.contrast([r, g, b], [54, 57, 63]))
+        // console.log(name, color, this.contrast([r, g, b], [249, 249, 249]), this.contrast([r, g, b], [54, 57, 63]), bgcolor, this.contrast([r, g, b], [249, 249, 249]) > this.contrast([r, g, b], [54, 57, 63]))
 
         let iconcolor = "#4a4a4a";
         if (this.contrast([r, g, b], [204, 204, 204]) > this.contrast([r, g, b], [74, 74, 74]))

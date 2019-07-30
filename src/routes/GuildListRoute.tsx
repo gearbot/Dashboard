@@ -13,11 +13,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
             method: "GET",
             endpoint: "guilds"
         }).then(
-            guilds =>
-            {
-                console.log(guilds)
-                this.setState({guilds: guilds})
-            }
+            guilds => this.setState({guilds: guilds})
         )
     }
 
