@@ -20,53 +20,53 @@ const validateRangedInt = (value, min, max) =>
 
 const fields = {
     general: {
-            Component: ConfigSection,
-            extra_props: {
-                fields:
-                    [
-                        {
-                            name: "PREFIX",
-                            Component: BasicInput,
-                            validator: (value) => {
-                                if (!value || value == "")
-                                    return "Please enter a prefix";
-                                if (value.length > 10)
-                                    return "Please use a shorter prefix";
-                                return true
-                            },
-                            extra_props: {
-                                type: "text"
-                            }
+        Component: ConfigSection,
+        extra_props: {
+            fields:
+                [
+                    {
+                        name: "PREFIX",
+                        Component: BasicInput,
+                        validator: (value) => {
+                            if (!value || value == "")
+                                return "Please enter a prefix";
+                            if (value.length > 10)
+                                return "Please use a shorter prefix";
+                            return true
                         },
-                        {
-                            name: "LANG",
-                            Component: LanguageSelector,
-                        },
-                        {
-                            name: "NEW_USER_THRESHOLD",
-                            Component: BasicInput,
-                            validator: (value) => validateRangedInt(value, 0, 60 * 60 * 24 * 14),
-                            extra_props: {
-                                type: "number"
-                            }
-                        },
-                        {
-                            name: "TIMEZONE",
-                            Component: TimezoneSelector,
-                            visible: (values) => values["TIMESTAMPS"],
-                        },
-                        {
-                            name: "PERM_DENIED_MESSAGE",
-                            Component: CheckmarkField,
-                        },
-                        {
-                            name: "TIMESTAMPS",
-                            Component: CheckmarkField,
+                        extra_props: {
+                            type: "text"
                         }
-                    ]
-            }
+                    },
+                    {
+                        name: "LANG",
+                        Component: LanguageSelector,
+                    },
+                    {
+                        name: "NEW_USER_THRESHOLD",
+                        Component: BasicInput,
+                        validator: (value) => validateRangedInt(value, 0, 60 * 60 * 24 * 14),
+                        extra_props: {
+                            type: "number"
+                        }
+                    },
+                    {
+                        name: "TIMEZONE",
+                        Component: TimezoneSelector,
+                        visible: (values) => values["TIMESTAMPS"],
+                    },
+                    {
+                        name: "PERM_DENIED_MESSAGE",
+                        Component: CheckmarkField,
+                    },
+                    {
+                        name: "TIMESTAMPS",
+                        Component: CheckmarkField,
+                    }
+                ]
+        }
 
-        },
+    },
     permissions: {
         Component: ConfigSection,
         extra_props: {
@@ -158,12 +158,42 @@ const fields = {
     log_channels: {
         Component: LogChannels
     },
-    message_logs: {},
-    censoring: {},
-    infractions: {},
-    perm_overrides: {},
-    raid_handling: {},
-    anti_spam: {}
+    message_logs: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: []
+        }
+    },
+    censoring: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: []
+        }
+    },
+    infractions: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: []
+        }
+    },
+    perm_overrides: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: []
+        }
+    },
+    raid_handling: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: []
+        }
+    },
+    anti_spam: {
+        Component: ConfigSection,
+        extra_props: {
+            fields: []
+        }
+    }
 
 };
 
