@@ -18,8 +18,11 @@ export default class MuteComponent extends Component<SettingsComponentProps, Mut
             this.setState({setup: true});
             get_info({
                 method: "POST",
-                endpoint: `guilds/${guild.id}/setup_mute`,
-                body: {role_id: value}
+                endpoint: `guilds/${guild.id}/mute`,
+                body: {
+                    action: "setup",
+                    role_id: value
+                }
             })
         };
 
@@ -28,8 +31,11 @@ export default class MuteComponent extends Component<SettingsComponentProps, Mut
             this.setState({cleaned: true});
             get_info({
                 method: "POST",
-                endpoint: `guilds/${guild.id}/cleanup_mute`,
-                body: {role_id: value}
+                endpoint: `guilds/${guild.id}/mute`,
+                body: {
+                    action: "cleanup",
+                    role_id: value
+                }
             })
         };
 
