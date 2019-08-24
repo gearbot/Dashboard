@@ -7,7 +7,7 @@
     "start": "per-env",
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
-    "build": "preact build --template src/index.html --no-sw",
+    "build": "preact build --template src/index.html",
     "serve": "preact build --template src/index.html && preact serve",
     "dev": "preact watch --template src/index.html",
     "test": "jest"
@@ -30,7 +30,7 @@
     "bulma": "^0.7.5",
     "bulma-extensions": "^6.2.7",
     "dotenv-webpack": "^1.7.0",
-    "preact": "^10.0.0-rc.0",
+    "preact": "^10.0.0-rc.1",
     "preact-compat": "^3.17.0",
     "preact-i18n": "^2.0.0-preactx.2",
     "preact-render-to-string": "^4.1.0",
