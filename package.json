@@ -35,7 +35,7 @@
     "preact-i18n": "^2.0.0-preactx.2",
     "preact-render-to-string": "^4.1.0",
     "preact-router": "^3.0.0",
-    "react-devtools": "^3.6.3",
+    "react-devtools": "^4.0.0",
     "reactide-config": "^1.0.2",
     "webpack": "^4.34.0"
   }
