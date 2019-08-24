@@ -12,30 +12,30 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install and build
-      run: |
-        npm install
-        npm run build
-      env:
-        CI: true
-    - name: deploy to server
-      uses: contention/rsync-deployments@v1.0.0
-      with:
-        secrets: ["SERVER_SSH_KEY"]
-        args = ["-e 'ssh -p ${{ secrets.SERVER_PORT }} -c --delete", "", "${{ secrets.SERVER_DEPLOY_INFO }}"]
-      env:
-        API_ROOT: gearbot.rocks
-        API_SECURE: true
-        CORS: false
-      if: github.ref == "master"
-    - name: Purge Cloudflare Cache
-      uses: jakejarvis/cloudflare-purge-action@v0.1.1
-      env:
-        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-        CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-        CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+        env:
+          CI: true
+      - name: deploy to server
+        uses: contention/rsync-deployments@v1.0.0
+        with:
+          secrets: ["SERVER_SSH_KEY"]
+          args = ["-e 'ssh -p ${{ secrets.SERVER_PORT }} -c --delete", "", "${{ secrets.SERVER_DEPLOY_INFO }}"]
+        env:
+          API_ROOT: gearbot.rocks
+          API_SECURE: true
+          CORS: false
+        if: github.ref == "master"
+      - name: Purge Cloudflare Cache
+        uses: jakejarvis/cloudflare-purge-action@v0.1.1
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
