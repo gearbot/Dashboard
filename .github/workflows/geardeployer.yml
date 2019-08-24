@@ -31,7 +31,7 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
         with:
-          args: ["-e 'ssh -p ${{ secrets.SERVER_PORT }} -c --delete", "", "${{ secrets.SERVER_DEPLOY_INFO }}"]
+          args: '"-e ''ssh -p ${{ secrets.SERVER_PORT }}'' -c --delete"  "${{ secrets.SERVER_DEPLOY_INFO}}"'
         if: github.ref == "master"
       - name: Purge Cloudflare Cache
         uses: jakejarvis/cloudflare-purge-action@v0.1.1
