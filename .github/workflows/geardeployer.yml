@@ -27,7 +27,7 @@ jobs:
         uses: contention/rsync-deployments@v1.0.0
         with:
           secrets: ["SERVER_SSH_KEY"]
-          args = ["-e 'ssh -p ${{ secrets.SERVER_PORT }} -c --delete", "", "${{ secrets.SERVER_DEPLOY_INFO }}"]
+          args: ["-e 'ssh -p ${{ secrets.SERVER_PORT }} -c --delete", "", "${{ secrets.SERVER_DEPLOY_INFO }}"]
         env:
           API_ROOT: gearbot.rocks
           API_SECURE: true
