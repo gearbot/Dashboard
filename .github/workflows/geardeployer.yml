@@ -17,8 +17,8 @@ jobs:
       - name: Send discord notification
         uses: AEnterprise/trigger-webhook@master
         with:
-          URL: ${{ secrets.DISCORD_WEBHOOK }}
-          CURL_ARGS: '-H "Content-Type: application/json" --data '{"embeds": [{"description": "[A new dashboard version is being deployed!]()", "color": 48895, "image": { "url": "https://media1.tenor.com/images/649fcbb487e4fcf5d2a480d72fb79827/tenor.gif"}}]}'
+          - URL: ${{ secrets.DISCORD_WEBHOOK }}
+          - CURL_ARGS: '-H "Content-Type: application/json" --data '{"embeds": [{"description": "[A new dashboard version is being deployed!]()", "color": 48895, "image": { "url": "https://media1.tenor.com/images/649fcbb487e4fcf5d2a480d72fb79827/tenor.gif"}}]}'
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
