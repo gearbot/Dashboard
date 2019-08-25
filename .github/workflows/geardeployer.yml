@@ -1,0 +1,47 @@
+name: Gear deployer
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+        env:
+          CI: true
+          API_ROOT: gearbot.rocks
+          API_SECURE: true
+          CORS: false
+      - name: deploy to server
+        uses: AEnterprise/rsync-deploy@master
+        env:
+          DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          FOLDER: "build"
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
+      - name: Purge Cloudflare Cache
+        uses: jakejarvis/cloudflare-purge-action@v0.1.1
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
