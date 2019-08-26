@@ -34,11 +34,11 @@ jobs:
           API_SECURE: true
           CORS: false
       - name: Send discord notification
-          uses: AEnterprise/discord-webhook@master
-          env:
-            DATA: '{"content": "Dashboard build failed! Could a <@&581757725332209674> please go yell at whoever broke it? kthx", "embeds": [{"color": 16711680, "image": { "url": "https://media1.tenor.com/images/3015d5e64f4e6199e21b0b7186f96c1d/tenor.gif"}}]}'
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          if: failure()
+        uses: AEnterprise/discord-webhook@master
+        env:
+          DATA: '{"content": "Dashboard build failed! Could a <@&581757725332209674> please go yell at whoever broke it? kthx", "embeds": [{"color": 16711680, "image": { "url": "https://media1.tenor.com/images/3015d5e64f4e6199e21b0b7186f96c1d/tenor.gif"}}]}'
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        if: failure()
       - name: deploy to server
         uses: AEnterprise/rsync-deploy@v1.0
         env:
@@ -50,11 +50,11 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
       - name: Send discord notification
-          uses: AEnterprise/discord-webhook@master
-          env:
-            DATA: '{"content": "Dashboard deployment failed! Could a <@&581757725332209674> please go yell at whoever broke it? kthx", "embeds": [{"color": 16711680, "image": { "url": "https://media1.tenor.com/images/90b35aec9b1f2549c3c10fcacd2b8e1c/tenor.gif"}}]}'
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          if: failure()
+        uses: AEnterprise/discord-webhook@master
+        env:
+          DATA: '{"content": "Dashboard deployment failed! Could a <@&581757725332209674> please go yell at whoever broke it? kthx", "embeds": [{"color": 16711680, "image": { "url": "https://media1.tenor.com/images/90b35aec9b1f2549c3c10fcacd2b8e1c/tenor.gif"}}]}'
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        if: failure()
       - name: Purge Cloudflare Cache
         uses: jakejarvis/cloudflare-purge-action@v0.1.1
         env:
