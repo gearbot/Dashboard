@@ -9,7 +9,7 @@
     "start:development": "npm run -s dev",
     "build": "preact build",
     "serve": "preact build && preact serve",
-    "dev": "preact watch --template template.html",
+    "dev": "preact watch",
     "test": "jest"
   },
   "devDependencies": {
