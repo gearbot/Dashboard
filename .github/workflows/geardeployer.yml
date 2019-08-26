@@ -62,7 +62,7 @@ jobs:
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
       - name: Send discord notification
-          uses: AEnterprise/discord-webhook@master
-          env:
-            DATA: '{"embeds": [{"description": "[A new dashboard version is has been successfully deployed!]()", "color": 65294, "image": { "url": "https://media1.tenor.com/images/77ff54276e951333b7c262f0dfb94930/tenor.gif"}}]}'
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: AEnterprise/discord-webhook@master
+        env:
+          DATA: '{"embeds": [{"description": "[A new dashboard version is has been successfully deployed!]()", "color": 65294, "image": { "url": "https://media1.tenor.com/images/77ff54276e951333b7c262f0dfb94930/tenor.gif"}}]}'
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
