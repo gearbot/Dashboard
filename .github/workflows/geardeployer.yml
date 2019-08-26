@@ -14,6 +14,11 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
+      - name: Send discord notification
+        uses: AEnterprise/discord-webhook@master
+        env:
+          DATA: '{"embeds": [{"description": "[A new dashboard version is being deployed!]()", "color": 48895, "image": { "url": "https://media1.tenor.com/images/649fcbb487e4fcf5d2a480d72fb79827/tenor.gif"}}]}'
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
