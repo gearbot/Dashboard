@@ -34,7 +34,7 @@ jobs:
           args: run build
         env:
           CI: true
-          API_ROOT: gearbot.rocks
+          API_ROOT: dash.gearbot.rocks
           API_SECURE: true
           CORS: false
       - name: Send discord notification
