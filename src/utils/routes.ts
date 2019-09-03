@@ -9,8 +9,10 @@ const ROUTES = {
     GUILD_INFRACTIONS: "/guilds/:gid/infractions",
     GUILD_SETTINGS: "/guilds/:gid/settings",
     GUILD_SETTINGS_GENERAL: "/guilds/:gid/settings/general",
-    "USER_SETTINGS": "/settings",
-    LOADING: "/loading"
+    USER_SETTINGS: "/settings",
+    LOADING: "/loading",
+    STATS: "/stats",
+    ADD_GEARBOT: "https://discordapp.com/oauth2/authorize?client_id=365497403928870914&scope=bot&permissions=1476783350"
 };
 
 export default ROUTES

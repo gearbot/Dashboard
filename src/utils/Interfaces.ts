@@ -1,4 +1,5 @@
 import {Component} from "preact";
+import WebSocketHolder from "./WebSocketHolder";
 import {SizeProp} from "@fortawesome/fontawesome-svg-core";
 
 export interface User {
@@ -17,7 +18,9 @@ export interface AppState {
     user: User;
     generalInfo: GeneralApiInfo;
     lang_strings: any;
-    loading: boolean
+    loading: boolean;
+    websocket: WebSocketHolder;
+    pluralRules: Intl.PluralRules;
 }
 
 export interface HeaderProps {
@@ -35,12 +38,24 @@ export interface BasicGuildInfo {
     icon: string;
 }
 
+export interface APIGuildInfo {
+    id: string
+    name: string;
+    icon: string;
+}
+
 export interface GuildMap {
     [guid: string]: BasicGuildInfo
 }
 
+export interface AllGuildMap {
+    [guid: string]: APIGuildInfo
+}
+
+
 export interface GuildProps {
-    guild: BasicGuildInfo;
+    guild: BasicGuildInfo | APIGuildInfo;
+    type: "SETTINGS" | "ADD";
 }
 
 export interface GuildRouteProps {
@@ -48,14 +63,20 @@ export interface GuildRouteProps {
     tab?: string;
 }
 
+export interface GuildUserPerms {
+    user_dash_perms: number;
+    user_level: number;
+}
+
 export interface GuildRouteState {
-    guild: DetailedGuildInfo;
     loading: boolean;
-    authorized: boolean;
+    guild_info: DetailedGuildInfo;
+    user_perms: GuildUserPerms;
 }
 
 export interface GuildListRouteState {
     guilds: GuildMap;
+    all_guilds: AllGuildMap;
 }
 
 export interface Owner {
@@ -97,7 +118,7 @@ export interface ChannelMap {
 export interface DetailedGuildInfo {
     id: string;
     name: string;
-    server_icon: string;
+    icon: string;
     owner: Owner;
     members: number;
     text_channels: ChannelMap;
@@ -109,8 +130,6 @@ export interface DetailedGuildInfo {
     role_list: Role[]
     emojis: Emoji[];
     member_statuses: Statuses;
-    user_perms: number;
-    user_level: number;
 }
 
 export interface NavProps {
@@ -300,4 +319,28 @@ export interface LogChannelSectionState {
     old_values?: any[]
     new_values?: any[]
     saving: boolean;
+}
+
+export interface StatProps {
+    name: string;
+    value: string;
+}
+
+interface Stats {
+    start_time: string;
+    user_mesages: string;
+    bot_messages: string;
+    own_messages: string;
+    total_members: string;
+    unique_members: string;
+    taco_count: string;
+    random_number: number;
+    commands_executed: string;
+    custom_commands_executed: string;
+}
+
+export interface StatsRouteState extends LoadingInterface{
+    stats: Stats;
+    uptime_parts: Component[];
+    interval;
 }

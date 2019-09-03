@@ -200,10 +200,6 @@ const fields = {
 
 export default class GuildSettings extends Component<NavProps, {}> {
 
-    constructor(props, state) {
-        super(props, state);
-    }
-
     render() {
         const sections = [];
 

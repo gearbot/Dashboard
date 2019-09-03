@@ -1,7 +1,7 @@
 import {Component} from "preact";
 import {LogChannelSectionState} from "../../utils/Interfaces";
 import {useContext} from "preact/hooks";
-import {Guild} from "../wrappers/Context";
+import {Guild, UserPerms, WS} from "../wrappers/Context";
 import {get_info} from "../../utils/dashAPI";
 import LogChannel from "./LogChannel";
 import {Text} from "preact-i18n";
@@ -25,10 +25,27 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
     componentDidMount(): void {
         this.setState({loading: true});
         const guild = useContext(Guild);
-        get_info({
-            method: "GET",
-            endpoint: `guilds/${guild.id}/config/log_channels`
-        }).then(this.process_info)
+        const websocket = useContext(WS);
+        websocket.ask_a_thing("get_guild_settings",
+            {
+                guild_id: guild.id,
+                section: "LOG_CHANNELS"
+            },
+            (data) => {
+               this.process_info(data)
+            });
+        websocket.subscribe({
+            channel: "guild_settings",
+            subkey: guild.id,
+            handler: (data) => {
+                console.log(data)
+            }
+        });
+    }
+
+    componentWillUnmount(): void {
+        const websocket = useContext(WS);
+        websocket.unsubscribe("guild_settings")
     }
 
     process_info = (info) => {
@@ -43,7 +60,8 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
             loading: false,
             //why is there no better way to deep clone an object?
             old_values: JSON.parse(JSON.stringify(new_info)),
-            new_values: new_info
+            new_values: new_info,
+            saving: false
         })
     };
 
@@ -78,20 +96,23 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
     on_submit = (event) => {
         event.preventDefault();
         if (!this.can_submit()) {
-            window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122"
+            // window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122"
             return;
         }
         this.setState({...this.state, saving: true});
 
         const guild = useContext(Guild);
-        get_info({
-            method: "POST",
-            endpoint: `guilds/${guild.id}/config/log_channels`,
-            body: this.get_to_submit()
-        }).then((info) => {
-            this.process_info(info.modified_values);
-            this.setState({saving: false})
-        })
+        const websocket = useContext(WS);
+        websocket.ask_a_thing(
+            "replace_guild_settings",
+            {
+                guild_id: guild.id,
+                section: "LOG_CHANNELS",
+                modified_values: this.get_to_submit()
+            },
+            (data) => {
+               this.process_info(data)
+            });
     };
 
     reset = (event) => {
@@ -118,8 +139,8 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
     render() {
         const assembled = [];
         const {loading, new_values, saving} = this.state;
-        const guild = useContext(Guild);
-        const disabled = saving || ((guild.user_perms & (1 << 3)) == 0);
+        const userperms = useContext(UserPerms)
+        const disabled = saving || ((userperms.user_dash_perms & (1 << 3)) == 0);
         const selected = [];
         if (!loading) {
 

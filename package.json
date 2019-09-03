@@ -7,12 +7,13 @@
     "start": "per-env",
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
-    "build": "preact build",
+    "build": "preact build && git rev-parse --short HEAD > build/assets/version.txt",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "test": "jest"
   },
   "devDependencies": {
+    "git-revision-webpack-plugin": "^3.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
     "node-sass": "^4.11.0",

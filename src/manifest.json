@@ -1,6 +1,6 @@
 {
-  "name": "Dashboard",
-  "short_name": "Dashboard",
+  "name": "GearBot dashboard",
+  "short_name": "GearBot dashboard",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

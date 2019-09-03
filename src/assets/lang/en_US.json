@@ -3,10 +3,29 @@
     "guilds": "Guilds",
     "admin": "Admin",
     "login": "Log in",
-    "logout": "Sign Out"
+    "logout": "Sign Out",
+    "stats": "Stats"
   },
   "home": {
     "content": "GearBot homepage, please pretend there is something super clever and informative here"
+  },
+  "guilds": {
+    "with_gearbot": "Servers you have dashboard access for",
+    "no_with_gearbot": "It seems like you don't have dashboard access for any servers",
+    "without_gearbot": "Servers you can add GearBot to (refresh to update this list)",
+    "no_without_gearbot": "Wow it seems GearBot is already on all servers you can add him to"
+  },
+  "stats": {
+    "uptime": "Uptime",
+    "user_mesages": "User messages received",
+    "bot_messages": "Messages by other bots",
+    "own_messages": "Messages send",
+    "total_members": "Total users",
+    "unique_members": "Unique users",
+    "taco_count": "Taco count",
+    "random_number": "Random number",
+    "commands_executed": "Commands executed",
+    "custom_commands_executed": "Custom commands executed"
   },
   "config": {
     "parts": {
@@ -196,5 +215,23 @@
     "voice_channels": "Voice channels",
     "roles": "Roles",
     "emoji": "Emoji"
+  },
+  "misc": {
+    "days": {
+      "singular": "1 day",
+      "other": "{{count}} days"
+    },
+    "hours": {
+      "one": "1 hour",
+      "other": "{{count}} hours"
+    },
+    "minutes": {
+      "one": "1 minute",
+      "other": "{{count}} minutes"
+    },
+    "seconds": {
+      "one": "1 second",
+      "other": "{{count}} seconds"
+    }
   }
 }

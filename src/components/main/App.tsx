@@ -3,7 +3,7 @@ import {AppState, UserHolder} from "../../utils/Interfaces";
 import Router from "preact-router";
 import Home from "../../routes/Home";
 import Header from "../navigation/Header";
-import {AuthUser, AuthUserSetter, GeneralInfo} from "../wrappers/Context";
+import {AuthUser, AuthUserSetter, GeneralInfo, WS} from "../wrappers/Context";
 import {useContext, useState} from "preact/hooks";
 import PopupCloser from "./PopupCloser";
 import ROUTES from "../../utils/routes";
@@ -13,6 +13,9 @@ import GuildRoute from "../../routes/GuildRoute";
 import {set_theme_colors} from "../../utils/theme";
 import {IntlProvider} from 'preact-i18n';
 import Loading from "./Loading";
+import {getCookie} from "../../utils/Utils";
+import WebSocketHolder from "../../utils/WebSocketHolder";
+import Stats from "../../routes/StatsRoute";
 
 const VERSION = 23;
 
@@ -21,7 +24,14 @@ class App extends Component<UserHolder, AppState> {
 
     componentDidMount(): void {
         // we got some loading to do!
-        this.setState({loading: true});
+        this.setState(
+            {
+                loading: true,
+                websocket: new WebSocketHolder((reply) =>
+                    useContext(AuthUserSetter)(reply.authorized ? reply.user_info : null)
+                )
+            }
+        );
 
         const todo = [];
 
@@ -36,7 +46,7 @@ class App extends Component<UserHolder, AppState> {
         todo.push(fetch("/assets/version.txt").then(
             response => response.text().then(
                 text => {
-                    if (parseInt(text) > VERSION) {
+                    if (text != process.env.VERSION && process.env.VERSIONCHECK == "true") {
                         navigator.serviceWorker.getRegistration().then(function (reg) {
                             if (reg) {
                                 reg.unregister().then(function () {
@@ -68,15 +78,22 @@ class App extends Component<UserHolder, AppState> {
             }
         );
 
-        todo.push(fetch(`/assets/lang/${localStorage.getItem('LANG') || "en_US"}.json`).then(
-            response => response.json().then(
-                text => {
-                    this.setState({lang_strings: text})
-                })));
+        todo.push(this.setLang(localStorage.getItem('LANG') || "en_US"));
 
         //wait till we got everything sorted
         Promise.all(todo).then(() => this.setState({loading: false}))
     }
+
+    setLang(lang) {
+        localStorage.setItem("LANG", lang);
+        this.setState({pluralRules: new Intl.PluralRules(lang.replace("_", "-"))});
+        return fetch(`/assets/lang/${lang}.json`).then(
+            response => response.json().then(
+                text => {
+                    this.setState({lang_strings: text})
+                }));
+    }
+
 
     setUser = user => {
         this.setState({user: user});
@@ -86,29 +103,40 @@ class App extends Component<UserHolder, AppState> {
             localStorage.removeItem("user")
     };
 
+    pluralProvider = (dict, plural) => {
+        return dict[this.state.pluralRules.select(plural)];
+    };
+
 
     render() {
         const [url, setUrl] = useState(null);
-        const show_background = !this.state.loading && url && !(url.endsWith(ROUTES.HOME));
+        const show_background = !this.state.loading && url && !(url.endsWith(ROUTES.STATS));
         return (
+            <WS.Provider value={this.state.websocket} children={
+                <AuthUser.Provider value={this.state.user} children={
+                    <AuthUserSetter.Provider value={this.setUser} children={
+                        <GeneralInfo.Provider value={this.state.generalInfo} children={
+                            <div class={show_background ? "bot_background" : ""}>
 
-            <AuthUser.Provider value={this.state.user} children={
-                <AuthUserSetter.Provider value={this.setUser} children={
-                    <GeneralInfo.Provider value={this.state.generalInfo} children={
-                        <div class={show_background ? "bot_background" : ""}>
-                            <IntlProvider definition={this.state.lang_strings}>
-                                {this.state.loading ? <Loading/> : <div><Header/>
-                                    <Router onChange={(url) => setUrl(url.url)} url={url}>
-                                        <Home path={ROUTES.HOME}/>
-                                        <PopupCloser path={ROUTES.CLOSER}/>
-                                        <GuildListRoute path={ROUTES.GUILDS}/>
-                                        <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
-                                    </Router>
-                                </div>
-                                }
-                            </IntlProvider>
-                        </div>
 
+                                <IntlProvider definition={this.state.lang_strings} provider={this.pluralProvider}>
+
+                                    <div class="page">
+                                        {this.state.loading ? <Loading/> : <div><Header/>
+                                            <Router onChange={(url) => setUrl(url.url)} url={url}>
+                                                <Home path={ROUTES.HOME}/>
+                                                <PopupCloser path={ROUTES.CLOSER}/>
+                                                <GuildListRoute path={ROUTES.GUILDS}/>
+                                                <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
+                                                <Stats path={ROUTES.STATS}/>
+                                            </Router>
+                                        </div>
+                                        }
+                                    </div>
+                                </IntlProvider>
+                            </div>
+
+                        }/>
                     }/>
                 }/>
             }/>

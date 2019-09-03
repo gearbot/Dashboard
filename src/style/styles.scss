@@ -155,6 +155,7 @@ body:before {
 
 	.card {
 		height: fit-content;
+
 		.card-header {
 			padding: 1em;
 		}
@@ -282,4 +283,66 @@ body:before {
 
 .sliding {
 	animation: slide-down 0.4s ease;
+}
+
+.loadingcontainer {
+	background: rgba(1, 1, 1, 0.3);
+	width: 100%;
+	height: 100%;
+
+	.loading {
+		margin: 0;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%, -50%);
+
+		.gear {
+			position: relative;
+			z-index: 1;
+			-webkit-animation:spin 6s linear infinite;
+			-moz-animation:spin 6s linear infinite;
+			animation:spin 6s linear infinite;
+		}
+
+		.loadingtext {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-right: -50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+			color: black;
+		}
+	}
+}
+
+.page {
+	width: 100vw;
+	height: 100vh;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+.uptime {
+	display: inline-block;
+	padding-right: 0.5em;
+}
+
+.box-item {
+	margin: 0.4em;
+	padding: 0.25em;
+	border: 0.25em solid var(--border-color);
+	border-radius: 1em;
+	background: rgba(1, 1, 1, 0.2);
+}
+
+.centered {
+	margin: 0 auto;
+	width: fit-content;
+	text-align: center;
 }

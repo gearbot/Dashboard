@@ -8,20 +8,36 @@ export default class GuildCard extends Component<GuildProps, {}> {
 
     render() {
         const {id, name, icon} = this.props.guild;
-        return (
-            <Link href={`${ROUTES.GUILDS}/${id}/info`} class="card tile is-child mycard">
-                <header class="card-header">
-                    <p class="card-header-title">
-                        {name}
+        let link, icon_url;
 
-                    </p>
-                </header>
-                <div class="card-image">
-                    <figure class="image">
-                        <GuildLogo link={icon} size="10x"/>
-                    </figure>
-                </div>
-            </Link>
+        const animated = icon && icon.startsWith("a_");
+        icon_url = `https://cdn.discordapp.com/icons/${id}/${icon}.${animated ? "gif" : "png"}?size=256`;
+
+        if (this.props.type == "SETTINGS")
+            link = `${ROUTES.GUILDS}/${id}/info`;
+        else
+            link = `${ROUTES.ADD_GEARBOT}&guild_id=${id}`;
+
+        const content = [<header class="card-header">
+            <p class="card-header-title">
+                {name}
+
+            </p>
+        </header>,
+            <div class="card-image">
+                <figure class="image">
+                    <GuildLogo link={icon && icon_url} size="10x"/>
+                </figure>
+            </div>];
+        return (
+            this.props.type == "SETTINGS" ?
+                <Link href={link} class="card tile is-child mycard">
+                    {content}
+                </Link>
+                :
+                <a href={link} class="card tile is-child mycard" target="_blank">
+                    {content}
+                </a>
         );
     }
 }

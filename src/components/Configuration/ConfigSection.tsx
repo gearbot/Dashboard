@@ -1,9 +1,10 @@
 import {Component} from "preact";
 import {GuildSettingsSectionProps, GuildSettingsSectionState} from "../../utils/Interfaces";
 import {useContext} from "preact/hooks";
-import {Guild} from "../wrappers/Context";
+import {Guild, UserPerms, WS} from "../wrappers/Context";
 import {get_info} from "../../utils/dashAPI";
 import {Text} from 'preact-i18n';
+import Loading from "../main/Loading";
 
 
 const INITIAL_STATE = {
@@ -27,25 +28,43 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
 
     componentDidUpdate(previousProps: Readonly<GuildSettingsSectionProps>, previousState: Readonly<GuildSettingsSectionState>, snapshot: any): void {
         if (previousProps.name != this.props.name) {
-            this.remount();
+            this.remount(previousProps.name);
         }
     }
 
-    remount = () => {
+    remount = (oldName?: string) => {
         this.setState({loading: true});
         const guild = useContext(Guild);
-        get_info({
-            method: "GET",
-            endpoint: `guilds/${guild.id}/config/${this.props.name}`
-        }).then(info =>
-            this.setState({
-                loading: false,
-                old_values: {...info},
-                new_values: {...info}
-            })
-        )
-    }
+        const websocket = useContext(WS);
+        websocket.ask_a_thing("get_guild_settings",
+            {
+                guild_id: guild.id,
+                section: this.props.name.toUpperCase()
+            },
+            (data) => {
+                this.setState({
+                    loading: false,
+                    old_values: {...data},
+                    new_values: {...data}
+                })
+            });
+        websocket.subscribe({
+            channel: "guild_settings",
+            subkey: guild.id,
+            handler: (data) => {
+                console.log(data)
+            }
+        });
 
+        if (oldName)
+            websocket.unsubscribe("guild_settings")
+    };
+
+
+    componentWillUnmount(): void {
+        const websocket = useContext(WS);
+        websocket.unsubscribe("guild_settings")
+    }
 
     setter = (key, value) => {
         const current = this.state.new_values;
@@ -84,25 +103,27 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
     on_submit = (event) => {
         event.preventDefault();
         if (!this.can_submit()) {
-            window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122";
+            // window.location.href = "https://tenor.com/view/close-so-close-joey-friends-nice-try-gif-4828122";
             return;
         }
         this.setState({...this.state, saving: true});
 
         const guild = useContext(Guild);
-        get_info({
-            method: "PATCH",
-            endpoint: `guilds/${guild.id}/config/${this.props.name}`,
-            body: this.get_to_submit()
-        }).then(
-            info => {
+        const websocket = useContext(WS);
+        websocket.ask_a_thing(
+            "save_guild_settings",
+            {
+                guild_id: guild.id,
+                section: this.props.name.toUpperCase(),
+                modified_values: this.get_to_submit()
+            },
+            (data) => {
                 this.setState({
-                    old_values: {...info.modified_values},
-                    new_values: {...info.modified_values},
+                    old_values: {...data.modified_values},
+                    new_values: {...data.modified_values},
                     saving: false
                 })
-            }
-        )
+            });
     };
 
     reset = (event) => {
@@ -115,6 +136,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
     render() {
         const assembled = [];
         const {loading, old_values, new_values, saving} = this.state;
+        const perms = useContext(UserPerms);
         if (!loading) {
             const guild = useContext(Guild);
             for (let key in this.props.fields) {
@@ -128,13 +150,13 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                     assembled.push(<Component name={name} info={info} value={new_values[name]}
                                               setter={this.setter} changed={changed} validator={validator}
                                               all_values={new_values}
-                                              disabled={saving || ((guild.user_perms & (1 << 3)) == 0)} {...extra_props}/>)
+                                              disabled={saving || ((perms.user_dash_perms & (1 << 3)) == 0)} {...extra_props}/>)
                 }
             }
         }
         return (
             loading ?
-                <div>Loading...</div> :
+                <Loading/> :
                 <form onsubmit={this.on_submit}>
                     {assembled}
 
@@ -144,7 +166,8 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                                 id="config.parts.save"/></button>
                         </div>
                         <div class="control">
-                            <button class="button is-link" disabled={!this.can_submit() || saving} onclick={this.reset}>
+                            <button class="button is-link" disabled={!this.can_submit() || saving}
+                                    onclick={this.reset}>
                                 <Text id="config.parts.reset"/></button>
                         </div>
                     </div>

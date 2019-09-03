@@ -45,7 +45,7 @@ export default class GuildInfo extends Component<{}, {}> {
                 <div class="level">
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="heading"><Text id="text_channels"/></p>
+                            <p class="heading"><Text id="info.text_channels"/></p>
                             <p class="title">{Object.keys(guildInfo.text_channels).length}</p>
                         </div>
                     </div>

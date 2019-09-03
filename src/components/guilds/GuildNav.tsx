@@ -1,8 +1,8 @@
 import {Component} from "preact";
-import {DetailedGuildInfo, NavProps} from "../../utils/Interfaces";
+import {NavProps} from "../../utils/Interfaces";
 import ROUTES from "../../utils/routes";
 import {useContext} from "preact/hooks";
-import {Guild} from "../wrappers/Context";
+import {Guild, UserPerms} from "../wrappers/Context";
 import {Link} from "preact-router";
 
 const menu_options = {
@@ -18,11 +18,12 @@ export default class GuildNav extends Component<NavProps, {}> {
     }
 
     render() {
-        const guild: DetailedGuildInfo = useContext(Guild);
+        const guild = useContext(Guild);
+        const user_perms = useContext(UserPerms);
         const links = [];
         for (let name in menu_options) {
             const {route, perms} = menu_options[name];
-            if ((guild.user_perms & perms) > 0)
+            if ((user_perms.user_dash_perms & perms) > 0)
                 links.push(
                     <li class={this.props.tab == route.split("/")[0] ? "is-active" : ""}>
                         <Link href={`${ROUTES.GUILDS}/${guild.id}/${route}`}>{name}</Link>

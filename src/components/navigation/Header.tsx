@@ -15,6 +15,7 @@ const NavigationAuth = ({user}) => (
 
     <div class="navbar-start">
         <Link activeClassName="is-active" class="navbar-item" href={ROUTES.GUILDS}><Text id="navbar.guilds" /></Link>
+        <Link activeClassName="is-active" class="navbar-item" href={ROUTES.STATS}><Text id="navbar.stats" /></Link>
         {
             user.bot_admin_status ?
                 <Link activeClassName="is-active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon icon={faToolbox}/><Text id="navbar.admin" /></Link>
@@ -26,8 +27,7 @@ const NavigationAuth = ({user}) => (
 //navbar for non authenticated users
 const NavigationNonAuth = () => (
     <div class="navbar-start">
-
-
+        <Link activeClassName="is-active" class="navbar-item" href={ROUTES.STATS}><Text id="navbar.stats" /></Link>
     </div>
 );
 

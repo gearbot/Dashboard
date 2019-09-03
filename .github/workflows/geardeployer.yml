@@ -53,6 +53,7 @@ jobs:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           USERNAME: ${{ secrets.USERNAME }}
           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
+          VERSIONCHECK: true
       - name: Send discord notification
         uses: AEnterprise/discord-webhook@master
         env:

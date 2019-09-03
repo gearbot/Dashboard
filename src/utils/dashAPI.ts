@@ -1,5 +1,5 @@
-const API_ROOT = process.env.API_ROOT;
-const CORS = process.env.CORS == "ENABLED";
+const API_ROOT = `${process.env.API_SECURE == "true" ? "https": "http"}://${process.env.API_ROOT}/api`;
+const CORS = process.env.CORS == "true";
 
 
 

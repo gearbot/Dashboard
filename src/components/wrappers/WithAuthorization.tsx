@@ -7,17 +7,10 @@ import ROUTES from "../../utils/routes";
 const withAuthorization = condition => Component => {
     class WithAuthorization extends preact_component<{}, {}> {
 
-        componentDidMount() {
-            const user = useContext(AuthUser);
-            if (!condition(user)) {
-                route(ROUTES.HOME, true);
-            }
-        }
-
         render(props) {
-            return (
-                <Component {...props} />
-            );
+            const user = useContext(AuthUser);
+            return condition(user) ? <Component {...props} /> : <p>Please login first</p>
+            ;
         }
     }
     return WithAuthorization;
