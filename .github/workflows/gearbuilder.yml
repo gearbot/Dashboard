@@ -20,12 +20,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and build
-        run: |
-          npm install
-          npm run build
+      - name: NPM install
+          uses: actions/npm@master
+          with:
+            args: install
+      - name: NPM build
+        uses: actions/npm@master
+        with:
+          args: run build
         env:
           CI: true
-          API_ROOT: gearbot.rocks
+          API_ROOT: dash.gearbot.rocks
           API_SECURE: true
           CORS: false
