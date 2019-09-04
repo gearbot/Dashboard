@@ -3,6 +3,7 @@ name: Gear builder
 on:
   push:
     branches:
+      - '*'
       - '!master'
 
 jobs:
