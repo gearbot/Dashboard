@@ -25,7 +25,8 @@
     "taco_count": "Taco count",
     "random_number": "Random number",
     "commands_executed": "Commands executed",
-    "custom_commands_executed": "Custom commands executed"
+    "custom_commands_executed": "Custom commands executed",
+    "guilds": "Guilds"
   },
   "config": {
     "parts": {

@@ -147,9 +147,9 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
 
                     <div class="level-item has-text-centered box-item">
                         <div>
-                            <p class="heading"><Text id={"stats.random_number"}/></p>
+                            <p class="heading"><Text id={"stats.guilds"}/></p>
                             <p class="title">
-                                {BigInt(stats.random_number).toLocaleString()}
+                                {stats.guilds.toLocaleString()}
                             </p>
                         </div>
                     </div>
