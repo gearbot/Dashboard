@@ -337,6 +337,7 @@ interface Stats {
     random_number: number;
     commands_executed: string;
     custom_commands_executed: string;
+    guilds: number;
 }
 
 export interface StatsRouteState extends LoadingInterface{
