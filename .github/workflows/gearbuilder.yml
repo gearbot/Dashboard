@@ -24,7 +24,7 @@ jobs:
       - name: NPM install
         uses: actions/npm@master
         with:
-        args: install
+          args: install
       - name: NPM build
         uses: actions/npm@master
         with:
