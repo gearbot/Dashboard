@@ -37,6 +37,7 @@ jobs:
           API_ROOT: dash.gearbot.rocks
           API_SECURE: true
           CORS: false
+          SENTRY_DSN: ${{secrets.SENTRY_DSN}}
       - name: Send discord notification
         uses: AEnterprise/discord-webhook@master
         env:
