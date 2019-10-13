@@ -13,11 +13,8 @@ import GuildRoute from "../../routes/GuildRoute";
 import {set_theme_colors} from "../../utils/theme";
 import {IntlProvider} from 'preact-i18n';
 import Loading from "./Loading";
-import {getCookie} from "../../utils/Utils";
 import WebSocketHolder from "../../utils/WebSocketHolder";
 import Stats from "../../routes/StatsRoute";
-
-const VERSION = 23;
 
 class App extends Component<UserHolder, AppState> {
 
