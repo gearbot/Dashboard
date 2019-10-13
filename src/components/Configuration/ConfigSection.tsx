@@ -22,17 +22,26 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
     }
 
     componentDidMount(): void {
+        const guild = useContext(Guild);
+        const websocket = useContext(WS);
+        websocket.subscribe({
+            channel: "guild_settings",
+            subkey: guild.id,
+            handler: (data) => {
+                console.log(data)
+            }
+        });
         this.remount();
     }
 
 
     componentDidUpdate(previousProps: Readonly<GuildSettingsSectionProps>, previousState: Readonly<GuildSettingsSectionState>, snapshot: any): void {
         if (previousProps.name != this.props.name) {
-            this.remount(previousProps.name);
+            this.remount();
         }
     }
 
-    remount = (oldName?: string) => {
+    remount = () => {
         this.setState({loading: true});
         const guild = useContext(Guild);
         const websocket = useContext(WS);
@@ -48,16 +57,6 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                     new_values: {...data}
                 })
             });
-        websocket.subscribe({
-            channel: "guild_settings",
-            subkey: guild.id,
-            handler: (data) => {
-                console.log(data)
-            }
-        });
-
-        if (oldName)
-            websocket.unsubscribe("guild_settings")
     };
 
 

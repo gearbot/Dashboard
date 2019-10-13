@@ -37,6 +37,11 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
         })
     }
 
+    componentWillUnmount(): void {
+        const websocket = useContext(WS);
+        websocket.unsubscribe("guild_info")
+    }
+
     render() {
         const {loading, guild_info, user_perms} = this.state;
         let animated, icon_url;
