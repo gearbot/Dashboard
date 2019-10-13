@@ -25,14 +25,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: NPM install
-        uses: actions/npm@master
-        with:
-          args: install
-      - name: NPM build
-        uses: actions/npm@master
-        with:
-          args: run build
+      - run: npm install
+      - run: npm run build
         env:
           CI: true
           API_ROOT: dash.gearbot.rocks
