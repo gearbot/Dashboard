@@ -26,7 +26,7 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
         this.setState({loading: true});
         const guild = useContext(Guild);
         const websocket = useContext(WS);
-        websocket.ask_a_thing("get_guild_settings",
+        websocket.ask_the_bot("get_guild_settings",
             {
                 guild_id: guild.id,
                 section: "LOG_CHANNELS"
@@ -103,7 +103,7 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
 
         const guild = useContext(Guild);
         const websocket = useContext(WS);
-        websocket.ask_a_thing(
+        websocket.ask_the_bot(
             "replace_guild_settings",
             {
                 guild_id: guild.id,

@@ -234,5 +234,16 @@
       "one": "1 second",
       "other": "{{count}} seconds"
     }
+  },
+  "infractions": {
+    "id": "Id",
+    "title": "Infractions",
+    "user_id": "User",
+    "mod_id": "Moderator",
+    "type": "Type",
+    "reason": "Reason",
+    "start": "Start",
+    "end": "End",
+    "active": "Active"
   }
 }

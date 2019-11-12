@@ -2,7 +2,8 @@ const THEME_COLORS = {
     light: {
         "body-background": "#f9f9f9",
         "navbar-background": "#f2f2f2",
-        "nav-item-hover-background": "#fafafa",
+        "nav-item-hover-background": "#c0c0c0",
+        "nav-item-hover-background-darker": "#b9b9b9",
         "body-color": "hsl(0, 0%, 29%)",
         "text-color": "hsl(0, 0%, 21%)",
         "link-color": "hsl(217, 71%, 53%)",
@@ -34,12 +35,14 @@ const THEME_COLORS = {
         "shadow-color": "hsl(0, 0%, 0%)",
         "input-color-disabled": "hsl(0, 0%, 48%)",
         "input-background-disabled": "hsl(0, 0%, 96%)",
-        "input-border-color-disabled": "hsl(0, 0%, 96%)"
+        "input-border-color-disabled": "hsl(0, 0%, 96%)",
+        "strong-color": "hsl(0, 0%, 21%)"
     },
     dark: {
         "body-background": "#2c2f35",
         "navbar-background": "#23272a",
         "nav-item-hover-background": "#0f1215",
+        "nav-item-hover-background-darker": "#06070a",
         "body-color": "hsl(0, 0%, 80%)",
         "text-color": "hsl(0, 0%, 75%)",
         "link-color": "hsl(217, 55%, 47%)",
@@ -70,7 +73,8 @@ const THEME_COLORS = {
         "shadow-color": "hsl(0, 0%, 100%)",
         "input-color-disabled": "hsl(0, 0%, 52%)",
         "input-background-disabled": "hsl(0, 0%, 4%)",
-        "input-border-color-disabled": "hsl(0, 0%, 4%)"
+        "input-border-color-disabled": "hsl(0, 0%, 4%)",
+        "strong-color": "hsl(0, 0%, 79%)"
     }
 };
 

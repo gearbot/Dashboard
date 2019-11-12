@@ -32,11 +32,11 @@
     "bulma": "^0.7.5",
     "bulma-extensions": "^6.2.7",
     "dotenv-webpack": "^1.7.0",
-    "preact": "^10.0.0",
+    "preact": "^10.0.5",
     "preact-compat": "^3.19.0",
     "preact-i18n": "^2.0.0-preactx.2",
-    "preact-render-to-string": "^5.0.7",
-    "preact-router": "^3.0.1",
+    "preact-render-to-string": "^5.1.1",
+    "preact-router": "^3.1.0",
     "webpack": "^4.34.0"
   }
 }

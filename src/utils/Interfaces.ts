@@ -14,13 +14,14 @@ export interface UserHolder {
     user?: User
 }
 
-export interface AppState {
-    user: User;
+export interface AppState extends LoadingInterface {
+    user?: User;
     generalInfo: GeneralApiInfo;
     lang_strings: any;
-    loading: boolean;
-    websocket: WebSocketHolder;
+    websocket?: WebSocketHolder;
     pluralRules: Intl.PluralRules;
+    usernameCache?: UsernameMap;
+    usernamesRequested: string[];
 }
 
 export interface HeaderProps {
@@ -340,8 +341,70 @@ interface Stats {
     guilds: number;
 }
 
-export interface StatsRouteState extends LoadingInterface{
+export interface StatsRouteState extends LoadingInterface {
     stats: Stats;
     uptime_parts: Component[];
     interval;
+}
+
+export interface Infraction {
+    id: number;
+    guild_id: string;
+    user_id: string;
+    mod_id: string;
+    type: string;
+    reason: string;
+    start: string;
+    end?: string;
+    active: boolean;
+}
+
+export interface FilterObject {
+    field: string;
+    mode: "string"
+}
+
+export interface Filter {
+    mode: "AND" | "OR"
+    filter_objects: FilterObject | Filter[];
+}
+
+export interface InfractionsRouteState extends LoadingInterface {
+    selected_infraction?: Infraction;
+    pages: number;
+    new_filter: string;
+    current_filter: Filter;
+    infraction_list: Infraction[];
+    order_by: string[];
+}
+
+export interface InfractionsRouteProps {
+    selection?: number;
+    filter?: string;
+    page?: number
+}
+
+export interface InfractionTableProps {
+    infractions: Infraction[]
+}
+
+export interface UsernameMap {
+    [id: string]: string
+}
+
+export interface UsernameProps {
+    id: string;
+    hideId?: boolean
+}
+
+export interface SortTitleProps {
+    name: string;
+    sorting: string[];
+    langPrefix: string;
+
+    setter(new_sorting: string[]): void;
+}
+
+export interface GearIconProps {
+    name: string;
 }

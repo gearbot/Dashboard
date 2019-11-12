@@ -1,4 +1,5 @@
 import {sleep} from "./dashAPI";
+import {receive_usernames} from "../components/main/Username";
 
 export default class WebSocketHolder {
 
@@ -14,6 +15,7 @@ export default class WebSocketHolder {
             hello: login,
             pong: this.heartbeat,
             reply: this.answerbox,
+            usernames: receive_usernames,
             error: (data) => alert(data)
         };
     }
@@ -65,10 +67,19 @@ export default class WebSocketHolder {
     };
 
     // hey do you know the answer to this o all knowing api?
-    ask_a_thing = (question, info, receiver) => {
+    ask_the_bot = (question, info, receiver) => {
+        this._ask("question", question, info, receiver)
+    };
+
+
+    ask_the_api = (question, info, receiver) => {
+        this._ask("question_api", question, info, receiver)
+    };
+
+    _ask = (type, question, info, receiver) => {
         const uid = Math.random().toString(36).substr(2, 9) + "-" + Math.random().toString(36).substr(2, 9);
         this.send(
-            "question",
+            type,
             {
                 question: question,
                 info: info,

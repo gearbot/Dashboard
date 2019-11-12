@@ -24,10 +24,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
             handler: (data) => {
                 switch (data.type) {
                     case "add":
-                       this.receiveGuilds(data.guilds)
-                        break;
-                    case "all_guilds":
-                        this.setState({all_guilds: data.guilds});
+                       this.receiveGuilds(data.guilds);
                         break;
                     case "remove":
                         const g: any = this.state.guilds;
@@ -38,6 +35,16 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
                 }
             }
         });
+        websocket.ask_the_api("get_user_guilds_gearbot", null, (data) => {
+           this.setState({
+               guilds: data,
+           })
+        })
+        websocket.ask_the_api("get_user_guilds_all", null, (data) => {
+            this.setState({
+                all_guilds: data,
+            })
+        })
     }
 
     receiveGuilds = (guilds) => {

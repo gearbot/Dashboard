@@ -3,7 +3,14 @@ import {AppState, UserHolder} from "../../utils/Interfaces";
 import Router from "preact-router";
 import Home from "../../routes/Home";
 import Header from "../navigation/Header";
-import {AuthUser, AuthUserSetter, GeneralInfo, WS} from "../wrappers/Context";
+import {
+    AuthUser,
+    AuthUserSetter,
+    GeneralInfo,
+    UsernameCache,
+    UsernameCacheSetter,
+    WS
+} from "../wrappers/Context";
 import {useContext, useState} from "preact/hooks";
 import PopupCloser from "./PopupCloser";
 import ROUTES from "../../utils/routes";
@@ -15,21 +22,33 @@ import {IntlProvider} from 'preact-i18n';
 import Loading from "./Loading";
 import WebSocketHolder from "../../utils/WebSocketHolder";
 import Stats from "../../routes/StatsRoute";
+import * as React from "preact/compat";
+
+const INITIAL_STATE = {
+    loading: true,
+    user: null,
+    generalInfo: null,
+    lang_strings: null,
+    websocket: null,
+    pluralRules: null,
+    usernameCache: {},
+    usernamesRequested: []
+};
 
 class App extends Component<UserHolder, AppState> {
 
+    constructor(props, state) {
+        super(props, state);
+        this.state =
+            {
+                ...INITIAL_STATE,
+                websocket: new WebSocketHolder((reply) =>
+                    useContext(AuthUserSetter)(reply.authorized ? reply.user_info : null))
+            };
+    }
 
     componentDidMount(): void {
         // we got some loading to do!
-        this.setState(
-            {
-                loading: true,
-                websocket: new WebSocketHolder((reply) =>
-                    useContext(AuthUserSetter)(reply.authorized ? reply.user_info : null)
-                )
-            }
-        );
-
         const todo = [];
 
         //restore info from localstorage
@@ -104,6 +123,10 @@ class App extends Component<UserHolder, AppState> {
         return dict[this.state.pluralRules.select(plural)];
     };
 
+    usernameCacheSetter = (newCache) => {
+        this.setState({usernameCache: newCache})
+    }
+
 
     render() {
         const [url, setUrl] = useState(null);
@@ -113,26 +136,31 @@ class App extends Component<UserHolder, AppState> {
                 <AuthUser.Provider value={this.state.user} children={
                     <AuthUserSetter.Provider value={this.setUser} children={
                         <GeneralInfo.Provider value={this.state.generalInfo} children={
-                            <div class={show_background ? "bot_background" : ""}>
+                            <UsernameCache.Provider value={this.state.usernameCache} children={
+                                <UsernameCacheSetter.Provider value={this.usernameCacheSetter} children={
+                                    <div class={show_background ? "bot_background" : ""}>
 
 
-                                <IntlProvider definition={this.state.lang_strings} provider={this.pluralProvider}>
+                                        <IntlProvider definition={this.state.lang_strings}
+                                                      provider={this.pluralProvider}>
 
-                                    <div class="page">
-                                        {this.state.loading ? <Loading/> : <div><Header/>
-                                            <Router onChange={(url) => setUrl(url.url)} url={url}>
-                                                <Home path={ROUTES.HOME}/>
-                                                <PopupCloser path={ROUTES.CLOSER}/>
-                                                <GuildListRoute path={ROUTES.GUILDS}/>
-                                                <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
-                                                <Stats path={ROUTES.STATS}/>
-                                            </Router>
-                                        </div>
-                                        }
+                                            <div class="page">
+                                                {this.state.loading ? <Loading/> : <div><Header/>
+                                                    <Router onChange={(url) => setUrl(url.url)} url={url}>
+                                                        <Home path={ROUTES.HOME}/>
+                                                        <PopupCloser path={ROUTES.CLOSER}/>
+                                                        <GuildListRoute path={ROUTES.GUILDS}/>
+                                                        <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
+                                                        <Stats path={ROUTES.STATS}/>
+                                                    </Router>
+                                                </div>
+                                                }
+                                            </div>
+                                        </IntlProvider>
                                     </div>
-                                </IntlProvider>
-                            </div>
 
+                                }/>
+                            }/>
                         }/>
                     }/>
                 }/>

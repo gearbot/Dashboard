@@ -11,6 +11,7 @@ import TODOComponent from "../components/TODOComponent";
 import GuildLogo from "../components/guilds/GuildLogo";
 import Loading from "../components/main/Loading";
 import {useContext} from "preact/hooks";
+import Infractions from "./Infractions";
 
 const INITIAL_STATE = {
     loading: true,
@@ -21,21 +22,22 @@ const INITIAL_STATE = {
 
 class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
 
-    constructor(props, state) {
-        super(props, state);
-        this.state = {...INITIAL_STATE};
-        const websocket = useContext(WS);
-        websocket.subscribe({
-            channel: "guild_info",
-            subkey: this.props.gid,
-            handler: (data) => {
-                this.setState({
-                    loading: false,
-                    ...data
-                })
-            }
-        })
-    }
+        constructor(props, state) {
+            super(props, state);
+            this.state = {...INITIAL_STATE};
+            const websocket = useContext(WS);
+            websocket.subscribe({
+                channel: "guild_info",
+                subkey: this.props.gid,
+                handler: (data) => {
+                    this.setState({
+                        ...data
+                    })
+                }
+            });
+
+            websocket.ask_the_bot("get_guild_info", {guild_id: this.props.gid}, (data) => this.setState({loading: false, ...data}))
+        }
 
     componentWillUnmount(): void {
         const websocket = useContext(WS);
@@ -63,7 +65,7 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
                                         <GuildNav tab={this.props.tab}/>
                                         <Router>
                                             <GuildInfo path={ROUTES.GUILD_INFO}/>
-                                            <TODOComponent path={ROUTES.GUILD_INFRACTIONS}/>
+                                            <Infractions path={ROUTES.GUILD_INFRACTIONS}/>
                                             <GuildSettings path={`${ROUTES.GUILD_SETTINGS}/:tab?`}/>
                                         </Router>
                                     </div> :

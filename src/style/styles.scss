@@ -70,7 +70,7 @@ $input-hover-border-color: var(--border-hover-color);
 $input-disabled-color: var(--input-color-disabled);
 $input-disabled-background-color: var(--input-background-disabled);
 $input-disabled-border-color: var(--input-border-color-disabled);
-
+$text-strong: var(--strong-color);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/all";
@@ -301,9 +301,9 @@ body:before {
 		.gear {
 			position: relative;
 			z-index: 1;
-			-webkit-animation:spin 6s linear infinite;
-			-moz-animation:spin 6s linear infinite;
-			animation:spin 6s linear infinite;
+			-webkit-animation: spin 6s linear infinite;
+			-moz-animation: spin 6s linear infinite;
+			animation: spin 6s linear infinite;
 		}
 
 		.loadingtext {
@@ -323,9 +323,24 @@ body:before {
 	height: 100vh;
 }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@-moz-keyframes spin {
+	100% {
+		-moz-transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
 
 
 .uptime {
@@ -345,4 +360,32 @@ body:before {
 	margin: 0 auto;
 	width: fit-content;
 	text-align: center;
+}
+
+.inf_table {
+	tr {
+		border-bottom: 1px solid black;
+
+		th {
+			text-align: center;
+			padding: 0.25em;
+			cursor: pointer;
+		}
+	}
+
+	tr:hover td {
+		background-color: var(--nav-item-hover-background)
+	}
+
+	tr:nth-child(2n) {
+		background-color: rgba(1, 1, 1, 0.15)
+	}
+
+	td {
+		padding: 0.5em 1em;
+	}
+}
+
+.gearIcon {
+	height: 1em;
 }
