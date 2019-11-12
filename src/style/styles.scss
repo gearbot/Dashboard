@@ -71,6 +71,10 @@ $input-disabled-color: var(--input-color-disabled);
 $input-disabled-background-color: var(--input-background-disabled);
 $input-disabled-border-color: var(--input-border-color-disabled);
 $text-strong: var(--strong-color);
+$text-light: var(--text-light);
+$pagination-color: var(--text-strong);
+$pagination-hover-color: var(--link-hover);
+$pagination-ellipsis-color: var(--pagination-ellipsis-color);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/all";
@@ -86,6 +90,8 @@ $text-strong: var(--strong-color);
 @import "../../node_modules/bulma/sass/components/menu.sass";
 @import "../../node_modules/bulma/sass/form/all";
 @import "../../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css";
+@import "../../node_modules/bulma/sass/components/pagination.sass";
+@import "../../node_modules/bulma/sass/elements/table";
 
 * {
 	transition: var(--transition-speed);
@@ -370,6 +376,7 @@ body:before {
 			text-align: center;
 			padding: 0.25em;
 			cursor: pointer;
+			background-color: rgba(1, 1, 1, 0.30)
 		}
 	}
 
@@ -377,8 +384,11 @@ body:before {
 		background-color: var(--nav-item-hover-background)
 	}
 
-	tr:nth-child(2n) {
+	tr:nth-child(2n + 1) {
 		background-color: rgba(1, 1, 1, 0.15)
+	}
+	tr:last-child {
+		border-bottom: 0;
 	}
 
 	td {

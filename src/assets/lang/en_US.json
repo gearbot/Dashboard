@@ -245,5 +245,9 @@
     "start": "Start",
     "end": "End",
     "active": "Active"
+  },
+  "navigation": {
+    "prev": "Previous page",
+    "next": "Next page"
   }
 }

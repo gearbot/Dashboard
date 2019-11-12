@@ -371,7 +371,8 @@ export interface Filter {
 
 export interface InfractionsRouteState extends LoadingInterface {
     selected_infraction?: Infraction;
-    pages: number;
+    page: number;
+    infraction_count: number;
     new_filter: string;
     current_filter: Filter;
     infraction_list: Infraction[];
@@ -402,9 +403,16 @@ export interface SortTitleProps {
     sorting: string[];
     langPrefix: string;
 
-    setter(new_sorting: string[]): void;
+    setter(newSorting: string[]): void;
 }
 
 export interface GearIconProps {
     name: string;
+}
+
+export interface PaginationProps {
+    page: number;
+    pages: number;
+
+    mover(newPage: number): void;
 }

@@ -40,7 +40,6 @@ export default class Username extends Component<UsernameProps, {}> {
 
     componentDidMount(): void {
         const cache = useContext(UsernameCache);
-        console.log(cache, requested, to_request);
         if (!cache[this.props.id] && requested.indexOf(this.props.id) === -1) {
             request_username(this.props.id);
         }
