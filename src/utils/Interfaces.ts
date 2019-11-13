@@ -408,6 +408,7 @@ export interface SortTitleProps {
 
 export interface GearIconProps {
     name: string;
+    size?: number;
 }
 
 export interface PaginationProps {

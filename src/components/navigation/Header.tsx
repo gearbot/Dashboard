@@ -52,7 +52,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 
     constructor(props, state) {
         super(props, state);
-        this.setState({"menuActive": false});
+        this.state = {"menuActive": false};
 
     }
 

@@ -7,6 +7,7 @@ import Loading from "../components/main/Loading";
 import Username from "../components/main/Username";
 import SortTitle from "../components/infractions/SortTitle";
 import Pagination from "../components/navigation/Pagination";
+import GearIcon from "../components/main/GearIcon";
 
 const INITIAL_STATE = {
     selected_infraction: null,
@@ -80,7 +81,9 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
     render() {
         const {loading, infraction_list, order_by, page, infraction_count} = this.state;
         if (loading)
-            return (<Loading/>);
+            return <Loading/>;
+        if (infraction_list.length == 0)
+            return <div style={{verticalAlign: "top", display: "block", textAlign: "center"}}><GearIcon name={"innocent"} size={10}/><div style={{display: "block"}}><Text id={"infractions.no_infractions"}/></div></div>;
         const rows = infraction_list.map((i) => (
                 <tr>
                     <td>{i.id}</td>
