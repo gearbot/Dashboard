@@ -416,3 +416,27 @@ export interface PaginationProps {
 
     mover(newPage: number): void;
 }
+
+export interface Command {
+    name: string;
+    syntax: string;
+    example: string;
+}
+
+export interface CommandGroup {
+    name: string;
+    permRequirement: number;
+    commands: Command[];
+}
+
+export interface CommandsState {
+    info: CommandGroup[];
+}
+
+export interface CommandGroupProps {
+    group: CommandGroup;
+}
+
+export interface CommandProps {
+    command: Command;
+}
