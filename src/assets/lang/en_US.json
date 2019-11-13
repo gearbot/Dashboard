@@ -4,7 +4,8 @@
     "admin": "Admin",
     "login": "Log in",
     "logout": "Sign Out",
-    "stats": "Stats"
+    "stats": "Stats",
+    "commands": "Commands"
   },
   "home": {
     "content": "GearBot homepage, please pretend there is something super clever and informative here"

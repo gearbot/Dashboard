@@ -6,7 +6,7 @@ import {Guild, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
 import Username from "../components/main/Username";
 import SortTitle from "../components/infractions/SortTitle";
-import Pagination from "../components/main/Pagination";
+import Pagination from "../components/navigation/Pagination";
 
 const INITIAL_STATE = {
     selected_infraction: null,
