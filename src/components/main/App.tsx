@@ -9,7 +9,8 @@ import {
     GeneralInfo,
     UsernameCache,
     UsernameCacheSetter,
-    WS
+    WS,
+    UrlSetter
 } from "../wrappers/Context";
 import {useContext, useState} from "preact/hooks";
 import PopupCloser from "./PopupCloser";
@@ -158,7 +159,6 @@ class App extends Component<UserHolder, AppState> {
                                             </div>
                                         </IntlProvider>
                                     </div>
-
                                 }/>
                             }/>
                         }/>

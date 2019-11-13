@@ -8,21 +8,22 @@ export default class SortTitle extends Component<SortTitleProps, {}> {
 
     toggleSort = () => {
         const {sorting, name, setter} = this.props;
+        const newSorting = sorting.slice(0);
         switch (this.getCurrentSort()) {
             case -1:
                 const index = sorting.indexOf(`-${name}`);
-                sorting[index] = (name);
+                newSorting[index] = (name);
                 break;
             case 0:
-                sorting.push(`-${name}`);
+                newSorting.push(`-${name}`);
                 break;
             case 1:
-                removeFromArray(sorting, name);
+                removeFromArray(newSorting, name);
                 break;
 
         }
-        setter(sorting);
-    }
+        setter(newSorting);
+    };
 
     getCurrentSort(): number {
         const {sorting, name} = this.props;

@@ -8,6 +8,8 @@ import Username from "../components/main/Username";
 import SortTitle from "../components/infractions/SortTitle";
 import Pagination from "../components/navigation/Pagination";
 import GearIcon from "../components/main/GearIcon";
+import ROUTES from "../utils/routes";
+import {areArraysSame} from "../utils/Utils";
 
 const INITIAL_STATE = {
     selected_infraction: null,
@@ -24,8 +26,17 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     constructor(props, state) {
         super(props, state);
-        this.state = {...INITIAL_STATE, new_filter: this.props.filter};
-        //TODO: load sort order from props
+        const tempState = {...INITIAL_STATE, new_filter: this.props.filter};
+
+        //load some props from the url if they are present
+        if (props.page)
+            tempState.page = parseInt(props.page) || 1;
+
+        if (props.order_by)
+            tempState.order_by = props.order_by.split("|")
+
+        this.state = tempState;
+
         const websocket = useContext(WS);
         const guild = useContext(Guild);
         websocket.subscribe({
@@ -34,7 +45,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
             handler: (data) => {
             }
         });
-        this.updateInfractions(1);
+        this.updateInfractions();
 
     }
 
@@ -43,13 +54,35 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         websocket.unsubscribe("guild_infractions")
     }
 
+    updateUrl(): void {
+        const guild = useContext(Guild);
+        let url = ROUTES.GUILD_INFRACTIONS.replace(":gid", guild.id);
+        if (this.state.selected_infraction)
+            url += `/${this.state.selected_infraction}`;
+        history.pushState(history.state, document.title, url + this.getQueryParams())
+    }
 
-    // shouldComponentUpdate(nextProps: Readonly<InfractionsRouteProps>, nextState: Readonly<InfractionsRouteState>, nextContext: any): boolean {
-    //     return this.state != nextState || nextContext;
-    // }
+    getQueryParams(): string {
+        let params = [];
+        const {page, order_by} = this.state;
+        if (page != 1)
+            params.push(`page=${page}`);
+        console.log("order by", order_by);
+        if (!areArraysSame(order_by, ["-id"]))
+            params.push(`order_by=${order_by.join("|")}`);
+        return params.length ? `?${params.join("&")}` : "";
+    }
 
-    updateInfractions(page): void {
-        const {current_filter, order_by} = this.state;
+
+    componentDidUpdate(previousProps: Readonly<InfractionsRouteProps>, previousState: Readonly<InfractionsRouteState>, snapshot: any): void {
+        const {current_filter, order_by, page} = this.state;
+        if (current_filter != previousState.current_filter || !areArraysSame(order_by, previousState.order_by) || page != previousState.page)
+            this.updateInfractions()
+    }
+
+    updateInfractions(): void {
+        this.updateUrl();
+        const {current_filter, order_by, page} = this.state;
         const websocket = useContext(WS);
         const guild = useContext(Guild);
         websocket.ask_the_api("infraction_search",
@@ -69,12 +102,10 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     set_sort = (newSort) => {
         this.setState({order_by: newSort});
-        this.updateInfractions(this.state.page);
     };
 
     setPage = (newPage) => {
         this.setState({page: newPage});
-        this.updateInfractions(newPage);
     }
 
 

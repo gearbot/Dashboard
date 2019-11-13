@@ -56,7 +56,7 @@ export default class Header extends Component<HeaderProps, HeaderState> {
 
     }
 
-    toggleActive = (event) => this.setState({"menuActive": !this.state.menuActive});
+    toggleActive = () => this.setState({"menuActive": !this.state.menuActive});
 
     render() {
 
