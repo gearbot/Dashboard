@@ -36,7 +36,7 @@ export default class SortTitle extends Component<SortTitleProps, {}> {
         const {langPrefix, name, sorting} = this.props;
         const direction = this.getCurrentSort();
         return (
-            <div onclick={this.toggleSort}>
+            <div onClick={this.toggleSort}>
                 <Text id={`${langPrefix}.${name}`}/>
                 {direction != 0 ?
                     <> ({sorting.indexOf(`${direction == 1? "": "-"}${name}`) + 1}

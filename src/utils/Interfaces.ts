@@ -377,6 +377,8 @@ export interface InfractionsRouteState extends LoadingInterface {
     current_filter: Filter;
     infraction_list: Infraction[];
     order_by: string[];
+    per_page: number;
+    updating: boolean;
 }
 
 export interface InfractionsRouteProps {
@@ -440,4 +442,14 @@ export interface CommandGroupProps {
 
 export interface CommandProps {
     command: Command;
+}
+
+export interface DropDownOptions {
+    [name: string] : any
+}
+export interface DropdownProps {
+    options: DropDownOptions
+    selected: string;
+
+    setter(newValue: any):void
 }

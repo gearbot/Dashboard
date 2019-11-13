@@ -10,6 +10,7 @@ import Pagination from "../components/navigation/Pagination";
 import GearIcon from "../components/main/GearIcon";
 import ROUTES from "../utils/routes";
 import {areArraysSame} from "../utils/Utils";
+import Dropdown from "../components/Configuration/Dropdown";
 
 const INITIAL_STATE = {
     selected_infraction: null,
@@ -19,7 +20,9 @@ const INITIAL_STATE = {
     infraction_count: 0,
     loading: true,
     current_filter: null,
-    order_by: ["-id"]
+    order_by: ["-id"],
+    per_page: 10,
+    updating: false
 };
 
 export default class Infractions extends Component<InfractionsRouteProps, InfractionsRouteState> {
@@ -33,7 +36,10 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
             tempState.page = parseInt(props.page) || 1;
 
         if (props.order_by)
-            tempState.order_by = props.order_by.split("|")
+            tempState.order_by = props.order_by.split("|");
+
+        if (props.per_page)
+            tempState.per_page = parseInt(props.per_page) || 10; //TODO: per user defaults?
 
         this.state = tempState;
 
@@ -64,37 +70,42 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     getQueryParams(): string {
         let params = [];
-        const {page, order_by} = this.state;
+        const {page, order_by, per_page} = this.state;
         if (page != 1)
             params.push(`page=${page}`);
         console.log("order by", order_by);
         if (!areArraysSame(order_by, ["-id"]))
             params.push(`order_by=${order_by.join("|")}`);
+        if (per_page != 10)
+            params.push(`per_page=${per_page}`);
         return params.length ? `?${params.join("&")}` : "";
     }
 
 
     componentDidUpdate(previousProps: Readonly<InfractionsRouteProps>, previousState: Readonly<InfractionsRouteState>, snapshot: any): void {
-        const {current_filter, order_by, page} = this.state;
-        if (current_filter != previousState.current_filter || !areArraysSame(order_by, previousState.order_by) || page != previousState.page)
+        const {current_filter, order_by, page, per_page} = this.state;
+        if (current_filter != previousState.current_filter || !areArraysSame(order_by, previousState.order_by) || page != previousState.page || per_page != previousState.per_page)
             this.updateInfractions()
     }
 
     updateInfractions(): void {
         this.updateUrl();
-        const {current_filter, order_by, page} = this.state;
+        const {current_filter, order_by, page, per_page} = this.state;
         const websocket = useContext(WS);
         const guild = useContext(Guild);
+        this.setState({updating: true})
         websocket.ask_the_api("infraction_search",
             {
                 question: current_filter,
                 guild_id: guild.id,
                 order_by: order_by,
-                page: page
+                page: page,
+                per_page: per_page
             },
             (data) => {
                 this.setState({
                     loading: false,
+                    updating: false,
                     ...data
                 })
             })
@@ -106,15 +117,22 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     setPage = (newPage) => {
         this.setState({page: newPage});
-    }
+    };
+
+    setPerPage = (value) => {
+        this.setState({per_page: parseInt(value), page: 1})
+    };
 
 
     render() {
-        const {loading, infraction_list, order_by, page, infraction_count} = this.state;
+        const {loading, infraction_list, order_by, page, infraction_count, per_page, updating} = this.state;
         if (loading)
             return <Loading/>;
         if (infraction_list.length == 0)
-            return <div style={{verticalAlign: "top", display: "block", textAlign: "center"}}><GearIcon name={"innocent"} size={10}/><div style={{display: "block"}}><Text id={"infractions.no_infractions"}/></div></div>;
+            return <div style={{verticalAlign: "top", display: "block", textAlign: "center"}}><GearIcon
+                name={"innocent"} size={10}/>
+                <div style={{display: "block"}}><Text id={"infractions.no_infractions"}/></div>
+            </div>;
         const rows = infraction_list.map((i) => (
                 <tr>
                     <td>{i.id}</td>
@@ -131,6 +149,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
         return (
             <>
+                {updating ? <Loading/> : null}
                 <table class="inf_table">
                     <thead>
                     <tr>
@@ -166,9 +185,13 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                     </tbody>
                 </table>
 
-                {infraction_count > 50 ?
-                    <Pagination page={page} pages={Math.ceil(infraction_count / 50)} mover={this.setPage}/> : null
+                {infraction_count > per_page ?
+                    <Pagination page={page} pages={Math.ceil(infraction_count / per_page)} mover={this.setPage}/> : null
                 }
+                <div>
+                    <Text id="infractions.per_page"/>
+                    <Dropdown options={{"10": 10, "20": 20, "30": 30, "40": 40, "50": 50}} selected={per_page.toString()} setter={this.setPerPage}/>
+                </div>
             </>
         );
     }
