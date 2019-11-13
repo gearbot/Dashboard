@@ -37,6 +37,7 @@ const THEME_COLORS = {
         "input-background-disabled": "hsl(0, 0%, 96%)",
         "input-border-color-disabled": "hsl(0, 0%, 96%)",
         "strong-color": "hsl(0, 0%, 21%)",
+        "header-color": "hsl(0, 0%, 95%)",
         "pagination-ellipsis-color": "hsl(0, 0%, 71%)"
     },
     dark: {
@@ -76,7 +77,8 @@ const THEME_COLORS = {
         "input-background-disabled": "hsl(0, 0%, 4%)",
         "input-border-color-disabled": "hsl(0, 0%, 4%)",
         "strong-color": "hsl(0, 0%, 79%)",
-        "pagination-ellipsis-color": "hsl(0, 0%, 29%)"
+        "pagination-ellipsis-color": "hsl(0, 0%, 29%)",
+        "header-color": "hsl(0, 0%, 85%)",
     }
 };
 
