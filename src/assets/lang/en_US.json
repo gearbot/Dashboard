@@ -247,7 +247,8 @@
     "end": "End",
     "active": "Active",
     "no_infractions": "There don't seem to be any naughty people on this server",
-    "per_page": "Infractions per page: "
+    "per_page": "Infractions per page: ",
+    "to_page": "Jump to page"
   },
   "navigation": {
     "prev": "Previous page",

@@ -431,7 +431,7 @@ export interface DropDownOptions {
     readonly [name: string] : any
 }
 export interface DropdownProps {
-    options: DropDownOptions
+    options: DropDownOptions | readonly any[]
     selected: string;
 
     setter(newValue: any):void

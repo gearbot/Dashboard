@@ -141,6 +141,11 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     render() {
         const {loading, infraction_list, order_by, page, infraction_count, per_page, updating, filter} = this.state;
+        const pages = [];
+        for (let p = 1; p <= Math.ceil(infraction_count / per_page); p++) {
+            console.log(p);
+            pages.push(p);
+        }
         if (loading)
             return <Loading/>;
         if (infraction_list.length == 0)
@@ -206,7 +211,11 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                 }
                 <div>
                     <Text id="infractions.per_page"/>
-                    <Dropdown options={{"10": 10, "20": 20, "30": 30, "40": 40, "50": 50}} selected={per_page.toString()} setter={this.setPerPage}/>
+                    <Dropdown options={[10, 20, 30, 40, 50]} selected={per_page.toString()} setter={this.setPerPage}/>
+                </div>
+                <div>
+                    <Text id="infractions.to_page"/>
+                    <Dropdown options={pages} selected={page.toString()} setter={this.setPage}/>
                 </div>
             </>
         );
