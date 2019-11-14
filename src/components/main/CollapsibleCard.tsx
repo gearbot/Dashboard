@@ -19,7 +19,7 @@ export default class CollapsibleCard extends Component<CollapsibleCardProps, Col
                     {header}
                     {
                         body ?
-                            <a onclick={this.toggle} style={{
+                            <a onClick={this.toggle} style={{
                                 height: "fit-content",
                                 paddingTop: "0.3em",
                                 right: "0.5em",

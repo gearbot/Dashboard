@@ -8,7 +8,7 @@ let scheduled = false;
 let to_request = [];
 
 export function receive_usernames(data) {
-    const cache = useContext(UsernameCache);
+    const cache = {...useContext(UsernameCache)};
     for (let uid in data) {
         cache[uid] = data[uid];
         requested.splice(requested.indexOf(uid), 1);

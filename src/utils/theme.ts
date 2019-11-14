@@ -54,7 +54,6 @@ const THEME_COLORS = {
         "navbar-dropdown-item-hover-background-color": "hsl(0, 0%,10%)",
         "navbar-dropdown-item-active-background-color": "hsl(0, 0%, 7.5%)",
         "navbar-divider-background-color": "hsl(0, 0%, 4%)",
-        "button-background-color": "hsl(0, 0%, 0%)",
         "button-hover-border-color": "hsl(0, 0%, 29%)",
         "button-static-color": "hsl(0, 0%, 52%)",
         "button-static-background-color": "hsl(0, 0%, 7.5%)",

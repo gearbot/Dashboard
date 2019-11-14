@@ -9,8 +9,7 @@ import {
     GeneralInfo,
     UsernameCache,
     UsernameCacheSetter,
-    WS,
-    UrlSetter
+    WS
 } from "../wrappers/Context";
 import {useContext, useState} from "preact/hooks";
 import PopupCloser from "./PopupCloser";
@@ -33,7 +32,6 @@ const INITIAL_STATE = {
     websocket: null,
     pluralRules: null,
     usernameCache: {},
-    usernamesRequested: []
 };
 
 class App extends Component<UserHolder, AppState> {

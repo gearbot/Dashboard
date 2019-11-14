@@ -39,7 +39,7 @@ export default class RoleComponent extends Component<RoleComponentProps, {}> {
             iconcolor = "#cccccc";
 
 
-        const markerContent = remover ? <a onclick={() => remover(this.props.role.id)} style={{padding: "0.35em", color: iconcolor}}><FontAwesomeIcon icon={faTimes}/></a> : <div style={{padding: "0 0.25em"}}><FontAwesomeIcon icon={faLock}/></div>
+        const markerContent = remover ? <a onClick={() => remover(this.props.role.id)} style={{padding: "0.35em", color: iconcolor}}><FontAwesomeIcon icon={faTimes}/></a> : <div style={{padding: "0 0.25em"}}><FontAwesomeIcon icon={faLock}/></div>
 
         return (
             <div class="level roleLevel" style={{float: "left", marginRight: "1em", backgroundColor: bgcolor}}>

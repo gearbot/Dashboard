@@ -10,7 +10,11 @@ export default class LogCategory extends Component<LogCategoryProps, {}> {
 
 
     cat_switcher = (e) => {
-        const i = this.props.info;
+        const i = {
+            channel: this.props.info.channel,
+            CATEGORIES: this.props.info.CATEGORIES.slice(),
+            DISABLED_KEYS: this.props.info.DISABLED_KEYS.slice()
+        };
         if (e.target.checked)
             i.CATEGORIES.push(e.target.name);
         else
@@ -25,7 +29,11 @@ export default class LogCategory extends Component<LogCategoryProps, {}> {
     };
 
     key_switcher = (e) => {
-        const i = this.props.info;
+        const i = {
+            channel: this.props.info.channel,
+            CATEGORIES: this.props.info.CATEGORIES.slice(),
+            DISABLED_KEYS: this.props.info.DISABLED_KEYS.slice()
+        };
         const subkey = e.target.getAttribute("data-subkey");
         const cat = e.target.getAttribute("data-category");
         if (e.target.checked) {

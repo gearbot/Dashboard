@@ -127,7 +127,7 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
 
     channel_adder = (e) => {
         e.preventDefault();
-        const i = this.state.new_values;
+        const i = [...this.state.new_values];
         i.push({
             channel: 0,
             CATEGORIES: [],
@@ -150,7 +150,7 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
                 const values = new_values[id];
 
                 const setter = ( value) => {
-                    const current = this.state.new_values;
+                    const current = [...this.state.new_values];
                     current[id] = value;
                     this.setState({
                         new_values: current,
@@ -158,7 +158,7 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
                 };
 
                 const channel_remover = () => {
-                    const i = this.state.new_values;
+                    const i = [...this.state.new_values];
                     delete i[id];
                     this.setState({new_values: i});
                 };
@@ -174,13 +174,13 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
         return (
             loading ?
                 <div>Loading...</div> :
-                <form onsubmit={this.on_submit}>
+                <form onSubmit={this.on_submit}>
                     {assembled}
 
                     <div class="field">
                         <div class="control">
                             <button class="button is-primary" disabled={disabled || saving || selected.indexOf(0) > -1}
-                                    onclick={this.channel_adder} style={{width: "100%"}}>
+                                    onClick={this.channel_adder} style={{width: "100%"}}>
                                 <Text id={"config.parts.add_channel"}/>
                             </button>
                         </div>
@@ -194,7 +194,7 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
                         </div>
                         <div class="control">
                             <button class="button is-link" disabled={JSON.stringify(this.state.old_values) == JSON.stringify(this.state.new_values) || saving}
-                                    onclick={this.reset}>Reset
+                                    onClick={this.reset}>Reset
                             </button>
                         </div>
                     </div>

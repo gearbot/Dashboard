@@ -15,6 +15,7 @@ const options = [
     "nobody"
 ];
 
+//FIXME: re-add user_level with the new permissions system
 export default class PermLevelSelector extends Component<PermLevelSelectorProps, {}> {
 
 

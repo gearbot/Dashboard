@@ -21,7 +21,7 @@ $title-color: var(--text-color);
 $subtitle-color: var(--body-color);
 $subtitle-strong-color: var(--text-color);
 $button-color: var(--text-color);
-$button-background-color: var(--button-background-color);
+$button-background-color: var(--input-background);
 $button-border-color: var(--border-color);
 $button-hover-color: var(--text-color);
 $button-hover-border-color: var(--button-hover-border-color);
@@ -75,6 +75,8 @@ $text-light: var(--text-light);
 $pagination-color: var(--text-strong);
 $pagination-hover-color: var(--link-hover);
 $pagination-ellipsis-color: var(--pagination-ellipsis-color);
+$dropdown-content-background-color: var(--input-background);
+$dropdown-item-color: var(--text-color);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/all";
@@ -92,6 +94,7 @@ $pagination-ellipsis-color: var(--pagination-ellipsis-color);
 @import "../../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css";
 @import "../../node_modules/bulma/sass/components/pagination.sass";
 @import "../../node_modules/bulma/sass/elements/table";
+@import "../../node_modules/bulma/sass/components/dropdown.sass";
 
 * {
 	transition: var(--transition-speed);

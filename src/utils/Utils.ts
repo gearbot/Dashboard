@@ -4,7 +4,7 @@ export function removeFromArray (array: any[], item: any) {
         array.splice(index, 1)
 }
 
-export function areArraysSame(a: any[], b:any[]) {
+export function areArraysSame(a: any[] | readonly any[], b:any[] | readonly any[]) {
     if (a.length != b.length)
         return false;
 

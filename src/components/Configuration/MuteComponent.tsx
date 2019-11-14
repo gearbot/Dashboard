@@ -46,12 +46,12 @@ export default class MuteComponent extends Component<SettingsComponentProps, Mut
 
                 <div class="field is-grouped">
                     <p class="control">
-                        <button class="button" disabled={disabled || this.state.setup} onclick={setupf}>
+                        <button class="button" disabled={disabled || this.state.setup} onClick={setupf}>
                             {this.state.setup ? <Text id="config.mute.setup_triggered"/> : <Text id="config.mute.setup"/>}
                         </button>
                     </p>
                     <p class="control">
-                        <button class="button" disabled={disabled || this.state.cleaned} onclick={cleanup}>
+                        <button class="button" disabled={disabled || this.state.cleaned} onClick={cleanup}>
                             {this.state.cleaned ?  <Text id="config.mute.cleanup_triggered"/> : <Text id="config.mute.cleanup"/>}
                         </button>
                     </p>

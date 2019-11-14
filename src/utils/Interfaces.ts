@@ -1,4 +1,4 @@
-import {Component} from "preact";
+import {Component, VNode} from "preact";
 import WebSocketHolder from "./WebSocketHolder";
 import {SizeProp} from "@fortawesome/fontawesome-svg-core";
 
@@ -21,7 +21,6 @@ export interface AppState extends LoadingInterface {
     websocket?: WebSocketHolder;
     pluralRules: Intl.PluralRules;
     usernameCache?: UsernameMap;
-    usernamesRequested: string[];
 }
 
 export interface HeaderProps {
@@ -46,11 +45,11 @@ export interface APIGuildInfo {
 }
 
 export interface GuildMap {
-    [guid: string]: BasicGuildInfo
+    readonly [guid: string]: BasicGuildInfo
 }
 
 export interface AllGuildMap {
-    [guid: string]: APIGuildInfo
+    readonly [guid: string]: APIGuildInfo
 }
 
 
@@ -113,7 +112,7 @@ export interface Channel {
 }
 
 export interface ChannelMap {
-    [id: string]: Channel
+    readonly [id: string]: Channel
 }
 
 export interface DetailedGuildInfo {
@@ -127,7 +126,7 @@ export interface DetailedGuildInfo {
     voice_channels: number;
     creation_date: string;
     age_days: number;
-    vip_features: string[];
+    vip_features: readonly string[];
     role_list: Role[]
     emojis: Emoji[];
     member_statuses: Statuses;
@@ -135,7 +134,7 @@ export interface DetailedGuildInfo {
 
 export interface NavProps {
     tab: string;
-    tabs: string[]
+    tabs: readonly string[]
 }
 
 export interface GeneralSettings {
@@ -152,7 +151,7 @@ export interface LangMap {
 }
 
 export interface LoggingMap {
-    [code: string]: string[];
+    readonly [code: string]: string[];
 }
 
 export interface GeneralApiInfo {
@@ -184,12 +183,12 @@ export interface ConfigField {
 }
 
 export interface FieldMap {
-    [name: string]: ConfigField
+    readonly [name: string]: ConfigField
 }
 
 export interface GuildSettingsSectionProps {
     name: string
-    fields: ConfigField[];
+    fields: readonly ConfigField[];
 }
 
 export interface SettingsComponentProps {
@@ -229,9 +228,9 @@ export interface RoleComponentProps {
 }
 
 export interface RolePickerComponents {
-    roles: Role[];
+    roles: readonly Role[];
     selected?: string;
-    button_text?: string;
+    button_text?: VNode | string;
 
     receiver(r: string): void;
 
@@ -259,13 +258,13 @@ export interface ThemeState {
 
 export interface LogChannelInfo {
     channel: string;
-    CATEGORIES: string[];
-    DISABLED_KEYS: string[];
+    CATEGORIES: readonly string[];
+    DISABLED_KEYS: readonly string[];
 }
 
 export interface LogChannelProps {
     info: LogChannelInfo;
-    selectedChannels: string[];
+    selectedChannels: readonly string[];
     disabled: boolean;
     index: string;
 
@@ -285,7 +284,7 @@ export interface LogCategoryProps {
 
 export interface ChannelSelectorProps {
     selected?: string;
-    selectedChannels: string[];
+    selectedChannels: readonly string[];
     disabled: boolean;
     requirement?: string;
 
@@ -293,11 +292,6 @@ export interface ChannelSelectorProps {
 
     remover();
 
-}
-
-export interface MainRouterProps {
-    url: any;
-    setUrl: any;
 }
 
 export interface InfoTooltipProps {
@@ -308,7 +302,7 @@ export interface InfoTooltipProps {
 export interface CollapsibleCardProps {
     header: any;
     body: any;
-    style?: object;
+    style?: any;
 }
 
 export interface CollapsibleCardState {
@@ -317,8 +311,8 @@ export interface CollapsibleCardState {
 
 export interface LogChannelSectionState {
     loading: boolean;
-    old_values?: any[]
-    new_values?: any[]
+    old_values?: readonly any[]
+    new_values?: readonly any[]
     saving: boolean;
 }
 
@@ -343,7 +337,7 @@ interface Stats {
 
 export interface StatsRouteState extends LoadingInterface {
     stats: Stats;
-    uptime_parts: Component[];
+    uptime_parts: readonly Component[];
     interval;
 }
 
@@ -359,24 +353,13 @@ export interface Infraction {
     active: boolean;
 }
 
-export interface FilterObject {
-    field: string;
-    mode: "string"
-}
-
-export interface Filter {
-    mode: "AND" | "OR"
-    filter_objects: FilterObject | Filter[];
-}
-
 export interface InfractionsRouteState extends LoadingInterface {
     selected_infraction?: Infraction;
     page: number;
     infraction_count: number;
-    new_filter: string;
-    current_filter: Filter;
-    infraction_list: Infraction[];
-    order_by: string[];
+    filter: Filter;
+    infraction_list: readonly Infraction[];
+    order_by: readonly string[];
     per_page: number;
     updating: boolean;
 }
@@ -388,11 +371,11 @@ export interface InfractionsRouteProps {
 }
 
 export interface InfractionTableProps {
-    infractions: Infraction[]
+    infractions: readonly Infraction[]
 }
 
 export interface UsernameMap {
-    [id: string]: string
+    readonly [id: string]: string
 }
 
 export interface UsernameProps {
@@ -402,7 +385,7 @@ export interface UsernameProps {
 
 export interface SortTitleProps {
     name: string;
-    sorting: string[];
+    sorting: readonly string[];
     langPrefix: string;
 
     setter(newSorting: string[]): void;
@@ -429,11 +412,11 @@ export interface Command {
 export interface CommandGroup {
     name: string;
     permRequirement: number;
-    commands: Command[];
+    commands: readonly Command[];
 }
 
 export interface CommandsState {
-    info: CommandGroup[];
+    info: readonly CommandGroup[];
 }
 
 export interface CommandGroupProps {
@@ -445,11 +428,42 @@ export interface CommandProps {
 }
 
 export interface DropDownOptions {
-    [name: string] : any
+    readonly [name: string] : any
 }
 export interface DropdownProps {
     options: DropDownOptions
     selected: string;
 
     setter(newValue: any):void
+}
+
+export interface FilterProperties {
+    Component: Component
+}
+
+export interface FilterValues {
+    readonly [name: string]: FilterProperties
+}
+
+export interface FilterOptions {
+    readonly [name: string]: FilterValues
+}
+
+export interface SetFilters {
+    readonly [name: string]: string
+}
+
+
+export interface Filter {
+    mode: "AND"| "OR";
+    set: SetFilters;
+    subFilters: readonly FilterProps[];
+}
+
+export interface FilterProps {
+    filter: Filter
+    options: FilterOptions
+
+    setter(newFilter): void;
+
 }

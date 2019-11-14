@@ -1,6 +1,6 @@
 import {Component} from "preact";
 import {Text} from 'preact-i18n';
-import {InfractionsRouteProps, InfractionsRouteState} from "../utils/Interfaces";
+import {InfractionsRouteProps, InfractionsRouteState, Filter as F, FilterOptions} from "../utils/Interfaces";
 import {useContext} from "preact/hooks";
 import {Guild, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
@@ -11,25 +11,35 @@ import GearIcon from "../components/main/GearIcon";
 import ROUTES from "../utils/routes";
 import {areArraysSame} from "../utils/Utils";
 import Dropdown from "../components/Configuration/Dropdown";
+import Filter from "../components/infractions/Filter";
+
+const FILTER_OPTIONS: FilterOptions = {
+
+};
+
+export const BLANK_FILTER: F = {
+    mode: "AND",
+    set: {},
+    subFilters: [],
+} as const;
 
 const INITIAL_STATE = {
     selected_infraction: null,
     page: 1,
-    new_filter: "",
     infraction_list: [],
     infraction_count: 0,
     loading: true,
-    current_filter: null,
+    filter: BLANK_FILTER,
     order_by: ["-id"],
     per_page: 10,
-    updating: false
+    updating: false,
 };
 
 export default class Infractions extends Component<InfractionsRouteProps, InfractionsRouteState> {
 
     constructor(props, state) {
         super(props, state);
-        const tempState = {...INITIAL_STATE, new_filter: this.props.filter};
+        const tempState = {...INITIAL_STATE};
 
         //load some props from the url if they are present
         if (props.page)
@@ -83,20 +93,21 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
 
     componentDidUpdate(previousProps: Readonly<InfractionsRouteProps>, previousState: Readonly<InfractionsRouteState>, snapshot: any): void {
-        const {current_filter, order_by, page, per_page} = this.state;
-        if (current_filter != previousState.current_filter || !areArraysSame(order_by, previousState.order_by) || page != previousState.page || per_page != previousState.per_page)
+        const {filter, order_by, page, per_page} = this.state;
+        //TODO: fix filter comparing
+        if (filter != previousState.filter || !areArraysSame(order_by, previousState.order_by) || page != previousState.page || per_page != previousState.per_page)
             this.updateInfractions()
     }
 
     updateInfractions(): void {
         this.updateUrl();
-        const {current_filter, order_by, page, per_page} = this.state;
+        const {filter, order_by, page, per_page} = this.state;
         const websocket = useContext(WS);
         const guild = useContext(Guild);
         this.setState({updating: true})
         websocket.ask_the_api("infraction_search",
             {
-                question: current_filter,
+                question: filter,
                 guild_id: guild.id,
                 order_by: order_by,
                 page: page,
@@ -123,9 +134,13 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         this.setState({per_page: parseInt(value), page: 1})
     };
 
+    setFilter = (newFilter) => {
+        this.setState({filter: newFilter})
+    }
+
 
     render() {
-        const {loading, infraction_list, order_by, page, infraction_count, per_page, updating} = this.state;
+        const {loading, infraction_list, order_by, page, infraction_count, per_page, updating, filter} = this.state;
         if (loading)
             return <Loading/>;
         if (infraction_list.length == 0)
@@ -150,6 +165,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         return (
             <>
                 {updating ? <Loading/> : null}
+                <Filter filter={filter} options={FILTER_OPTIONS} setter={this.setFilter}/>
                 <table class="inf_table">
                     <thead>
                     <tr>
