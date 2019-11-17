@@ -1,4 +1,4 @@
-import {FilterOptions} from "./Interfaces";
+import {Filter as F, FilterOptions} from "./Interfaces";
 import NumberInput from "../components/infractions/filters/NumberInput";
 
 const numberValidator = (value: string): boolean => {
@@ -41,3 +41,9 @@ export const FILTER_OPTIONS: FilterOptions = {
         "EQUALS"
     ]
 };
+
+export const BLANK_FILTER: F = {
+    mode: "AND",
+    set: [],
+    subFilters: [],
+} as const;

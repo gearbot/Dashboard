@@ -478,8 +478,8 @@ export interface Filter {
 }
 
 export interface FilterProps {
-    filter: Filter
-
+    filter: Filter;
+    level: number;
     setter(newFilter): void;
 
 }

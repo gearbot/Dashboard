@@ -12,14 +12,10 @@ import ROUTES from "../utils/routes";
 import {areArraysSame} from "../utils/Utils";
 import Dropdown from "../components/Configuration/Dropdown";
 import Filter from "../components/infractions/Filter";
-import {FILTER_OPTIONS, FILTER_TYPES} from "../utils/FilterDefinitions";
+import {FILTER_TYPES, BLANK_FILTER} from "../utils/FilterDefinitions";
 
 
-export const BLANK_FILTER: F = {
-    mode: "AND",
-    set: [],
-    subFilters: [],
-} as const;
+
 
 const INITIAL_STATE = {
     selected_infraction: null,
@@ -58,6 +54,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
             channel: "guild_infractions",
             subkey: guild.id,
             handler: (data) => {
+                //TODO: HANDLE NEW INFRACTIONS
             }
         });
         this.updateInfractions();
@@ -149,12 +146,14 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
     };
 
     setFilter = (newFilter) => {
+        console.log("newfilter", newFilter);
         this.setState({filter: newFilter, validFilter: this.isFilterValid(newFilter), page: 1})
     };
 
 
     render() {
         const {loading, infraction_list, order_by, page, infraction_count, per_page, updating, filter, validFilter} = this.state;
+
         const pages = [];
         for (let p = 1; p <= Math.ceil(infraction_count / per_page); p++) {
             pages.push(p);
@@ -178,7 +177,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
         const parts = [];
 
-        parts.push(<Filter filter={filter} setter={this.setFilter}/>);
+        parts.push(<Filter filter={filter} setter={this.setFilter} level={1}/>);
 
         if (validFilter)
             if (rows.length == 0)
@@ -245,15 +244,13 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                 </div>
             );
 
-        if (infraction_count > per_page)
+        if (validFilter) {
+            if (infraction_count > per_page)
+                parts.push(
+                    <Pagination page={page} pages={Math.ceil(infraction_count / per_page)}
+                                mover={this.setPage}/>
+                );
             parts.push(
-                <Pagination page={page} pages={Math.ceil(infraction_count / per_page)}
-                            mover={this.setPage}/>
-            );
-
-        return (
-            <>
-                {parts}
                 <div class={"level"} style={{marginTop: "0.5em"}}>
                     <div class="level-left">
                         <div class="level-item">
@@ -270,6 +267,12 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                         </div>
                     </div>
                 </div>
+            );
+        }
+
+        return (
+            <>
+                {parts}
             </>
         );
     }

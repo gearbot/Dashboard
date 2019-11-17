@@ -254,7 +254,8 @@
     "AND": "AND",
     "OR": "OR",
     "invalid_filter": "Your search filter is not valid.",
-    "no_results": "No infractions found matching your filter"
+    "no_results": "No infractions found matching your filter",
+    "add_filter": "Add sub-filter"
   },
   "navigation": {
     "prev": "Previous page",

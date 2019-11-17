@@ -2,7 +2,7 @@ import {Component} from "preact";
 import {Text} from "preact-i18n";
 import {FilterProps} from "../../utils/Interfaces";
 import Dropdown from "../Configuration/Dropdown";
-import {FILTER_OPTIONS, FILTER_TYPES} from "../../utils/FilterDefinitions";
+import {FILTER_OPTIONS, BLANK_FILTER} from "../../utils/FilterDefinitions";
 import FilterRow from "./FilterRow";
 
 export default class Filter extends Component<FilterProps, {}> {
@@ -17,18 +17,16 @@ export default class Filter extends Component<FilterProps, {}> {
 
     render() {
 
-        const {filter, setter} = this.props;
+        const {filter, level} = this.props;
         const {mode, set, subFilters} = filter;
-        console.log(set);
-
         const assembledSubFilters = [];
         for (let i = 0; i < subFilters.length; i++) {
             const updater = (newSubfilter) => {
                 const newSubFilters = [...subFilters];
-                newSubfilter[i] = newSubfilter;
+                newSubFilters[i] = newSubfilter;
                 this.set({subFilters: newSubFilters})
             };
-            assembledSubFilters.push(<Filter filter={subFilters[i]} setter={updater}/>)
+            assembledSubFilters.push(<Filter filter={subFilters[i]} setter={updater} level={level+1}/>)
         }
 
         const assembledSetFilters = [];
@@ -50,7 +48,7 @@ export default class Filter extends Component<FilterProps, {}> {
             assembledSetFilters.push(<FilterRow field={field} type={type} value={value} setter={setProp} remover={remover}/>);
         }
         return (
-            <div class="filter">
+            <div class="filter" style={{marginLeft: `${2*level}em`}}>
                 <div style={{verticalAlign: "center"}}>
                     <Text id={"infractions.mode"}/>
                     <Dropdown options={{
@@ -75,6 +73,14 @@ export default class Filter extends Component<FilterProps, {}> {
                 </div>
 
                 {assembledSubFilters}
+
+                {level < 3 && subFilters.length < 5 ?
+                <div class="field" style={{marginTop: "1em"}}>
+                    <div class="control">
+                        <button class="button is-link" onclick={() => {this.set({subFilters: [...subFilters, BLANK_FILTER]})}}><Text id="infractions.add_filter"/></button>
+                    </div>
+                </div>
+                    : null}
             </div>
         )
     }
