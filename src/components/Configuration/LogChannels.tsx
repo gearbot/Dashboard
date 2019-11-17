@@ -38,7 +38,6 @@ export default class LogChannels extends Component<{}, LogChannelSectionState> {
             channel: "guild_settings",
             subkey: guild.id,
             handler: (data) => {
-                console.log(data)
             }
         });
     }

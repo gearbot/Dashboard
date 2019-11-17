@@ -12,7 +12,6 @@ export default class Pagination extends Component<PaginationProps, {}> {
 
     render() {
         const {page, pages} = this.props;
-        console.log(page, pages);
         return (
             <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
                 <a class="pagination-previous" data-page={page - 1} onclick={this.gotoPage} disabled={page == 1}><Text id="navigation.prev"/></a>

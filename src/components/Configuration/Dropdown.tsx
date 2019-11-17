@@ -1,13 +1,19 @@
 import {Component} from "preact";
-import {DropdownProps} from "../../utils/Interfaces";
-import {useState} from "preact/hooks";
+import {DropdownProps, DropdownState} from "../../utils/Interfaces";
+import {Text} from "preact-i18n";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
+import OutsideAlerter from "../wrappers/OutsideAlerter";
 
-export default class Dropdown extends Component<DropdownProps, {}> {
+export default class Dropdown extends Component<DropdownProps, DropdownState> {
+
+    constructor(state, props){
+        super(state, props)
+    }
 
     render() {
-        const {options, selected, setter} = this.props;
+        const {options, selected, setter, direction} = this.props;
+
         const assembled = [];
         if (Array.isArray(options)) {
             for (let i = 0; i < options.length; i++) {
@@ -17,16 +23,17 @@ export default class Dropdown extends Component<DropdownProps, {}> {
             }
         } else {
             for (let option in options) {
-                assembled.push(<a onclick={() => setter(options[option])}
-                                  class={`dropdown-item ${options[option] == selected ? "is-active" : ""}`}>{option}</a>)
+                assembled.push(<a onclick={() => setter(option)}
+                                  class={`dropdown-item ${option == selected ? "is-active" : ""}`}>{options[option]}</a>)
             }
 
         }
         return (
-                <div class={`dropdown is-hoverable is-up`}>
+            <OutsideAlerter clicker={() => this.setState({open: false})}>
+                <div class={`dropdown ${this.state.open ? 'is-active' : ""} ${direction == "UP" ? "is-up" : ""}`} style={{marginLeft: "0.5em", marginRight: "0.5em", marginBottom: "0.2em"}} onclick={() => this.setState({open: !this.state.open})}>
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="mydropdown">
-                            <span>{selected}</span>
+                            <span>{selected? selected : <Text id={"misc.select_option"}/>}</span>
                             <span class="icon is-small">
                                 <FontAwesomeIcon icon={faAngleDown}/>
                         </span>
@@ -38,6 +45,7 @@ export default class Dropdown extends Component<DropdownProps, {}> {
                         </div>
                     </div>
                 </div>
+            </OutsideAlerter>
         )
     }
 

@@ -362,6 +362,7 @@ export interface InfractionsRouteState extends LoadingInterface {
     order_by: readonly string[];
     per_page: number;
     updating: boolean;
+    validFilter: boolean;
 }
 
 export interface InfractionsRouteProps {
@@ -428,42 +429,66 @@ export interface CommandProps {
 }
 
 export interface DropDownOptions {
-    readonly [name: string] : any
+    readonly [name: string] : string | number | VNode
 }
 export interface DropdownProps {
-    options: DropDownOptions | readonly any[]
-    selected: string;
+    options: DropDownOptions | readonly string[] | readonly number[]
+    selected?: string | number;
+    direction?: "UP" | "DOWN";
 
     setter(newValue: any):void
 }
 
-export interface FilterProperties {
-    Component: Component
+export interface DropdownState {
+    open: boolean;
 }
 
-export interface FilterValues {
-    readonly [name: string]: FilterProperties
+export interface FilterProperties {
+    field: string;
+    type?: string;
+    value?: string;
+}
+
+export interface CheckedInput {
+    value?: string | number;
+    setter(value: string | number): void;
+    validator(value: string | number): boolean;
+}
+
+export interface InputProps {
+    value: string | number;
+    setter(value: string | number): void;
+}
+
+export interface FilterType {
+    type: string;
+    operation: string
+    validator(value: string): boolean;
 }
 
 export interface FilterOptions {
-    readonly [name: string]: FilterValues
-}
-
-export interface SetFilters {
-    readonly [name: string]: string
+    readonly [name: string]: readonly string[]
 }
 
 
 export interface Filter {
     mode: "AND"| "OR";
-    set: SetFilters;
-    subFilters: readonly FilterProps[];
+    set: readonly FilterProperties[];
+    subFilters: readonly Filter[];
 }
 
 export interface FilterProps {
     filter: Filter
-    options: FilterOptions
 
     setter(newFilter): void;
 
+}
+
+export interface FilterRowProps {
+    field: string;
+    type: string;
+    value: string;
+
+    setter(field:string, value:string):void;
+    remover():void;
 }

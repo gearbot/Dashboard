@@ -28,7 +28,6 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
             channel: "guild_settings",
             subkey: guild.id,
             handler: (data) => {
-                console.log(data)
             }
         });
         this.remount();

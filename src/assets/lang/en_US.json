@@ -234,7 +234,8 @@
     "seconds": {
       "one": "1 second",
       "other": "{{count}} seconds"
-    }
+    },
+    "select_option": "Please make a selection"
   },
   "infractions": {
     "id": "Id",
@@ -247,8 +248,13 @@
     "end": "End",
     "active": "Active",
     "no_infractions": "There don't seem to be any naughty people on this server",
-    "per_page": "Infractions per page: ",
-    "to_page": "Jump to page"
+    "per_page": "Infractions per page:",
+    "to_page": "Jump to page",
+    "mode": "Mode",
+    "AND": "AND",
+    "OR": "OR",
+    "invalid_filter": "Your search filter is not valid.",
+    "no_results": "No infractions found matching your filter"
   },
   "navigation": {
     "prev": "Previous page",
