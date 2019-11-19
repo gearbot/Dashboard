@@ -34,7 +34,7 @@ export default class Filter extends Component<FilterProps, {}> {
             const {field, type, value} = set[i];
 
             const setProp = (prop, v) => {
-                const newSet = [...set];
+                const newSet = JSON.parse(JSON.stringify(set));
                 newSet[i][prop] = v;
                 this.set({set: newSet})
             };

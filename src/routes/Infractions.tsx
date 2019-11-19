@@ -114,7 +114,6 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         const websocket = useContext(WS);
         const guild = useContext(Guild);
         this.setState({updating: true});
-        console.log(filter);
 
         websocket.ask_the_api("infraction_search",
             {
@@ -146,7 +145,6 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
     };
 
     setFilter = (newFilter) => {
-        console.log("newfilter", newFilter);
         this.setState({filter: newFilter, validFilter: this.isFilterValid(newFilter), page: 1})
     };
 
