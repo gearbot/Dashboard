@@ -481,6 +481,7 @@ export interface FilterProps {
     filter: Filter;
     level: number;
     setter(newFilter): void;
+    remover?(): void;
 
 }
 

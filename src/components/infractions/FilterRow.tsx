@@ -10,7 +10,7 @@ export default class FilterRow extends Component<FilterRowProps, {}> {
     render() {
         const {field, type, value, setter, remover} = this.props;
         return (
-            <>
+            <div style={{display: "block"}}>
                 <Dropdown options={Object.keys(FILTER_OPTIONS)} selected={field}
                           setter={newField => setter("field", newField)}/>
                 <Dropdown options={FILTER_OPTIONS[field]} selected={type}
@@ -22,10 +22,12 @@ export default class FilterRow extends Component<FilterRowProps, {}> {
                                class={`input small-input ${FILTER_TYPES[type].validator(value) ? "is-success" : "is-danger"}`}/>
                         : null}
                 <div onclick={remover} style={{display: "inline-block", cursor: "pointer"}}>
-                    <FontAwesomeIcon icon={faTimes}/>
+                    <span style={{margin: "0.75em"}}>
+                        <FontAwesomeIcon icon={faTimes}/>
+                    </span>
                 </div>
 
-            </>
+            </div>
         );
     }
 }
