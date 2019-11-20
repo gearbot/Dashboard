@@ -85,7 +85,7 @@ export default class Filter extends Component<FilterProps, {}> {
 
                 {assembledSubFilters}
 
-                {level < 3 && subFilters.length < 5 ?
+                {level < 3 ?
                     <div class="field" style={{marginTop: "1em"}}>
                         <div class="control">
                             <button class="button is-link" onclick={() => {
@@ -95,8 +95,16 @@ export default class Filter extends Component<FilterProps, {}> {
                     </div>
                     : null}
                 {remover ?
-                    <div onclick={remover} style={{display: "inline-block", cursor: "pointer", margin: "0.75em", position: "absolute", top: 0, right: 0}}>
+                    <div style={{
+                        display: "inline-block",
+                        margin: "0.75em",
+                        position: "absolute",
+                        top: 0,
+                        right: 0
+                    }}>
+                        <span onclick={remover} style={{cursor: "pointer"}}>
                         <FontAwesomeIcon icon={faTimes}/>
+                        </span>
                     </div>
                     : null}
             </div>

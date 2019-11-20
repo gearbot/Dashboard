@@ -1,5 +1,4 @@
 import {Filter as F, FilterOptions} from "./Interfaces";
-import NumberInput from "../components/infractions/filters/NumberInput";
 
 const numberValidator = (value: string): boolean => {
     const converted = parseInt(value);
@@ -7,22 +6,22 @@ const numberValidator = (value: string): boolean => {
 };
 
 export const FILTER_TYPES = {
-    GREATER_THEN: {
+    GREATER_THAN: {
         type: "number",
         validator: numberValidator
     },
 
-    GREATER_OR_EQUAL_THEN: {
+    GREATER_OR_EQUAL_THAN: {
         type: "number",
         validator: numberValidator
     },
 
-    SMALLER_THEN: {
+    SMALLER_THAN: {
         type: "number",
         validator: numberValidator
     },
 
-    SMALLER_OR_EQUAL_THEN: {
+    SMALLER_OR_EQUAL_THAN: {
         type: "number",
         validator: numberValidator
     },
@@ -34,10 +33,10 @@ export const FILTER_TYPES = {
 
 export const FILTER_OPTIONS: FilterOptions = {
     "id": [
-        "GREATER_THEN",
-        "GREATER_OR_EQUAL_THEN",
-        "SMALLER_THEN",
-        "SMALLER_OR_EQUAL_THEN",
+        "GREATER_THAN",
+        "GREATER_OR_EQUAL_THAN",
+        "SMALLER_THAN",
+        "SMALLER_OR_EQUAL_THAN",
         "EQUALS"
     ]
 };

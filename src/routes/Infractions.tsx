@@ -15,7 +15,11 @@ import Filter from "../components/infractions/Filter";
 import {FILTER_TYPES, BLANK_FILTER} from "../utils/FilterDefinitions";
 
 
-
+const separators = [
+    ["🍇", "🍈", "🍉", "🍊"],
+    ["🍋", "🍌", "🍍", "🥭"],
+    ["🍎", "🍏", "🍐", "🍑"]
+];
 
 const INITIAL_STATE = {
     selected_infraction: null,
@@ -46,6 +50,9 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         if (props.per_page)
             tempState.per_page = parseInt(props.per_page) || 10; //TODO: per user defaults?
 
+        if (props.filter)
+            tempState.filter = this.unwrapFilter(props.filter);
+
         this.state = tempState;
 
         const websocket = useContext(WS);
@@ -74,15 +81,69 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         history.pushState(history.state, document.title, url + this.getQueryParams())
     }
 
+
+    urlifyFilter(filter: F, layer = 0): string {
+        let out = "";
+        const {mode, set, subFilters} = filter;
+        out = `${mode}${separators[layer][0]}`;
+        for (let i = 0; i < set.length; i++) {
+            const {field, type, value} = set[i];
+            out += `${field}${separators[layer][1]}${type}${separators[layer][1]}${value}`;
+            if (i < set.length-1)
+                out += separators[layer][2]
+        }
+        out += separators[layer][0];
+        for (let i = 0; i < subFilters.length; i++) {
+            out += `${this.urlifyFilter(subFilters[i], layer + 1)}`;
+            if (i < subFilters.length-1)
+                out += separators[layer][3]
+        }
+        return out;
+    }
+
+    unwrapFilter(input: string, layer = 0): F {
+        const rootParts = input.split(separators[layer][0]);
+        const set = [];
+        const rawSets = rootParts[1].split( separators[layer][2]);
+        if (rootParts[0] != "AND" && rootParts[0] != "OR")
+            return BLANK_FILTER;
+        for (let i = 0; i < rawSets.length; i++) {
+            const setParts = rawSets[i].split(separators[layer][1])
+            set.push({
+                field: setParts[0],
+                type: setParts[1],
+                value: setParts[2]
+            } as const);
+        }
+
+        const subfilters = [];
+        if (layer < 2) {
+            const rawFilters = rootParts[2].split(separators[layer][3]);
+            for (let i = 0; i < rawFilters.length; i++) {
+                subfilters.push(this.unwrapFilter(rawFilters[i], layer + 1))
+            }
+        }
+
+        return {
+            mode: rootParts[0] as "AND" | "OR",
+            set: set,
+            subFilters: subfilters
+        } as const;
+
+    }
+
     getQueryParams(): string {
         let params = [];
-        const {page, order_by, per_page} = this.state;
+        const {page, order_by, per_page, filter} = this.state;
         if (page != 1)
             params.push(`page=${page}`);
         if (!areArraysSame(order_by, ["-id"]))
             params.push(`order_by=${order_by.join("|")}`);
         if (per_page != 10)
             params.push(`per_page=${per_page}`);
+        if (JSON.stringify(filter) != JSON.stringify(BLANK_FILTER))
+            params.push(`filter=${this.urlifyFilter(filter)}`);
+
         return params.length ? `?${params.join("&")}` : "";
     }
 
