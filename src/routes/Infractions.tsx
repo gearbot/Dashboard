@@ -35,6 +35,7 @@ const INITIAL_STATE = {
 };
 
 export default class Infractions extends Component<InfractionsRouteProps, InfractionsRouteState> {
+    unmounting = false;
 
     constructor(props, state) {
         super(props, state);
@@ -71,6 +72,8 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
     componentWillUnmount(): void {
         const websocket = useContext(WS);
         websocket.unsubscribe("guild_infractions")
+        this.unmounting = true;
+
     }
 
     updateUrl(): void {
@@ -104,11 +107,12 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
     unwrapFilter(input: string, layer = 0): F {
         const rootParts = input.split(separators[layer][0]);
         const set = [];
+        console.log("rootparts", rootParts);
         const rawSets = rootParts[1].split( separators[layer][2]);
         if (rootParts[0] != "AND" && rootParts[0] != "OR")
             return BLANK_FILTER;
         for (let i = 0; i < rawSets.length; i++) {
-            const setParts = rawSets[i].split(separators[layer][1])
+            const setParts = rawSets[i].split(separators[layer][1]);
             set.push({
                 field: setParts[0],
                 type: setParts[1],
@@ -117,7 +121,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         }
 
         const subfilters = [];
-        if (layer < 2) {
+        if (layer < 2 && rootParts[2] != "") {
             const rawFilters = rootParts[2].split(separators[layer][3]);
             for (let i = 0; i < rawFilters.length; i++) {
                 subfilters.push(this.unwrapFilter(rawFilters[i], layer + 1))
@@ -150,7 +154,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     componentDidUpdate(previousProps: Readonly<InfractionsRouteProps>, previousState: Readonly<InfractionsRouteState>, snapshot: any): void {
         const {filter, order_by, page, per_page} = this.state;
-        if ((JSON.stringify(filter) != JSON.stringify(previousState.filter) || !areArraysSame(order_by, previousState.order_by) || page != previousState.page || per_page != previousState.per_page) && this.isFilterValid(filter))
+        if ((JSON.stringify(filter) != JSON.stringify(previousState.filter) || !areArraysSame(order_by, previousState.order_by) || page != previousState.page || per_page != previousState.per_page) && this.isFilterValid(filter) && !this.unmounting)
             this.updateInfractions()
     }
 
@@ -229,7 +233,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                     <td>{i.reason}</td>
                     <td>{i.start}</td>
                     <td>{i.end}</td>
-                    <td>{i.active}</td>
+                    <td><GearIcon name={i.active ? "yes" : "no"} size={2}/></td>
                 </tr>
             )
         );

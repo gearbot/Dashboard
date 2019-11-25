@@ -6,9 +6,15 @@ import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import OutsideAlerter from "../wrappers/OutsideAlerter";
 
 export default class Dropdown extends Component<DropdownProps, DropdownState> {
+    mounted = true;
 
     constructor(state, props){
         super(state, props)
+    }
+
+
+    componentWillUnmount(): void {
+        this.mounted = false
     }
 
     render() {
@@ -30,7 +36,7 @@ export default class Dropdown extends Component<DropdownProps, DropdownState> {
         }
         return (
             <OutsideAlerter clicker={() => this.setState({open: false})}>
-                <div class={`dropdown ${this.state.open ? 'is-active' : ""} ${direction == "UP" ? "is-up" : ""}`} style={{marginLeft: "0.5em", marginRight: "0.5em", marginBottom: "0.2em"}} onclick={() => this.setState({open: !this.state.open})}>
+                <div class={`dropdown ${this.state.open ? 'is-active' : ""} ${direction == "UP" ? "is-up" : ""}`} style={{marginLeft: "0.5em", marginRight: "0.5em", marginBottom: "0.2em"}} onclick={() => this.mounted && this.setState({open: !this.state.open})}>
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="mydropdown">
                             <span>{selected? selected : <Text id={"misc.select_option"}/>}</span>

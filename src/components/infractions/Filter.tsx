@@ -43,9 +43,9 @@ export default class Filter extends Component<FilterProps, {}> {
         for (let i = 0; i < set.length; i++) {
             const {field, type, value} = set[i];
 
-            const setProp = (prop, v) => {
+            const setProp = (override) => {
                 const newSet = JSON.parse(JSON.stringify(set));
-                newSet[i][prop] = v;
+                newSet[i] = {...newSet[i], ...override};
                 this.set({set: newSet})
             };
 
@@ -74,18 +74,22 @@ export default class Filter extends Component<FilterProps, {}> {
                     />
                 </div>
                 {assembledSetFilters}
-                <div>
-                    <Dropdown options={Object.keys(FILTER_OPTIONS)} selected={null}
-                              setter={
-                                  (field) => {
-                                      this.set({set: [...set, {field: field}]})
-                                  }
-                              }/>
-                </div>
+                {
+                    set.length < 5 ?
+                        <div>
+                            <Dropdown options={Object.keys(FILTER_OPTIONS)} selected={null}
+                                      setter={
+                                          (field) => {
+                                              this.set({set: [...set, {field: field}]})
+                                          }
+                                      }/>
+                        </div>
+                        : null
+                }
 
                 {assembledSubFilters}
 
-                {level < 3 ?
+                {level < 3 && subFilters.length < 5 ?
                     <div class="field" style={{marginTop: "1em"}}>
                         <div class="control">
                             <button class="button is-link" onclick={() => {

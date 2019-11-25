@@ -429,14 +429,15 @@ export interface CommandProps {
 }
 
 export interface DropDownOptions {
-    readonly [name: string] : string | number | VNode
+    readonly [name: string]: string | number | VNode
 }
+
 export interface DropdownProps {
     options: DropDownOptions | readonly string[] | readonly number[]
     selected?: string | number;
     direction?: "UP" | "DOWN";
 
-    setter(newValue: any):void
+    setter(newValue: any): void
 }
 
 export interface DropdownState {
@@ -451,19 +452,10 @@ export interface FilterProperties {
 
 export interface CheckedInput {
     value?: string | number;
+
     setter(value: string | number): void;
+
     validator(value: string | number): boolean;
-}
-
-export interface InputProps {
-    value: string | number;
-    setter(value: string | number): void;
-}
-
-export interface FilterType {
-    type: string;
-    operation: string
-    validator(value: string): boolean;
 }
 
 export interface FilterOptions {
@@ -472,7 +464,7 @@ export interface FilterOptions {
 
 
 export interface Filter {
-    mode: "AND"| "OR";
+    mode: "AND" | "OR";
     set: readonly FilterProperties[];
     subFilters: readonly Filter[];
 }
@@ -480,7 +472,9 @@ export interface Filter {
 export interface FilterProps {
     filter: Filter;
     level: number;
+
     setter(newFilter): void;
+
     remover?(): void;
 
 }
@@ -490,6 +484,15 @@ export interface FilterRowProps {
     type: string;
     value: string;
 
-    setter(field:string, value:string):void;
-    remover():void;
+    setter(override): void;
+
+    remover(): void;
+}
+
+export interface FilterRowFieldProps {
+    value: string;
+
+    validator(value: string): boolean;
+
+    setter(value: string): void;
 }
