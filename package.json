@@ -29,7 +29,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@sentry/browser": "^5.7.0",
-    "bulma": "^0.7.5",
     "bulma-extensions": "^6.2.7",
     "dotenv-webpack": "^1.7.0",
     "preact": "^10.0.5",

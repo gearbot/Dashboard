@@ -252,8 +252,9 @@ export interface PermLevelSelectorProps extends SettingsComponentProps {
     min_value?: string;
 }
 
-export interface ThemeState {
+export interface UserMenuState {
     theme: "light" | "dark";
+    open: boolean;
 }
 
 export interface LogChannelInfo {

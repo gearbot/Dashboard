@@ -5,7 +5,9 @@
     "login": "Log in",
     "logout": "Sign Out",
     "stats": "Stats",
-    "commands": "Commands"
+    "commands": "Commands",
+    "add_bot": "Add GearBot",
+    "faq": "FAQ"
   },
   "home": {
     "content": "GearBot homepage, please pretend there is something super clever and informative here"
@@ -27,7 +29,12 @@
     "random_number": "Random number",
     "commands_executed": "Commands executed",
     "custom_commands_executed": "Custom commands executed",
-    "guilds": "Guilds"
+    "guilds": "Guilds",
+    "basics": "Basics",
+    "messages": "Messages",
+    "other": "Other",
+    "title": "Stats",
+    "info": "You can find some statistics about the what GearBot has been up to since the last reboot."
   },
   "config": {
     "parts": {
@@ -235,7 +242,9 @@
       "one": "1 second",
       "other": "{{count}} seconds"
     },
-    "select_option": "Please make a selection"
+    "select_option": "Please make a selection",
+    "created_by": "Created by",
+    "find_us": "Find us online"
   },
   "infractions": {
     "id": "Id",

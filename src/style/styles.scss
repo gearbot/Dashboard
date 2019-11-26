@@ -1,155 +1,224 @@
-$body-background-color: var(--body-background);
-$navbar-background-color: var(--navbar-background);
-$navbar-item-hover-background-color: var(--nav-item-hover-background);
-$body-color: var(--body-color);
-$strong-color: var(--strong-color);
-$navbar-item-color: var(--body-color);
-$navbar-item-hover-color: var(--link-color);
-$navbar-item-hover-background-color: var(--navbar-item-hover-background-color);
-$navbar-item-active-color: var(--navbar-item-active-color);
-$navbar-tab-hover-border-bottom-color: var(--link-color);
-$navbar-tab-active-color: var(--link-color);
-$navbar-tab-active-border-bottom-color: var(--link-color);
-$navbar-dropdown-background-color: var(--navbar-background);
-$navbar-dropdown-arrow: var(--link-color);
-$navbar-dropdown-item-hover-color: var(--navbar-dropdown-item-hover-color);
-$navbar-dropdown-item-hover-background-color: var(--navbar-item-hover-background-color);
-$navbar-dropdown-item-active-color: var(--link-color);
-$navbar-dropdown-item-active-background-color: var(--navbar-dropdown-item-active-background-color);
-$navbar-divider-background-color: var(--navbar-divider-background-color);
-$title-color: var(--text-color);
-$subtitle-color: var(--body-color);
-$subtitle-strong-color: var(--text-color);
-$button-color: var(--text-color);
-$button-background-color: var(--input-background);
-$button-border-color: var(--border-color);
-$button-hover-color: var(--text-color);
-$button-hover-border-color: var(--button-hover-border-color);
-$button-focus-color: var(--text-color);
-$button-focus-border-color: var(--link-color);
-$button-active-color: var(--text-color);
-$button-active-border-color: var(--body-color);
-$button-text-color: var(--body-color);
-$button-static-color: var(--button-static-color);
-$button-static-background-color: var(--button-static-background-color);
-$button-static-border-color: var(--button-static-border-color);
-$button-disabled-background-color: var(--button-disabled-background-color);
-$button-disabled-border-color: var(--button-disabled-border-color);
-$label-color: var(--text-color);
-$card-color: var(--body-color);
-$card-background-color: var(--card-background-color);
-$card-header-color: var(--text-color);
-$card-footer-border-top: 1px solid var(--border-color);
-$card-shadow: 0 2px 3px rgba(var(--border-color), 0.1), 0 0 0 1px rgba(var(--border-color), 0.1);
-$tabs-border-bottom-color: var(--border-color);
-$switch-background: var(--switch-background);
-$tabs-border-bottom-color: var(--border-color);
-$tabs-link-color: var(--text-color);
-$tabs-link-hover-color: var(--strong-color);
-$tabs-link-active-border-bottom-color: var(--link-color);
-$tabs-link-active-color: var(--link-color);
-$tabs-boxed-link-hover-background-color: var(--body-color);
-$tabs-boxed-link-hover-border-bottom-color: var(--border-color);
-$tabs-boxed-link-active-border-color: var(--border-color);
-$tabs-toggle-link-border-color: var(--border-color);
-$tabs-toggle-link-hover-border-color: var(--border-hover-color);
-$tabs-toggle-link-active-background-color: var(--link-color);
-$tabs-toggle-link-active-border-color: var(--link-color);
-$tabs-toggle-link-hover-background-color: var(--link-hover-color);
-$menu-item-color: var(--text-color);
-$menu-item-hover-color: var(--strong-color);
-$menu-item-hover-background-color: var(--link-hover-color);
-$menu-item-active-background-color: var(--link-color);
-$menu-label-color: var(--text-light);
-$input-background-color: var(--input-background);
-$input-color: var(--input-color);
-$input-border-color: var(--border-color);
-$input-shadow: inset 0 1px 2px rgba(var(--shadow-color), 0.1);
-$input-hover-color: var(--input-hover-color);
-$input-hover-border-color: var(--border-hover-color);
-$input-disabled-color: var(--input-color-disabled);
-$input-disabled-background-color: var(--input-background-disabled);
-$input-disabled-border-color: var(--input-border-color-disabled);
-$text-strong: var(--strong-color);
-$text-light: var(--text-light);
-$pagination-color: var(--text-strong);
-$pagination-hover-color: var(--link-hover);
-$pagination-ellipsis-color: var(--pagination-ellipsis-color);
-$dropdown-content-background-color: var(--input-background);
-$dropdown-item-color: var(--text-color);
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-@import "../../node_modules/bulma/sass/utilities/_all.sass";
-@import "../../node_modules/bulma/sass/base/all";
-@import "../../node_modules/bulma/sass/elements/button.sass";
-@import "../../node_modules/bulma/sass/elements/container.sass";
-@import "../../node_modules/bulma/sass/elements/title.sass";
-@import "../../node_modules/bulma/sass/components/navbar.sass";
-@import "../../node_modules/bulma/sass/layout/section.sass";
-@import "../../node_modules/bulma/sass/components/tabs.sass";
-@import "../../node_modules/bulma/sass/components/card.sass";
-@import "../../node_modules/bulma/sass/components/modal.sass";
-@import "../../node_modules/bulma/sass/components/level.sass";
-@import "../../node_modules/bulma/sass/components/menu.sass";
-@import "../../node_modules/bulma/sass/form/all";
-@import "../../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css";
-@import "../../node_modules/bulma/sass/components/pagination.sass";
-@import "../../node_modules/bulma/sass/elements/table";
-@import "../../node_modules/bulma/sass/components/dropdown.sass";
+$yellow: #FECB4D;
+$black: #191B1F;
+$grey: #2C2F36;
+$textGrey: #DADADA;
+$textOffGrey: #767B85;
+$footerHeight: 20em;
+$containerWidth: 60%;
 
-* {
-	transition: var(--transition-speed);
-}
-
-
-html {
+html,
+body {
 	overflow-y: auto;
-}
-
-body:before {
-	content: "";
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: -1;
-	width: 100%;
-	background-size: 100%;
-	background-image: url('../assets/background.svg');
-	background-repeat: no-repeat;
-	opacity: var(--background-opacity);
+	background-color: $grey;
+	color: $textGrey;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
 
-.userHolder {
+.discrim {
+	color: $textOffGrey;
+}
+
+
+.container {
+	min-height: 100%;
+	display: grid;
+	grid-template-columns: 1fr 60% 1fr;
+	grid-template-rows: 5em auto $footerHeight;
+	grid-template-areas: "header header header" ". main ." "footer footer footer";
 	position: relative;
-	width: 3em;
-	height: 2em;
-	display: inline-block;
-	margin-right: 0.5em;
 
-	.userGear {
-		position: absolute;
-		height: 3em;
-		width: 3em;
-		max-height: 5em;
-		max-width: 5em;
-		top: -0.3em;
-		left: 0;
+	.navbar {
+		grid-area: header;
+
+		position: sticky;
+		top: 0;
+		background-color: $black;
+		padding: 1em 1em 0.75em 1em;
+		margin: 0;
+		z-index: 100;
+
+		.navcontainer {
+			margin: auto;
+			width: $containerWidth;
+			height: 100%;
+			display: table;
+
+
+			.logo {
+				float: left;
+				display: inline-block;
+				font-size: 24px;
+
+				line-height: 48px;
+
+				.logoImage {
+					float: left;
+					height: 1.5em;
+					margin-right: 0.15em;
+					margin-top: 5px;
+				}
+
+				.logoText {
+					color: $yellow;
+
+				}
+			}
+
+			.navmiddle {
+				float: left;
+				line-height: 3em;
+			}
+
+			.navbar-item {
+				margin-left: 2em;
+				color: $textGrey;
+				font-weight: 500;
+				font-size: 16px;
+				height: 100%;
+
+			}
+
+			.navbar-item:hover {
+				color: $yellow;
+				text-decoration: underline;
+			}
+
+			.navright {
+				float: right;
+				line-height: 3em;
+
+				.userHolder {
+					display: inline-block;
+					line-height: 2.2em;
+					font-weight: 500;
+					font-size: 16px;
+
+					.userImage {
+						float: left;
+						border-radius: 50%;
+						height: 2em;
+						margin-right: 0.5em;
+					}
+				}
+			}
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+
 	}
 
-
-	.userImage {
-		border-radius: 50%;
-		position: absolute;
-		width: 2.2em;
-		height: 2.2em;
-		max-height: 5em;
-		max-width: 5em;
-		padding: 0.1em;
-		top: 0.1em;
-		left: 0.4em;
+	.page {
+		position: relative;
+		grid-area: main;
 	}
+
+	.footer {
+		grid-area: footer;
+		display: grid;
+
+		grid-template-columns: 1fr 60% 1fr;
+		grid-template-rows: auto;
+		grid-template-areas: ". footercontent .";
+
+		height: $footerHeight;
+		background-color: $black;
+		bottom: 0;
+		position: absolute;
+		width: 100%;
+
+		font-size: 14px;
+
+		.footerContainer {
+			grid-area: footercontent;
+			margin: 2.3em auto auto;
+			width: 100%;
+			min-height: 0;
+		}
+
+		h1 {
+			color: $yellow;
+			font-size: 16px;
+			margin: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: $textGrey;
+			display: block;
+			padding-top: 1.15em;
+		}
+
+		a:hover {
+			color: $yellow;
+			text-decoration: underline;
+		}
+
+		.left {
+			float: left;
+		}
+
+		.right {
+			float: right;
+		}
+
+		.logo {
+			height: 80px;
+		}
+
+		.copyright {
+			padding-top: 3em;
+		}
+
+		.socials {
+			padding-top: 6em;
+
+			a {
+				padding: 0.25em;
+				display: inline-block;
+				float: right;
+
+				img {
+					height: 25px;
+				}
+			}
+		}
+	}
+}
+
+.statsContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+	grid-gap: 3em;
+
+
+	.row {
+		.card {
+			margin: 1em 0;
+			padding: 1em;
+			background-color: $black;
+			border-radius: 5px;
+
+			.statHeader {
+				font-weight: bold;
+				font-size: 16px;
+				margin-bottom: 1em;
+			}
+		}
+	}
+}
+
+h2 {
+	color: $yellow;
+	font-size: 24px;
 }
 
 .cardgrid {
@@ -329,11 +398,6 @@ body:before {
 	}
 }
 
-.page {
-	width: 100vw;
-	height: 100vh;
-}
-
 @-moz-keyframes spin {
 	100% {
 		-moz-transform: rotate(360deg);
@@ -424,6 +488,7 @@ body:before {
 * {
 	scrollbar-color: rgba(0, 0, 0, 0.30) rgba(0, 0, 0, 0.30);
 	scrollbar-width: thin;
+
 	::-webkit-scrollbar {
 		width: 14px;
 		height: 18px;

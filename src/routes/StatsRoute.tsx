@@ -4,6 +4,7 @@ import {WS} from "../components/wrappers/Context";
 import {StatsRouteState} from "../utils/Interfaces";
 import {Text} from 'preact-i18n';
 import Loading from "../components/main/Loading";
+import {format, formats} from "../utils/Utils";
 
 const INITIAL_STATE = {
     loading: true,
@@ -43,6 +44,7 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
     updateUptime() {
         const {loading, stats} = this.state;
         let total = loading ? 0 : Math.floor((new Date().getTime() - new Date(`${stats.start_time} UTC`).getTime()) / 1000);
+        console.log(total);
         const days = Math.floor(total / (60 * 60 * 24));
         total = total % (60 * 60 * 24);
         const hours = Math.floor(total / (60 * 60));
@@ -68,6 +70,98 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
         if (loading)
             return <Loading/>;
 
+        console.log(uptime_parts);
+
+        return (
+            <>
+                <h1><Text id="stats.title"/></h1>
+                <Text id="stats.info"/>
+
+                <div class="statsContainer">
+                    <div class="row">
+                        <h2><Text id={"stats.basics"}/></h2>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.uptime"}/></div>
+                            <div class="stat">
+                                {uptime_parts}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.total_members"}/></div>
+                            <div class="stat">
+                                {formats(stats.total_members)}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.total_members"}/></div>
+                            <div class="stat">
+                                {formats(stats.unique_members)}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <h2><Text id={"stats.messages"}/></h2>
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.user_mesages"}/></div>
+                            <div class="stat">
+                                {formats(stats.user_mesages)}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.bot_messages"}/></div>
+                            <div class="stat">
+                                {formats(stats.bot_messages)}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.own_messages"}/></div>
+                            <div class="stat">
+                                {formats(stats.own_messages)}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <h2><Text id={"stats.other"}/></h2>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.taco_count"}/></div>
+                            <div class="stat">
+                                {formats(stats.taco_count)}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.guilds"}/></div>
+                            <div class="stat">
+                                {format(stats.guilds)}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.commands_executed"}/></div>
+                            <div class="stat">
+                                {formats(stats.commands_executed)}
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="statHeader"><Text id={"stats.custom_commands_executed"}/></div>
+                            <div class="stat">
+                                {formats(stats.custom_commands_executed)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </>
+        );
 
         return (
             <div>

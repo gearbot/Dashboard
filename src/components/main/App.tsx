@@ -23,6 +23,7 @@ import Loading from "./Loading";
 import WebSocketHolder from "../../utils/WebSocketHolder";
 import Stats from "../../routes/StatsRoute";
 import * as React from "preact/compat";
+import Footer from "./Footer";
 
 const INITIAL_STATE = {
     loading: true,
@@ -124,12 +125,11 @@ class App extends Component<UserHolder, AppState> {
 
     usernameCacheSetter = (newCache) => {
         this.setState({usernameCache: newCache})
-    }
+    };
 
 
     render() {
         const [url, setUrl] = useState(null);
-        const show_background = !this.state.loading && url && !(url.endsWith(ROUTES.STATS));
         return (
             <WS.Provider value={this.state.websocket} children={
                 <AuthUser.Provider value={this.state.user} children={
@@ -137,26 +137,26 @@ class App extends Component<UserHolder, AppState> {
                         <GeneralInfo.Provider value={this.state.generalInfo} children={
                             <UsernameCache.Provider value={this.state.usernameCache} children={
                                 <UsernameCacheSetter.Provider value={this.usernameCacheSetter} children={
-                                    <div class={show_background ? "bot_background" : ""}>
 
 
-                                        <IntlProvider definition={this.state.lang_strings}
-                                                      provider={this.pluralProvider}>
-
-                                            <div class="page">
-                                                {this.state.loading ? <Loading/> : <div><Header/>
-                                                    <Router onChange={(url) => setUrl(url.url)} url={url}>
-                                                        <Home path={ROUTES.HOME}/>
-                                                        <PopupCloser path={ROUTES.CLOSER}/>
-                                                        <GuildListRoute path={ROUTES.GUILDS}/>
-                                                        <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
-                                                        <Stats path={ROUTES.STATS}/>
-                                                    </Router>
+                                    <IntlProvider definition={this.state.lang_strings}
+                                                  provider={this.pluralProvider}>
+                                        {this.state.loading ? <Loading/> :
+                                            <div class="container">
+                                                <Header/>
+                                                <div class="page">
+                                                <Router onChange={(url) => setUrl(url.url)} url={url}>
+                                                    <Home path={ROUTES.HOME}/>
+                                                    <PopupCloser path={ROUTES.CLOSER}/>
+                                                    <GuildListRoute path={ROUTES.GUILDS}/>
+                                                    <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
+                                                    <Stats path={ROUTES.STATS}/>
+                                                </Router>
                                                 </div>
-                                                }
+                                                <Footer/>
                                             </div>
-                                        </IntlProvider>
-                                    </div>
+                                        }
+                                    </IntlProvider>
                                 }/>
                             }/>
                         }/>

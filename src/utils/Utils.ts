@@ -22,3 +22,11 @@ export function areArraysSame(a: any[] | readonly any[], b:any[] | readonly any[
     }
     return true;
 }
+
+export function format(n: number) {
+    return n.toLocaleString()
+}
+
+export function formats(s: string) {
+    return format(parseInt(s))
+}
