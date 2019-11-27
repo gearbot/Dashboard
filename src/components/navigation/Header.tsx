@@ -1,12 +1,11 @@
 import {Component} from "preact";
 import {HeaderProps, HeaderState} from "../../utils/Interfaces";
 import {useContext} from "preact/hooks";
-import {AuthUser, AuthUserSetter} from "../wrappers/Context";
+import {AuthUser} from "../wrappers/Context";
 import ROUTES from "../../utils/routes";
 import {Link} from "preact-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faToolbox} from "@fortawesome/free-solid-svg-icons";
-import {get_info} from "../../utils/dashAPI";
 import UserMenu from "./UserMenu";
 import {Text} from 'preact-i18n';
 
@@ -36,21 +35,6 @@ const NavigationNonAuth = () => (
         <Link activeClassName="is-active" class="navbar-item" href={ROUTES.FAQ}><Text id="navbar.faq"/></Link>
         <Link activeClassName="is-active" class="navbar-item" href={ROUTES.STATS}><Text id="navbar.stats"/></Link>
     </>
-);
-
-const login = () => {
-    get_info({method: "GET", endpoint: "whoami", auth_on_fail: true}).then(info => useContext(AuthUserSetter)(info))
-};
-
-//login for non authenticated users
-const UserLogin = () => (
-    <div class="navbar-item">
-        <div class="buttons">
-            <a class="button is-light" onClick={login}>
-                <FontAwesomeIcon icon={faSignInAlt} className="fab"/> <Text id="navbar.login"/>
-            </a>
-        </div>
-    </div>
 );
 
 
