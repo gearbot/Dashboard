@@ -10,7 +10,9 @@
     "faq": "FAQ"
   },
   "home": {
-    "content": "GearBot homepage, please pretend there is something super clever and informative here"
+    "title": "Moderation for your Discord, easily managed.",
+    "info": "Configure the best bot for your Discord server and easily setup custom commands, filters, and much more!",
+    "commands": "View commands"
   },
   "guilds": {
     "with_gearbot": "Servers you have dashboard access for",

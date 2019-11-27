@@ -1,6 +1,6 @@
 import {Component} from "preact";
 import {Text} from 'preact-i18n';
-import {InfractionsRouteProps, InfractionsRouteState, Filter as F, FilterOptions} from "../utils/Interfaces";
+import {InfractionsRouteProps, InfractionsRouteState, Filter as F} from "../utils/Interfaces";
 import {useContext} from "preact/hooks";
 import {Guild, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
@@ -27,8 +27,7 @@ const INITIAL_STATE = {
     infraction_list: [],
     infraction_count: 0,
     loading: true,
-    filter: BLANK_FILTER,
-    order_by: ["-id"],
+    filter: BLANK_FILTER,    order_by: ["-id"],
     per_page: 10,
     updating: true,
     validFilter: true
@@ -71,7 +70,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
     componentWillUnmount(): void {
         const websocket = useContext(WS);
-        websocket.unsubscribe("guild_infractions")
+        websocket.unsubscribe("guild_infractions");
         this.unmounting = true;
 
     }
@@ -86,9 +85,8 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
 
     urlifyFilter(filter: F, layer = 0): string {
-        let out = "";
         const {mode, set, subFilters} = filter;
-        out = `${mode}${separators[layer][0]}`;
+        let out = `${mode}${separators[layer][0]}`;
         for (let i = 0; i < set.length; i++) {
             const {field, type, value} = set[i];
             out += `${field}${separators[layer][1]}${type}${separators[layer][1]}${value}`;
@@ -215,7 +213,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
 
 
     render() {
-        const {loading, infraction_list, order_by, page, infraction_count, per_page, updating, filter, validFilter} = this.state;
+        const {loading, infraction_list, order_by, page, infraction_count, per_page, filter, validFilter} = this.state;
 
         const pages = [];
         for (let p = 1; p <= Math.ceil(infraction_count / per_page); p++) {

@@ -14,6 +14,7 @@ body {
 	background-color: $grey;
 	color: $textGrey;
 	font-family: 'Roboto', sans-serif;
+	font-style: normal;
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -216,9 +217,73 @@ body {
 	}
 }
 
+.button {
+	text-decoration: none;
+	font-weight: 900;
+	font-size: 16px;
+	margin: 1em;
+	padding-top: 0.75em;
+	padding-bottom: 0.75em;
+	border-radius: 5px;
+}
+
+.yellowButton {
+	background-color: $yellow;
+	color: $black;
+}
+
+.blackButton {
+	background-color: $black;
+	color: $textGrey
+}
+
+
+
 h2 {
 	color: $yellow;
 	font-size: 24px;
+}
+
+
+
+.home {
+	text-align: center;
+
+	.homeHeader {
+		margin: auto;
+		background-image: url("../assets/gearbotGrey.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+
+		h1 {
+			padding-top: 5em;
+			display: inline-block;
+		}
+		.button {
+			width: 15em;
+			display: inline-block;
+		}
+	}
+
+	.features {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		.feature {
+			flex-grow: 1;
+			margin: 3em;
+			max-width: 20em;
+
+			h2 {
+				color: $textGrey
+			}
+			img {
+				padding-bottom: 2em;
+			}
+		}
+	}
 }
 
 .cardgrid {
