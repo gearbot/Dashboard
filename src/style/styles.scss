@@ -30,7 +30,7 @@ body {
 	min-height: 100%;
 	display: grid;
 	grid-template-columns: 1fr 60% 1fr;
-	grid-template-rows: 5em auto $footerHeight;
+	grid-template-rows: auto auto $footerHeight;
 	grid-template-areas: "header header header" ". main ." "footer footer footer";
 	position: relative;
 
@@ -44,10 +44,14 @@ body {
 		margin: 0;
 		z-index: 100;
 
+		.altnav {
+			float: right;
+		}
+
+
 		.navcontainer {
 			margin: auto;
 			width: $containerWidth;
-			height: 100%;
 			display: table;
 
 
@@ -55,6 +59,7 @@ body {
 				float: left;
 				display: inline-block;
 				font-size: 24px;
+				width: 6em;
 
 				line-height: 48px;
 
@@ -71,9 +76,19 @@ body {
 				}
 			}
 
+			.navgroup {
+				max-height: 20em;
+				transition-property: all;
+				transition-duration: .5s;
+				transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+				overflow-y: hidden;
+			}
+
 			.navmiddle {
 				float: left;
 				line-height: 3em;
+
+
 			}
 
 			.navbar-item {
@@ -195,9 +210,75 @@ body {
 	}
 }
 
+@media screen and (max-width: 600px) {
+	.container {
+		grid-template-columns: 1fr;
+		grid-template-areas: "header" "main" "footer";
+	}
+}
+
+@media screen and (max-width: 1400px) {
+
+	.navbar {
+		padding-bottom: 0 !important;
+
+		.active {
+			max-height: 20em !important;
+		}
+	}
+
+
+
+	.navgroup {
+		max-height: 0 !important;
+
+		.navmiddle{
+
+		}
+
+		.navitems {
+			a {
+				display: block;
+				margin-left: 0 !important;
+			}
+		}
+	}
+
+	.menubutton {
+		float: right;
+		display: block;
+	}
+
+	.navmiddle,
+	.navright {
+		display: block;
+		float: none !important;
+	}
+
+
+	.logo {
+		float: none !important;
+		display: block !important;
+		margin: auto;
+	}
+
+	.altnav {
+		top: -2em;
+		position: relative;
+		cursor: pointer;
+	}
+
+}
+
+@media screen and (min-width: 1400px) {
+	.altnav {
+		display: none;
+	}
+}
+
 .statsContainer {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
 	grid-gap: 3em;
 
 
@@ -237,12 +318,10 @@ body {
 }
 
 
-
 h2 {
 	color: $yellow;
 	font-size: 24px;
 }
-
 
 
 .home {
@@ -259,6 +338,7 @@ h2 {
 			padding-top: 5em;
 			display: inline-block;
 		}
+
 		.button {
 			width: 15em;
 			display: inline-block;
@@ -278,6 +358,7 @@ h2 {
 			h2 {
 				color: $textGrey
 			}
+
 			img {
 				padding-bottom: 2em;
 			}

@@ -5,7 +5,7 @@ import {AuthUser} from "../wrappers/Context";
 import ROUTES from "../../utils/routes";
 import {Link} from "preact-router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignInAlt, faToolbox} from "@fortawesome/free-solid-svg-icons";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 import UserMenu from "./UserMenu";
 import {Text} from 'preact-i18n';
 
@@ -20,8 +20,8 @@ const NavigationAuth = ({user}) => (
         <Link activeClassName="is-active" class="navbar-item" href={ROUTES.STATS}><Text id="navbar.stats"/></Link>
         {
             user.bot_admin_status ?
-                <Link activeClassName="is-active" href={ROUTES.ADMIN} class="navbar-item"><FontAwesomeIcon
-                    icon={faToolbox}/><Text id="navbar.admin"/></Link>
+                <Link activeClassName="is-active" href={ROUTES.ADMIN} class="navbar-item"><Text
+                    id="navbar.admin"/></Link>
                 : null
         }
     </>
@@ -57,24 +57,23 @@ export default class Header extends Component<HeaderProps, HeaderState> {
                     <img src="/assets/logo.png" class="logoImage"/>
                     <span class="logoText"><b>GEAR</b>BOT</span>
                 </Link>
-                <div class="navmiddle">
-                    {
-                        user ? <NavigationAuth user={user}/> : <NavigationNonAuth/>
-                    }
+                <div class="altnav">
+                    <a onclick={this.toggleActive}><FontAwesomeIcon icon={faBars}/></a>
                 </div>
+                <div class={`navgroup ${this.state.menuActive ? "active" : ""}`}>
+                    <div class="navmiddle">
+                        <div class="navitems">
+                            {
+                                user ? <NavigationAuth user={user}/> : <NavigationNonAuth/>
+                            }
+                        </div>
+                    </div>
 
-                <div class="navright">
-                    <UserMenu />
+                    <div class="navright">
+                        <UserMenu/>
+                    </div>
                 </div>
             </div>
-
-
-            {/*<a role="button" aria-label="menu" aria-expanded="false" onClick={this.toggleActive}*/}
-            {/*   class={this.state.menuActive ? "navbar-burger burger is-active" : "navbar-burger burger"}>*/}
-            {/*    <span aria-hidden="true"/>*/}
-            {/*    <span aria-hidden="true"/>*/}
-            {/*    <span aria-hidden="true"/>*/}
-            {/*</a>*/}
 
 
 
