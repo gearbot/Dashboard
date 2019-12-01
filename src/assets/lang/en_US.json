@@ -15,9 +15,11 @@
     "commands": "View commands"
   },
   "guilds": {
-    "with_gearbot": "Servers you have dashboard access for",
+    "title": "Guilds",
+    "info": "Find information on your server.",
+    "with_gearbot": "GearBot Dashboard Available",
     "no_with_gearbot": "It seems like you don't have dashboard access for any servers",
-    "without_gearbot": "Servers you can add GearBot to (refresh to update this list)",
+    "refresh_update": "(refresh to update list)",
     "no_without_gearbot": "Wow it seems GearBot is already on all servers you can add him to"
   },
   "stats": {

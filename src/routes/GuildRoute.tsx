@@ -56,7 +56,7 @@ class GuildRoute extends Component<GuildRouteProps, GuildRouteState> {
                 <UserPerms.Provider value={user_perms} children={
                     <div>
                         {
-                            loading?
+                            loading ?
                                 <Loading/> :
                                 user_perms.user_dash_perms > 0 ?
                                     <div class="container">

@@ -7,13 +7,19 @@ import {useContext} from "preact/hooks";
 import {AuthUser, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
 import {Text} from "preact-i18n"
+import Carousel from "../components/main/Carousel";
+
+const INITIAL_STATE = {
+    guilds: undefined,
+    all_guilds: undefined
+};
 
 class GuildListRoute extends Component<{}, GuildListRouteState> {
 
+
     constructor(props, state) {
         super(props, state);
-        this.setState({guilds: undefined});
-
+        this.state = {...INITIAL_STATE};
     }
 
     componentDidMount(): void {
@@ -24,7 +30,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
             handler: (data) => {
                 switch (data.type) {
                     case "add":
-                       this.receiveGuilds(data.guilds);
+                        this.receiveGuilds(data.guilds);
                         break;
                     case "remove":
                         const g: any = this.state.guilds;
@@ -36,9 +42,9 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
             }
         });
         websocket.ask_the_api("get_user_guilds_gearbot", null, (data) => {
-           this.setState({
-               guilds: data,
-           })
+            this.setState({
+                guilds: data,
+            })
         })
         websocket.ask_the_api("get_user_guilds_all", null, (data) => {
             this.setState({
@@ -85,22 +91,27 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
         return (
             guilds ?
                 <div>
-                    <h1 class="title centered"><Text id="guilds.with_gearbot"/></h1>
+                    <h1><Text id="guilds.title"/></h1>
+                    <p><Text id="guilds.info"/></p>
 
                     {with_gearbot.length > 0 ?
-                        <div class="cardgrid">{with_gearbot}</div> :
-                        <div class="box-item centered">
+                        <Carousel items={with_gearbot} title={<h2><Text id="guilds.with_gearbot"/></h2>}/> :
+                        <div class="card centered">
                             <p><Text id="guilds.no_with_gearbot"/></p>
                             <img src="../assets/gearWhat.png"/>
                         </div>
                     }
 
-                    <h1 class="title centered"><Text id="guilds.without_gearbot"/></h1>
-
 
                     {without_gearbot.length > 0 ?
-                        <div class="cardgrid">{without_gearbot}</div> :
-                        <div class="box-item centered">
+                        <Carousel items={without_gearbot} title={
+                            <>
+                                <h2><Text id="navbar.add_bot"/></h2>
+                                <p><Text id="guilds.refresh_update"/></p>
+                            </>
+                        }/>
+                        :
+                        <div class="card centered">
                             <p><Text id="guilds.no_without_gearbot"/></p>
                             <img src="../assets/gearWhat.png"/>
                         </div>

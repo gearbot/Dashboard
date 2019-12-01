@@ -7,6 +7,7 @@ $textGrey: #DADADA;
 $textOffGrey: #767B85;
 $footerHeight: 20em;
 $containerWidth: 60%;
+$carouselExtra : 5em;
 
 html,
 body {
@@ -30,7 +31,7 @@ body {
 	min-height: 100%;
 	display: grid;
 	grid-template-columns: 1fr 60% 1fr;
-	grid-template-rows: auto auto $footerHeight;
+	grid-template-rows: minmax(auto, 5em) auto $footerHeight;
 	grid-template-areas: "header header header" ". main ." "footer footer footer";
 	position: relative;
 
@@ -228,11 +229,10 @@ body {
 	}
 
 
-
 	.navgroup {
 		max-height: 0 !important;
 
-		.navmiddle{
+		.navmiddle {
 
 		}
 
@@ -285,9 +285,6 @@ body {
 	.row {
 		.card {
 			margin: 1em 0;
-			padding: 1em;
-			background-color: $black;
-			border-radius: 5px;
 
 			.statHeader {
 				font-weight: bold;
@@ -340,7 +337,7 @@ h2 {
 		}
 
 		.button {
-			width: 15em;
+			width: 12em;
 			display: inline-block;
 		}
 	}
@@ -366,105 +363,157 @@ h2 {
 	}
 }
 
-.cardgrid {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
-	grid-auto-flow: dense;
-}
-
-.cardgridlogs {
-
-
-	.card {
-		height: fit-content;
-
-		.card-header {
-			padding: 1em;
-		}
-	}
-}
-
-.mycard {
-	//float: left;
-	margin: 1em;
-
-	border: 0.25em solid var(--border-color);
-	border-radius: 1em;
-
-
-	.card-header {
-		border-bottom: 0.25em solid var(--border-color);
-		box-shadow: none;
-	}
-}
-
-.card-image {
-	figure {
-		margin: auto;
-
-		img, svg {
-			display: block;
-			height: 100%;
-			border-radius: 50%;
-			margin: 0.1em auto auto;
-		}
-	}
-}
-
-.serverImage {
-	border-radius: 50%;
-	height: 2em;
-	vertical-align: text-bottom;
-}
-
-.serverTitle {
-	text-align: center;
-
-	image, svg {
-		border-radius: 50%;
-		height: 2em !important;
-		vertical-align: text-bottom;
-	}
-}
-
-.tabs {
-	display: inline-flex;
-	margin: auto;
-}
-
-.flexcontainer {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-}
-
-.flexitem {
-	flex-grow: 0;
-}
-
-.flexitem2 {
-	flex-grow: 10;
-	width: 100%
-}
-
-.roleMarker {
-	width: 1.4em;
-	height: 1.4em;
-	border-radius: 50%;
+.carousel-title {
+	position: relative;
+	top: 2em;
 	float: left;
-	margin-right: 0.6em;
+	h2, p {
+		color: $textGrey;
+		display: inline-block;
+	}
+	p {
+		margin-left: 0.5em;
+	}
 }
 
-.roleLevel {
-	padding: 0.15em 1em;
-	border-radius: 1.5em;
+.carousel-outer {
+	position: relative;
+	top: -2em;
 }
 
-.mytitle {
-	font-size: 1.75rem;
-	margin-top: 1em;
+.carousel-buttons {
+	float: right;
+	position: relative;
+	top: 2em;
+	.button {
+		background: $black;
+		display: inline-block;
+		padding: 0.5em 1em;
+		text-align: center;
+		cursor: pointer;
+		margin: 0 0 0 0.4em;
+	}
+
+	.disabled {
+		color: $textOffGrey;
+		cursor: not-allowed;
+	}
+}
+
+.carousel-wrapper {
+	position: relative;
+	left: -$carouselExtra;
+	overflow-x: hidden;
+	width:calc(100% + 10em);
+	clear: left;
+
+	.carousel-inner {
+		clear: left;
+		overflow: hidden;
+		padding: 1em $carouselExtra 0;
+		position: relative;
+
+		.card {
+			width: 13.4em;
+			padding: 0.1em;
+		}
+	}
+
+
+	.carousel {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, 14.5em);
+		position: relative;
+		grid-gap: 0;
+		justify-content: start;
+
+
+	}
+
+
+}
+.carousel-wrapper:after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	right: 0;
+	pointer-events: none;
+	background-image: linear-gradient(to right,
+			rgba(0, 0, 0, 0),
+			$grey 60%);
+	width: $carouselExtra;
+	height: 100%;
+}
+
+.carousel-wrapper:before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	background-image: linear-gradient(to left,
+
+			rgba(0, 0, 0, 0),
+			$grey 60%);
+	width: $carouselExtra;
+	height: 100%;
+}
+
+.hoverable {
+	transition: 0.1s ease-in-out;
+}
+
+.hoverable:hover {
+	transform: scale(1.1, 1.1) translate(0, -1em);
+}
+
+
+.card {
+	grid-row: 1;
+	background-color: $black;
+	position: relative;
+	padding: 0.75em;
+	border-radius: 5px;
+	text-decoration: none;
+	margin: 0.4em 1em 0 0;
+
+	.guild-icon {
+		background-color: $grey;
+		border-radius: 50%;
+		margin: 1em auto;
+		position: relative;
+		img {
+			height: 100%;
+			width: 100%;
+			border-radius: 50%;
+			position:absolute;
+		}
+
+		.servericon-alt {
+			text-align: center;
+			vertical-align: middle;
+			font-size: 18px;
+			font-weight: bold;
+
+		}
+	}
+
+	.servericon-alt {
+		color: $textGrey;
+	}
+
+	.guild-name {
+		max-width: 10em;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		color: $textGrey;
+		font-weight: bold;
+		text-align: center;
+		margin: auto auto 0.5em;
+	}
 }
 
 .helpbutton {
@@ -568,66 +617,11 @@ h2 {
 	padding-right: 0.5em;
 }
 
-.box-item {
-	margin: 0.4em;
-	padding: 0.25em;
-	border: 0.25em solid var(--border-color);
-	border-radius: 1em;
-	background: rgba(1, 1, 1, 0.2);
-}
 
 .centered {
 	margin: 0 auto;
 	width: fit-content;
 	text-align: center;
-}
-
-.inf_table {
-	overflow-wrap: break-word;
-	width: 100%;
-
-	thead {
-		th {
-			position: sticky;
-			top: 0;
-			color: var(--header-color);
-		}
-	}
-
-	td {
-		max-width: 28em;
-	}
-
-	tr {
-		border-bottom: 1px solid black;
-		max-width: 100%;
-
-		th {
-			text-align: center;
-			padding: 0.25em;
-			cursor: pointer;
-			background-color: rgba(1, 1, 1, 0.80);
-			min-width: 5em;
-		}
-
-
-	}
-
-	tr:hover td {
-		background-color: var(--nav-item-hover-background)
-	}
-
-	tr:nth-child(2n + 1) {
-		background-color: rgba(1, 1, 1, 0.15)
-	}
-
-	tr:last-child {
-		border-bottom: 0;
-	}
-
-	td {
-		padding: 0.5em 1em;
-	}
 }
 
 * {
@@ -658,15 +652,4 @@ h2 {
 		background-color: transparent;
 	}
 
-}
-
-.filter {
-	margin: 1em;
-	padding: 1em;
-	background-color: rgba(0, 0, 0, 0.2);
-}
-
-.small-input {
-	min-width: 6em;
-	width: auto;
 }

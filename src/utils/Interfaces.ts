@@ -213,7 +213,8 @@ export interface BasicInputComponentProps extends SettingsComponentProps {
 
 export interface GuildLogoProps {
     link: string;
-    size: SizeProp;
+    name: string;
+    size: number
 }
 
 export interface RoleListProps extends SettingsComponentProps {
@@ -496,4 +497,14 @@ export interface FilterRowFieldProps {
     validator(value: string): boolean;
 
     setter(value: string): void;
+}
+
+export interface CarouselProps {
+    title: VNode;
+    items: readonly VNode[];
+}
+
+export interface CarouselState {
+    leftDisabled: boolean;
+    rightDisabled: boolean;
 }

@@ -18,24 +18,20 @@ export default class GuildCard extends Component<GuildProps, {}> {
         else
             link = `${ROUTES.ADD_GEARBOT}&guild_id=${id}`;
 
-        const content = [<header class="card-header">
-            <p class="card-header-title">
-                {name}
-
-            </p>
-        </header>,
-            <div class="card-image">
-                <figure class="image">
-                    <GuildLogo link={icon && icon_url} size="10x"/>
-                </figure>
-            </div>];
+        const content = <>
+                <GuildLogo link={icon && icon_url} name={name} size={7}/>
+                    <p class="guild-name">
+                        {name}
+                    </p>
+            </>
+        ;
         return (
             this.props.type == "SETTINGS" ?
-                <Link href={link} class="card tile is-child mycard">
+                <Link href={link} class="card hoverable">
                     {content}
                 </Link>
                 :
-                <a href={link} class="card tile is-child mycard" target="_blank">
+                <a href={link} class="card hoverable" target="_blank">
                     {content}
                 </a>
         );
