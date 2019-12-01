@@ -76,7 +76,6 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
             Object.keys(guilds).forEach(key => {
                 const guild = guilds[key];
                 with_gearbot.push(<GuildCard guild={guild} type="SETTINGS"/>)
-
             });
 
 
@@ -85,7 +84,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
                     const guild = all_guilds[key];
                     if (!guilds[key])
                         without_gearbot.push(<GuildCard guild={guild} type={"ADD"}/>)
-                })
+                });
             }
         }
         return (

@@ -2,12 +2,13 @@
 
 $yellow: #FECB4D;
 $black: #191B1F;
+$darkBlack: #0F1012;
 $grey: #2C2F36;
 $textGrey: #DADADA;
 $textOffGrey: #767B85;
 $footerHeight: 20em;
 $containerWidth: 60%;
-$carouselExtra : 5em;
+$carouselExtra: 5em;
 
 html,
 body {
@@ -31,15 +32,14 @@ body {
 	min-height: 100%;
 	display: grid;
 	grid-template-columns: 1fr 60% 1fr;
-	grid-template-rows: minmax(auto, 5em) auto $footerHeight;
-	grid-template-areas: "header header header" ". main ." "footer footer footer";
+	grid-template-rows:  min-content min-content 1fr $footerHeight;
+	grid-template-areas: "header header header" "guildnav guildnav guildnav" ". main ." "footer footer footer";
 	position: relative;
 
 	.navbar {
 		grid-area: header;
-
-		position: sticky;
-		top: 0;
+		height: fit-content;
+		position: relative;
 		background-color: $black;
 		padding: 1em 1em 0.75em 1em;
 		margin: 0;
@@ -135,6 +135,11 @@ body {
 
 	.page {
 		position: relative;
+		display: contents;
+
+	}
+
+	.page > * {
 		grid-area: main;
 	}
 
@@ -314,6 +319,11 @@ body {
 	color: $textGrey
 }
 
+.greyButton {
+	background-color: $grey;
+	color: $textGrey
+}
+
 
 h2 {
 	color: $yellow;
@@ -367,10 +377,12 @@ h2 {
 	position: relative;
 	top: 2em;
 	float: left;
+
 	h2, p {
 		color: $textGrey;
 		display: inline-block;
 	}
+
 	p {
 		margin-left: 0.5em;
 	}
@@ -385,6 +397,7 @@ h2 {
 	float: right;
 	position: relative;
 	top: 2em;
+
 	.button {
 		background: $black;
 		display: inline-block;
@@ -404,7 +417,7 @@ h2 {
 	position: relative;
 	left: -$carouselExtra;
 	overflow-x: hidden;
-	width:calc(100% + 10em);
+	width: calc(100% + 10em);
 	clear: left;
 
 	.carousel-inner {
@@ -432,6 +445,7 @@ h2 {
 
 
 }
+
 .carousel-wrapper:after {
 	content: "";
 	position: absolute;
@@ -454,7 +468,6 @@ h2 {
 	left: 0;
 	pointer-events: none;
 	background-image: linear-gradient(to left,
-
 			rgba(0, 0, 0, 0),
 			$grey 60%);
 	width: $carouselExtra;
@@ -469,6 +482,32 @@ h2 {
 	transform: scale(1.1, 1.1) translate(0, -1em);
 }
 
+.guild-icon {
+	background-color: $grey;
+	border-radius: 50%;
+	margin: 1em auto;
+	position: relative;
+
+	img {
+		height: 100%;
+		width: 100%;
+		border-radius: 50%;
+		position: absolute;
+	}
+
+	.servericon-alt {
+		font-size: 18px;
+		font-weight: bold;
+
+		position: relative;
+		float: left;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+	}
+}
+
 
 .card {
 	grid-row: 1;
@@ -478,27 +517,6 @@ h2 {
 	border-radius: 5px;
 	text-decoration: none;
 	margin: 0.4em 1em 0 0;
-
-	.guild-icon {
-		background-color: $grey;
-		border-radius: 50%;
-		margin: 1em auto;
-		position: relative;
-		img {
-			height: 100%;
-			width: 100%;
-			border-radius: 50%;
-			position:absolute;
-		}
-
-		.servericon-alt {
-			text-align: center;
-			vertical-align: middle;
-			font-size: 18px;
-			font-weight: bold;
-
-		}
-	}
 
 	.servericon-alt {
 		color: $textGrey;
@@ -622,6 +640,53 @@ h2 {
 	margin: 0 auto;
 	width: fit-content;
 	text-align: center;
+}
+
+.guild-nav {
+	width: 100%;
+	background: $darkBlack;
+	grid-area: guildnav !important;
+
+	.guild-nav-inner {
+		margin: auto;
+		width: $containerWidth;
+
+
+		.guild-info {
+			float: left;
+			display: inline-block;
+			margin: 0.75em;
+
+			.guild-icon {
+				display: inline-block;
+				float: left;
+				margin:0;
+				.servericon-alt {
+					font-size: 11px;
+					margin:0;
+				}
+			}
+
+			.guild-name{
+				float: left;
+				display: inline-block;
+				margin: 0 0 0 0.5em;
+				line-height: 1.75em;
+			}
+		}
+
+		.links {
+			float: right;
+
+			.button {
+				font-size: 14px;
+				font-weight: normal;
+				display: inline-block;
+				padding: 0.4em 1.5em;
+				margin: 0.75em;
+			}
+		}
+	}
 }
 
 * {

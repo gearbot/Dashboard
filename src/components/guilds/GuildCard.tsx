@@ -7,11 +7,9 @@ import GuildLogo from "./GuildLogo";
 export default class GuildCard extends Component<GuildProps, {}> {
 
     render() {
-        const {id, name, icon} = this.props.guild;
-        let link, icon_url;
+        const {id, name} = this.props.guild;
+        let link;
 
-        const animated = icon && icon.startsWith("a_");
-        icon_url = `https://cdn.discordapp.com/icons/${id}/${icon}.${animated ? "gif" : "png"}?size=256`;
 
         if (this.props.type == "SETTINGS")
             link = `${ROUTES.GUILDS}/${id}/info`;
@@ -19,7 +17,7 @@ export default class GuildCard extends Component<GuildProps, {}> {
             link = `${ROUTES.ADD_GEARBOT}&guild_id=${id}`;
 
         const content = <>
-                <GuildLogo link={icon && icon_url} name={name} size={7}/>
+                <GuildLogo guild_info={this.props.guild} size={7}/>
                     <p class="guild-name">
                         {name}
                     </p>

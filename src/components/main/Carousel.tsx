@@ -12,7 +12,6 @@ export default class Carousel extends Component<CarouselProps, CarouselState> {
     }
 
     updateScroll = () => {
-        console.log("test");
         const c = this.divRef.current
         const currentScroll = c.scrollLeft;
         const width = c.children[0].children[0].offsetWidth;
@@ -28,11 +27,11 @@ export default class Carousel extends Component<CarouselProps, CarouselState> {
     }
 
     moveRight = () => {
-        this.divRef.current.scrollBy({left: this.divRef.current.children[0].children[0].offsetWidth, behavior: "smooth"})
+        this.divRef.current.scrollBy({left: this.divRef.current.scrollWidth / this.props.items.length, behavior: "smooth"})
     };
 
     moveLeft = () => {
-        this.divRef.current.scrollBy({left: -this.divRef.current.children[0].children[0].offsetWidth, behavior: "smooth"})
+        this.divRef.current.scrollBy({left: -this.divRef.current.scrollWidth / this.props.items.length, behavior: "smooth"})
     };
 
     render() {

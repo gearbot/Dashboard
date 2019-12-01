@@ -144,6 +144,7 @@ class App extends Component<UserHolder, AppState> {
                                         {this.state.loading ? <Loading/> :
                                             <div class="container">
                                                 <Header/>
+
                                                 <div class="page">
                                                 <Router onChange={(url) => setUrl(url.url)} url={url}>
                                                     <Home path={ROUTES.HOME}/>

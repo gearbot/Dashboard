@@ -1,6 +1,7 @@
 import {Component, VNode} from "preact";
 import WebSocketHolder from "./WebSocketHolder";
 import {SizeProp} from "@fortawesome/fontawesome-svg-core";
+import GuildInfo from "../routes/GuildInfo";
 
 export interface User {
     id: string;
@@ -212,8 +213,7 @@ export interface BasicInputComponentProps extends SettingsComponentProps {
 }
 
 export interface GuildLogoProps {
-    link: string;
-    name: string;
+    guild_info?: BasicGuildInfo | APIGuildInfo;
     size: number
 }
 
