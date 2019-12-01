@@ -145,7 +145,6 @@ class App extends Component<UserHolder, AppState> {
                                             <div class="container">
                                                 <Header/>
 
-                                                <div class="page">
                                                 <Router onChange={(url) => setUrl(url.url)} url={url}>
                                                     <Home path={ROUTES.HOME}/>
                                                     <PopupCloser path={ROUTES.CLOSER}/>
@@ -153,7 +152,6 @@ class App extends Component<UserHolder, AppState> {
                                                     <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
                                                     <Stats path={ROUTES.STATS}/>
                                                 </Router>
-                                                </div>
                                                 <Footer/>
                                             </div>
                                         }

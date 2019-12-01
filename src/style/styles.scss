@@ -133,16 +133,6 @@ body {
 
 	}
 
-	.page {
-		position: relative;
-		display: contents;
-
-	}
-
-	.page > * {
-		grid-area: main;
-	}
-
 	.footer {
 		grid-area: footer;
 		display: grid;
@@ -214,6 +204,10 @@ body {
 			}
 		}
 	}
+}
+
+.container > * {
+	grid-area: main;
 }
 
 @media screen and (max-width: 600px) {
