@@ -1,0 +1,44 @@
+@import "../variables";
+@import "../main/buttons";
+
+.home {
+	text-align: center;
+
+	.homeHeader {
+		margin: auto;
+		background-image: url("../../assets/gearbotGrey.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+
+		h1 {
+			padding-top: 5em;
+			display: inline-block;
+		}
+
+		.button {
+			width: 12em;
+			display: inline-block;
+		}
+	}
+
+	.features {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		.feature {
+			flex-grow: 1;
+			margin: 3em;
+			max-width: 15em;
+
+			h2 {
+				color: $textGrey
+			}
+
+			img {
+				padding-bottom: 2em;
+			}
+		}
+	}
+}

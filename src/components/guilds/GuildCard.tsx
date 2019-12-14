@@ -3,6 +3,8 @@ import {GuildProps} from "../../utils/Interfaces";
 import {Link} from "preact-router";
 import ROUTES from "../../utils/routes";
 import GuildLogo from "./GuildLogo";
+import "../../style/main/cards.scss"
+import "../../style/other/hover.scss"
 
 export default class GuildCard extends Component<GuildProps, {}> {
 

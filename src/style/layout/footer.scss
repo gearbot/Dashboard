@@ -1,0 +1,73 @@
+@import "../variables";
+
+.footer {
+	grid-area: footer;
+	display: grid;
+
+	grid-template-columns: 1fr 60% 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: ". footercontent .";
+
+	height: $footerHeight;
+	background-color: $black;
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+
+	font-size: 14px;
+
+	.footerContainer {
+		grid-area: footercontent;
+		margin: 2.3em auto auto;
+		width: 100%;
+		min-height: 0;
+	}
+
+	h1 {
+		color: $yellow;
+		font-size: 16px;
+		margin: 0;
+	}
+
+	a {
+		text-decoration: none;
+		color: $textGrey;
+		display: block;
+		padding-top: 1.15em;
+	}
+
+	a:hover {
+		color: $yellow;
+		text-decoration: underline;
+	}
+
+	.left {
+		float: left;
+	}
+
+	.right {
+		float: right;
+	}
+
+	.logo {
+		height: 80px;
+	}
+
+	.copyright {
+		padding-top: 3em;
+	}
+
+	.socials {
+		padding-top: 6em;
+
+		a {
+			padding: 0.25em;
+			display: inline-block;
+			float: right;
+
+			img {
+				height: 25px;
+			}
+		}
+	}
+}

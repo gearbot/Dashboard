@@ -1,8 +1,9 @@
+import "../../style/main.scss";
 import {Component} from "preact";
 import {AppState, UserHolder} from "../../utils/Interfaces";
 import Router from "preact-router";
 import Home from "../../routes/Home";
-import Header from "../navigation/Header";
+import Header from "../layout/Header";
 import {
     AuthUser,
     AuthUserSetter,
@@ -23,7 +24,7 @@ import Loading from "./Loading";
 import WebSocketHolder from "../../utils/WebSocketHolder";
 import Stats from "../../routes/StatsRoute";
 import * as React from "preact/compat";
-import Footer from "./Footer";
+import Footer from "../layout/Footer";
 
 const INITIAL_STATE = {
     loading: true,

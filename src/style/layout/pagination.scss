@@ -1,0 +1,14 @@
+@import "../variables";
+
+.pagination {
+	float: right;
+
+	.pagination-link{
+		margin: 0.2em;
+		cursor: pointer;
+	}
+
+	.current-page {
+		color:$yellow;
+	}
+}

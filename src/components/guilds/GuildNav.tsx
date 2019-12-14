@@ -5,6 +5,8 @@ import {useContext} from "preact/hooks";
 import {Guild, UserPerms} from "../wrappers/Context";
 import {Link} from "preact-router";
 import GuildLogo from "./GuildLogo";
+import "../../style/guild/guildnav.scss"
+import "../../style/main/buttons.scss"
 
 const MENU_OPTIONS = {
     Info: {route: "info", perms: 1 << 0},

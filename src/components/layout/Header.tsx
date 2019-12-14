@@ -8,8 +8,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import UserMenu from "./UserMenu";
 import {Text} from 'preact-i18n';
+import "../../style/layout/header.scss"
 
-//navigation for authenticated users
+//layout for authenticated users
 const NavigationAuth = ({user}) => (
 
     <>

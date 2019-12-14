@@ -1,0 +1,35 @@
+@import "../other/spin";
+
+.loadingcontainer {
+	background: rgba(1, 1, 1, 0.3);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+
+	.loading {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: 0 -50% 0 0;
+		transform: translate(-50%, -50%);
+		z-index: 10;
+
+		.gear {
+			position: relative;
+			z-index: 11;
+			-webkit-animation: spin 6s linear infinite;
+			-moz-animation: spin 6s linear infinite;
+			animation: spin 6s linear infinite;
+		}
+
+		.loadingtext {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-right: -50%;
+			transform: translate(-50%, -50%);
+			z-index: 12;
+			color: black;
+		}
+	}
+}

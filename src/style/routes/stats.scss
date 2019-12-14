@@ -1,0 +1,25 @@
+@import "../main/cards";
+
+.statsContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+	grid-gap: 3em;
+
+
+	.row {
+		.card {
+			margin: 1em 0;
+
+			.statHeader {
+				font-weight: bold;
+				font-size: 16px;
+				margin-bottom: 1em;
+			}
+		}
+	}
+
+	h2 {
+		color: $yellow;
+		font-size: 24px;
+	}
+}

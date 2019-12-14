@@ -2,6 +2,7 @@ import {Component} from "preact";
 import {UsernameProps} from "../../utils/Interfaces";
 import {useContext} from "preact/hooks";
 import {UserInfoCache, UserInfoCacheSetter, WS} from "../wrappers/Context";
+import "../../style/main/userdisplay.scss"
 
 const requested = [];
 let scheduled = false;

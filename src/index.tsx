@@ -1,4 +1,3 @@
-import "./style/styles.scss";
 import App from "./components/main/App";
 import * as Sentry from '@sentry/browser';
 

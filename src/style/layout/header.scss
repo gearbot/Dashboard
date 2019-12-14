@@ -1,0 +1,151 @@
+@import "../variables";
+
+.navbar {
+	grid-area: header;
+	height: fit-content;
+	position: relative;
+	background-color: $black;
+	padding: 1em 1em 0.75em 1em;
+	margin: 0;
+	z-index: 100;
+
+	.altnav {
+		float: right;
+	}
+
+
+	.navcontainer {
+		margin: auto;
+		width: $containerWidth;
+		display: table;
+
+
+		.logo {
+			float: left;
+			display: inline-block;
+			font-size: 24px;
+			width: 6em;
+
+			line-height: 48px;
+
+			.logoImage {
+				float: left;
+				height: 1.5em;
+				margin-right: 0.15em;
+				margin-top: 5px;
+			}
+
+			.logoText {
+				color: $yellow;
+
+			}
+		}
+
+		.navgroup {
+			max-height: 20em;
+			overflow-y: hidden;
+		}
+
+		.navmiddle {
+			float: left;
+			line-height: 3em;
+
+
+		}
+
+		.navbar-item {
+			margin-left: 2em;
+			color: $textGrey;
+			font-weight: 500;
+			font-size: 16px;
+			height: 100%;
+
+		}
+
+		.navbar-item:hover {
+			color: $yellow;
+			text-decoration: underline;
+		}
+
+		.navright {
+			float: right;
+			line-height: 3em;
+
+			.userHolder {
+				display: inline-block;
+				line-height: 2.2em;
+				font-weight: 500;
+				font-size: 16px;
+
+				.userImage {
+					float: left;
+					border-radius: 50%;
+					height: 2em;
+					margin-right: 0.5em;
+				}
+			}
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+@media screen and (max-width: 1400px) {
+
+	.navbar {
+		padding-bottom: 0 !important;
+
+		.active {
+			max-height: 20em !important;
+		}
+	}
+
+
+	.navgroup {
+		max-height: 0 !important;
+
+		.navmiddle {
+
+		}
+
+		.navitems {
+			a {
+				display: block;
+				margin-left: 0 !important;
+			}
+		}
+	}
+
+	.menubutton {
+		float: right;
+		display: block;
+	}
+
+	.navmiddle,
+	.navright {
+		display: block;
+		float: none !important;
+	}
+
+
+	.logo {
+		float: none !important;
+		display: block !important;
+		margin: auto;
+	}
+
+	.altnav {
+		top: -2em;
+		position: relative;
+		cursor: pointer;
+	}
+
+}
+
+@media screen and (min-width: 1400px) {
+	.altnav {
+		display: none;
+	}
+}

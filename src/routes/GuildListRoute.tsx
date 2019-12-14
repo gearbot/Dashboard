@@ -8,6 +8,7 @@ import {AuthUser, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
 import {Text} from "preact-i18n"
 import Carousel from "../components/main/Carousel";
+import "../style/other/center.scss"
 
 const INITIAL_STATE = {
     guilds: undefined,

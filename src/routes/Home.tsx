@@ -2,6 +2,7 @@ import {Component} from "preact";
 import {Text} from 'preact-i18n';
 import ROUTES from "../utils/routes";
 import {Link} from "preact-router";
+import "../style/routes/home.scss"
 
 export default class Home extends Component<{}, {}> {
 

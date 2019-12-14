@@ -1,11 +1,12 @@
 import {Component} from "preact";
 import {Text} from "preact-i18n";
 import {FilterProps} from "../../utils/Interfaces";
-import Dropdown from "../Configuration/Dropdown";
+import Dropdown from "../main/Dropdown";
 import {FILTER_OPTIONS, BLANK_FILTER} from "../../utils/FilterDefinitions";
 import FilterRow from "./FilterRow";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+import "../../style/infractions/filter.scss"
 
 export default class Filter extends Component<FilterProps, {}> {
 

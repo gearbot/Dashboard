@@ -1,0 +1,36 @@
+.helpbutton {
+	border-radius: 50%;
+	margin-left: 0.2em;
+	display: inline-block;
+
+}
+
+.helpholder {
+	margin-left: 0.5rem;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1rem;
+}
+
+.helpcontent {
+	display: none;
+}
+
+.helpholder:hover {
+	.helpcontent {
+		position: fixed;
+		padding: 0.7em;
+		border-radius: 5%;
+		background-color: hsla(0, 0%, 20%, 0.7);
+		color: #fff;
+		content: attr(data-tooltip);
+		text-align: center;
+		display: inline-block;
+		margin-left: 0.5em;
+		z-index: 5;
+		width: fit-content;
+		font-weight: normal;
+		max-width: 50em;
+
+	}
+}

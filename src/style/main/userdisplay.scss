@@ -1,0 +1,16 @@
+.userDisplay {
+	display: inline-block;
+	margin-left: 0.25em;
+
+	.avatar {
+		border-radius: 50%;
+		height: 1em;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.username {
+		display: inline-block;
+		margin-left: 0.25em;
+	}
+}

@@ -1,0 +1,20 @@
+@import "../variables";
+
+.filter {
+	margin-top: 1em;
+	background-color: $black;
+	padding: 0.5em;
+	border-radius: 5px;
+
+	.dropdown {
+		font-size: 12px;
+	}
+
+	.filter-button {
+		display: inline-block;
+		cursor: pointer;
+		background-color: $grey;
+		border-radius: 5px;
+		padding: 0.4em;
+	}
+}

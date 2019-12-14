@@ -1,6 +1,7 @@
 import {Component} from "preact";
 import {PaginationProps} from "../../utils/Interfaces";
 import {Text} from 'preact-i18n';
+import "../../style/layout/pagination.scss"
 
 export default class Pagination extends Component<PaginationProps, {}> {
 

@@ -1,0 +1,81 @@
+@import "../variables";
+
+.infractions {
+	margin-top: 2em;
+	color: $textGrey;
+
+	.infraction {
+		margin-bottom: 1em;
+
+
+		.infraction-header {
+			display: inline-block;
+			width: 100%;
+			background-color: $black;
+			border-radius: 5px;
+			padding: 1em;
+			box-sizing: border-box;
+
+			.icon {
+				float: left;
+				background: $grey;
+				padding: 0.3em;
+				margin: 0 1em 0 0.5em;
+				border-radius: 5px;
+				height: 1.5em;
+			}
+
+
+			.reason {
+				color: $infreactionReasonColor;
+			}
+		}
+
+
+		.opener {
+			float: right;
+			cursor: pointer;
+		}
+
+
+		.infraction-header-opened {
+			border-radius: 5px 5px 0 0;
+		}
+
+		.infraction-body {
+			max-height: 0;
+			overflow-y: hidden;
+			border-radius: 0 0 5px 5px;
+			background-color: $backgroundInfractions;
+			transition: 0.5s ease-in-out;
+
+			.infraction-body-inner {
+				padding: 1em;
+				transition: 0.5s ease-in-out;
+
+
+				.infraction-info {
+					margin-left: 2em;
+
+					.detail {
+						display: inline-block;
+						margin-left: 1em;
+						color: $textOffGrey;
+
+						.detail-value {
+							margin-left: 0.6em;
+							color: $textGrey;
+						}
+					}
+				}
+			}
+		}
+
+		.infraction-body-opened {
+			max-height: 7em;
+
+
+		}
+	}
+
+}

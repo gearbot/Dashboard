@@ -1,6 +1,6 @@
 import {Component} from "preact";
 import {FilterRowProps} from "../../utils/Interfaces";
-import Dropdown from "../Configuration/Dropdown";
+import Dropdown from "../main/Dropdown";
 import {FILTER_OPTIONS, FILTER_TYPES} from "../../utils/FilterDefinitions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";

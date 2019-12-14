@@ -6,14 +6,15 @@ import {Guild, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
 import UserDisplay from "../components/main/UserDisplay";
 import SortTitle from "../components/infractions/SortTitle";
-import Pagination from "../components/navigation/Pagination";
+import Pagination from "../components/layout/Pagination";
 import GearIcon from "../components/main/GearIcon";
 import ROUTES from "../utils/routes";
 import {areArraysSame} from "../utils/Utils";
-import Dropdown from "../components/Configuration/Dropdown";
+import Dropdown from "../components/main/Dropdown";
 import Filter from "../components/infractions/Filter";
 import {FILTER_TYPES, BLANK_FILTER} from "../utils/FilterDefinitions";
 import Infraction from "../components/infractions/Infraction";
+import "../style/routes/infractions.scss"
 
 
 const separators = [

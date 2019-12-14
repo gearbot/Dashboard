@@ -1,6 +1,7 @@
 import {Component} from "preact";
 import {TimeDisplayProps} from "../../utils/Interfaces";
 import {Text} from "preact-i18n";
+import "../../style/main/timedisplay.scss"
 
 export default class TimeDisplay extends Component<TimeDisplayProps, {}>{
 

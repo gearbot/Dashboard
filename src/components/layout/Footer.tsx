@@ -2,6 +2,7 @@ import {Component} from "preact";
 import {Link} from "preact-router";
 import ROUTES from "../../utils/routes";
 import {Text} from 'preact-i18n';
+import "../../style/layout/footer.scss"
 
 export default class Footer extends Component<{}, {}> {
 

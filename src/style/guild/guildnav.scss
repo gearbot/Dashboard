@@ -1,0 +1,49 @@
+@import "../variables";
+
+.guild-nav {
+	width: 100%;
+	background: $darkBlack;
+	grid-area: guildnav !important;
+
+	.guild-nav-inner {
+		margin: auto;
+		width: $containerWidth;
+
+
+		.guild-info {
+			float: left;
+			display: inline-block;
+			margin: 0.75em;
+
+			.guild-icon {
+				display: inline-block;
+				float: left;
+				margin: 0;
+
+				.servericon-alt {
+					font-size: 11px;
+					margin: 0;
+				}
+			}
+
+			.guild-name {
+				float: left;
+				display: inline-block;
+				margin: 0 0 0 0.5em;
+				line-height: 1.75em;
+			}
+		}
+
+		.links {
+			float: right;
+
+			.button {
+				font-size: 14px;
+				font-weight: normal;
+				display: inline-block;
+				padding: 0.4em 1.5em;
+				margin: 0.75em;
+			}
+		}
+	}
+}

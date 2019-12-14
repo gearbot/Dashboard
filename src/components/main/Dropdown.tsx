@@ -4,6 +4,7 @@ import {Text} from "preact-i18n";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import OutsideAlerter from "../wrappers/OutsideAlerter";
+import "../../style/main/dropdown.scss"
 
 export default class Dropdown extends Component<DropdownProps, DropdownState> {
     mounted = true;

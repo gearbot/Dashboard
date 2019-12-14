@@ -2,6 +2,9 @@ import {Component, createRef, Ref, VNode} from "preact";
 import {CarouselProps, CarouselState} from "../../utils/Interfaces";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLongArrowAltLeft, faLongArrowAltRight, faSortDown} from "@fortawesome/free-solid-svg-icons";
+import "../../style/main/carousel.scss"
+import "../../style/main/cards.scss"
+import "../../style/other/hover.scss"
 
 export default class Carousel extends Component<CarouselProps, CarouselState> {
     divRef;
@@ -14,7 +17,6 @@ export default class Carousel extends Component<CarouselProps, CarouselState> {
     updateScroll = () => {
         const c = this.divRef.current
         const currentScroll = c.scrollLeft;
-        const width = c.children[0].children[0].offsetWidth;
         this.setState({
             leftDisabled: currentScroll == 0,
             rightDisabled: (c.offsetWidth + currentScroll) >= c.scrollWidth

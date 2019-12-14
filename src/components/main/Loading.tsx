@@ -1,4 +1,5 @@
 import {Component} from "preact";
+import "../../style/main/loading.scss"
 
 export default class Loading extends Component<{}, {}> {
 

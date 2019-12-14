@@ -2,6 +2,7 @@ import {Component} from "preact";
 import {GuildLogoProps} from "../../utils/Interfaces";
 import {useContext} from "preact/hooks";
 import {Guild} from "../wrappers/Context";
+import "../../style/guild/guildlogo.scss"
 
 export default class GuildLogo extends Component<GuildLogoProps, {}> {
 

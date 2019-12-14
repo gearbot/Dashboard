@@ -1,0 +1,102 @@
+@import "../variables";
+
+.carousel-outer {
+	position: relative;
+	top: -2em
+}
+
+.carousel-buttons {
+	float: right;
+	position: relative;
+	top:2em;
+
+	.button {
+		background: $black;
+		display: inline-block;
+		padding: 0.5em 1em;
+		text-align: center;
+		cursor: pointer;
+		margin: 0 0 0 0.4em;
+	}
+
+	.disabled {
+		color: $textOffGrey;
+		cursor: not-allowed;
+	}
+}
+
+.carousel-wrapper {
+	position: relative;
+	left: -$carouselExtra;
+	overflow-x: hidden;
+	width: calc(100% + 10em);
+	clear: left;
+
+	.carousel-inner {
+		clear: left;
+		overflow: hidden;
+		padding: 1em $carouselExtra 0;
+		position: relative;
+
+		.card {
+			width: 13.4em;
+			padding: 0.1em;
+		}
+	}
+
+
+	.carousel {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, 14.5em);
+		position: relative;
+		grid-gap: 0;
+		justify-content: start;
+
+
+	}
+
+
+}
+
+.carousel-wrapper:after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	right: 0;
+	pointer-events: none;
+	background-image: linear-gradient(to right,
+			rgba(0, 0, 0, 0),
+			$grey 60%);
+	width: $carouselExtra;
+	height: 100%;
+}
+
+.carousel-wrapper:before {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	background-image: linear-gradient(to left,
+			rgba(0, 0, 0, 0),
+			$grey 60%);
+	width: $carouselExtra;
+	height: 100%;
+}
+
+.carousel-title {
+	position: relative;
+	top: 2em;
+	float: left;
+
+	h2, p {
+		color: $textGrey;
+		display: inline-block;
+	}
+
+	p {
+		margin-left: 0.5em;
+	}
+}

@@ -6,6 +6,7 @@ import {Text} from 'preact-i18n';
 import Loading from "../components/main/Loading";
 import {format, formats} from "../utils/Utils";
 import TimeDisplay from "../components/main/TimeDisplay";
+import "../style/routes/stats.scss"
 
 const INITIAL_STATE = {
     loading: true,
@@ -62,7 +63,7 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
 
 
         return (
-            <>
+            <div>
                 <h1><Text id="stats.title"/></h1>
                 <Text id="stats.info"/>
 
@@ -149,7 +150,7 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
                     </div>
                 </div>
 
-            </>
+            </div>
         );
 
         return (

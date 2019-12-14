@@ -10,6 +10,7 @@ import {route} from "preact-router";
 import {faSignInAlt} from "@fortawesome/free-solid-svg-icons";
 import OutsideAlerter from "../wrappers/OutsideAlerter";
 import {Text} from 'preact-i18n';
+import "../../style/layout/usermenu"
 
 export default class UserMenu extends Component<{}, UserMenuState> {
     mounted = true;
