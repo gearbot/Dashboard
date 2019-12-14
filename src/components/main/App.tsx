@@ -7,8 +7,8 @@ import {
     AuthUser,
     AuthUserSetter,
     GeneralInfo,
-    UsernameCache,
-    UsernameCacheSetter,
+    UserInfoCache,
+    UserInfoCacheSetter,
     WS
 } from "../wrappers/Context";
 import {useContext, useState} from "preact/hooks";
@@ -135,8 +135,8 @@ class App extends Component<UserHolder, AppState> {
                 <AuthUser.Provider value={this.state.user} children={
                     <AuthUserSetter.Provider value={this.setUser} children={
                         <GeneralInfo.Provider value={this.state.generalInfo} children={
-                            <UsernameCache.Provider value={this.state.usernameCache} children={
-                                <UsernameCacheSetter.Provider value={this.usernameCacheSetter} children={
+                            <UserInfoCache.Provider value={this.state.usernameCache} children={
+                                <UserInfoCacheSetter.Provider value={this.usernameCacheSetter} children={
 
 
                                     <IntlProvider definition={this.state.lang_strings}

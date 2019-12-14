@@ -5,7 +5,7 @@ import Dropdown from "../Configuration/Dropdown";
 import {FILTER_OPTIONS, BLANK_FILTER} from "../../utils/FilterDefinitions";
 import FilterRow from "./FilterRow";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 export default class Filter extends Component<FilterProps, {}> {
 
@@ -59,19 +59,24 @@ export default class Filter extends Component<FilterProps, {}> {
                                                 remover={remover}/>);
         }
         return (
-            <div class="filter" style={{marginLeft: `${2 * level}em`, position: "relative"}}>
+            <div class="filter" style={{paddingLeft: `${2 * level}em`, position: "relative"}}>
                 <div style={{verticalAlign: "center"}}>
-                    <Text id={"infractions.mode"}/>
-                    <Dropdown options={{
-                        AND: <Text id={"infractions.AND"}/>,
-                        OR: <Text id={"infractions.OR"}/>
-                    }}
-                              selected={mode}
-                              setter={
-                                  (newMode) => {
-                                      this.set({mode: newMode})
-                                  }}
-                    />
+                    {set.length + subFilters.length >= 2 ?
+                        <>
+                            <Text id={"infractions.mode"}/>
+                            <Dropdown
+                                options={{
+                                    AND: <Text id={"infractions.AND"}/>,
+                                    OR: <Text id={"infractions.OR"}/>
+                                }}
+                                selected={mode}
+                                setter={
+                                    (newMode) => {
+                                        this.set({mode: newMode})
+                                    }}
+                            />
+                        </> : null
+                    }
                 </div>
                 {assembledSetFilters}
                 {
@@ -92,9 +97,9 @@ export default class Filter extends Component<FilterProps, {}> {
                 {level < 3 && subFilters.length < 5 ?
                     <div class="field" style={{marginTop: "1em"}}>
                         <div class="control">
-                            <button class="button is-link" onclick={() => {
+                            <div class="filter-button" onClick={() => {
                                 this.set({subFilters: [...subFilters, BLANK_FILTER]})
-                            }}><Text id="infractions.add_filter"/></button>
+                            }}><Text id="infractions.add_filter"/></div>
                         </div>
                     </div>
                     : null}
@@ -106,7 +111,7 @@ export default class Filter extends Component<FilterProps, {}> {
                         top: 0,
                         right: 0
                     }}>
-                        <span onclick={remover} style={{cursor: "pointer"}}>
+                        <span onClick={remover} style={{cursor: "pointer"}}>
                         <FontAwesomeIcon icon={faTimes}/>
                         </span>
                     </div>

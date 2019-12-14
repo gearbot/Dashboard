@@ -51,7 +51,7 @@ export default class UserMenu extends Component<{}, UserMenuState> {
         const user = useContext(AuthUser);
         return (
             <OutsideAlerter clicker={() => this.setState({open: false})}>
-                <div class={`dropdown ${this.state.open ? 'is-active' : ""}`}
+                <div class={`${this.state.open ? 'is-active' : ""}`}
                      style={{marginLeft: "0.5em", marginRight: "0.5em", marginBottom: "0.2em"}}
                      onClick={() => this.mounted && this.setState({open: !this.state.open})}>
 

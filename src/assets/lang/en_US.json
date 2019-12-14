@@ -248,7 +248,11 @@
     },
     "select_option": "Please make a selection",
     "created_by": "Created by",
-    "find_us": "Find us online"
+    "find_us": "Find us online",
+    "date": "Date",
+    "time": "Time",
+    "mod_id": "Moderator id",
+    "user_id": "User id"
   },
   "infractions": {
     "id": "Id",
@@ -268,7 +272,16 @@
     "OR": "OR",
     "invalid_filter": "Your search filter is not valid.",
     "no_results": "No infractions found matching your filter",
-    "add_filter": "Add sub-filter"
+    "add_filter": "Add sub-filter",
+    "kick": "kicked",
+    "ban": "banned",
+    "unban": "unbanned",
+    "forced_ban": "force banned",
+    "mute": "muted",
+    "tempban": "temporarily banned",
+    "unmute": "unmuted",
+    "softban": "kicked and cleaned",
+    "warn": "warned"
   },
   "navigation": {
     "prev": "Previous page",

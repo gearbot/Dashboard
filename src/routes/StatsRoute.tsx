@@ -5,12 +5,13 @@ import {StatsRouteState} from "../utils/Interfaces";
 import {Text} from 'preact-i18n';
 import Loading from "../components/main/Loading";
 import {format, formats} from "../utils/Utils";
+import TimeDisplay from "../components/main/TimeDisplay";
 
 const INITIAL_STATE = {
     loading: true,
     stats: null,
-    uptime_parts: [],
-    interval: null
+    interval: null,
+    uptime: 0
 };
 
 export default class StatsRoute extends Component<{}, StatsRouteState> {
@@ -23,12 +24,18 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
 
     componentDidMount(): void {
         const websocket = useContext(WS);
+        this.setState({});
         const interval = setInterval(() => this.updateUptime(), 1000);
         this.setState({interval: interval});
         websocket.subscribe({
             channel: "stats",
             handler: (stats) => {
-                this.setState({loading: false, stats: stats});
+                this.setState({
+                    loading: false,
+                    stats: stats,
+                    uptime: new Date().getTime() - new Date(`${stats.start_time} UTC`).getTime()
+                })
+                ;
                 this.updateUptime();
             }
         })
@@ -42,35 +49,17 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
     }
 
     updateUptime() {
-        const {loading, stats} = this.state;
-        let total = loading ? 0 : Math.floor((new Date().getTime() - new Date(`${stats.start_time} UTC`).getTime()) / 1000);
-        console.log(total);
-        const days = Math.floor(total / (60 * 60 * 24));
-        total = total % (60 * 60 * 24);
-        const hours = Math.floor(total / (60 * 60));
-        total = total % (60 * 60);
-        const minutes = Math.floor(total / 60);
-        const seconds = total % 60;
-
-
-        const parts = [];
-        if (days)
-            parts.push(<div class="uptime"><Text id="misc.days" plural={days} fields={{count: days}}/></div>);
-        if (hours)
-            parts.push(<div class="uptime"><Text id="misc.hours" plural={hours} fields={{count: hours}}/></div>);
-        if (minutes)
-            parts.push(<div class="uptime"><Text id="misc.minutes" plural={minutes} fields={{count: minutes}}/></div>);
-        if (seconds)
-            parts.push(<div class="uptime"><Text id="misc.seconds" plural={seconds} fields={{count: seconds}}/></div>);
-        this.setState({uptime_parts: parts});
+        if (this.state.loading)
+            return
+        this.setState({uptime: new Date().getTime() - new Date(`${this.state.stats.start_time} UTC`).getTime()});
     }
 
     render() {
-        const {loading, stats, uptime_parts} = this.state;
+        const {loading, stats, uptime} = this.state;
+        console.log(this.state)
         if (loading)
             return <Loading/>;
 
-        console.log(uptime_parts);
 
         return (
             <>
@@ -84,7 +73,7 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
                         <div class="card">
                             <div class="statHeader"><Text id={"stats.uptime"}/></div>
                             <div class="stat">
-                                {uptime_parts}
+                                <TimeDisplay time={uptime}/>
                             </div>
                         </div>
 
@@ -170,8 +159,7 @@ export default class StatsRoute extends Component<{}, StatsRouteState> {
                         <div>
                             <p class="heading"><Text id={"stats.uptime"}/></p>
                             <p class="title">
-
-                                {uptime_parts}
+                                <TimeDisplay time={uptime}/>
                             </p>
                         </div>
                     </div>

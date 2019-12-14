@@ -31,7 +31,7 @@
     "@sentry/browser": "^5.7.0",
     "bulma-extensions": "^6.2.7",
     "dotenv-webpack": "^1.7.0",
-    "preact": "^10.0.5",
+    "preact": "^10.1.0",
     "preact-compat": "^3.19.0",
     "preact-i18n": "^2.0.0-preactx.2",
     "preact-render-to-string": "^5.1.1",

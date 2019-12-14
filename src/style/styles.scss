@@ -6,6 +6,8 @@ $darkBlack: #0F1012;
 $grey: #2C2F36;
 $textGrey: #DADADA;
 $textOffGrey: #767B85;
+$backgroundInfractions: #23252b;
+$infreactionReasonColor: #b3b3b4;
 $footerHeight: 20em;
 $containerWidth: 60%;
 $carouselExtra: 5em;
@@ -32,7 +34,7 @@ body {
 	min-height: 100%;
 	display: grid;
 	grid-template-columns: 1fr 60% 1fr;
-	grid-template-rows:  min-content min-content 1fr $footerHeight;
+	grid-template-rows: min-content min-content 1fr $footerHeight;
 	grid-template-areas: "header header header" "guildnav guildnav guildnav" ". main ." "footer footer footer";
 	position: relative;
 
@@ -79,9 +81,6 @@ body {
 
 			.navgroup {
 				max-height: 20em;
-				transition-property: all;
-				transition-duration: .5s;
-				transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 				overflow-y: hidden;
 			}
 
@@ -566,7 +565,9 @@ h2 {
 }
 
 .sliding {
-	animation: slide-down 0.4s ease;
+	transition-property: all;
+	transition-duration: 1s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
 .loadingcontainer {
@@ -623,10 +624,17 @@ h2 {
 	}
 }
 
-
-.uptime {
+.timeDisplay {
 	display: inline-block;
-	padding-right: 0.5em;
+
+	.timePart {
+		display: inline-block;
+		padding-right: 0.5em;
+	}
+
+	.timePart:last-of-type {
+		padding-right: 0;
+	}
 }
 
 
@@ -654,14 +662,15 @@ h2 {
 			.guild-icon {
 				display: inline-block;
 				float: left;
-				margin:0;
+				margin: 0;
+
 				.servericon-alt {
 					font-size: 11px;
-					margin:0;
+					margin: 0;
 				}
 			}
 
-			.guild-name{
+			.guild-name {
 				float: left;
 				display: inline-block;
 				margin: 0 0 0 0.5em;
@@ -680,6 +689,204 @@ h2 {
 				margin: 0.75em;
 			}
 		}
+	}
+}
+
+.infractions {
+	margin-top: 2em;
+	color: $textGrey;
+
+	.infraction {
+		margin-bottom: 1em;
+
+
+		.infraction-header {
+			display: inline-block;
+			width: 100%;
+			background-color: $black;
+			border-radius: 5px;
+			padding: 1em;
+			box-sizing: border-box;
+
+			.icon {
+				float: left;
+				background: $grey;
+				padding: 0.3em;
+				margin: 0 1em 0 0.5em;
+				border-radius: 5px;
+				height: 1.5em;
+			}
+
+
+			.reason {
+				color: $infreactionReasonColor;
+			}
+		}
+
+
+		.opener {
+			float: right;
+			cursor: pointer;
+		}
+
+
+		.infraction-header-opened {
+			border-radius: 5px 5px 0 0;
+		}
+
+		.infraction-body {
+			max-height: 0;
+			overflow-y: hidden;
+			border-radius: 0 0 5px 5px;
+			background-color: $backgroundInfractions;
+			transition: 0.5s ease-in-out;
+
+			.infraction-body-inner {
+				padding: 1em;
+				transition: 0.5s ease-in-out;
+
+
+				.infraction-info {
+					margin-left: 2em;
+
+					.detail {
+						display: inline-block;
+						margin-left: 1em;
+						color: $textOffGrey;
+
+						.detail-value {
+							margin-left: 0.6em;
+							color: $textGrey;
+						}
+					}
+				}
+			}
+		}
+
+		.infraction-body-opened {
+			max-height: 7em;
+
+
+		}
+	}
+
+}
+
+.userDisplay {
+	display: inline-block;
+	margin-left: 0.25em;
+
+	.avatar {
+		border-radius: 50%;
+		height: 1em;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.username {
+		display: inline-block;
+		margin-left: 0.25em;
+	}
+}
+
+.filter {
+	margin-top: 1em;
+	background-color: $black;
+	padding: 0.5em;
+	border-radius: 5px;
+
+	.dropdown {
+		font-size: 12px;
+	}
+
+	.filter-button {
+		display: inline-block;
+		cursor: pointer;
+		background-color: $grey;
+		border-radius: 5px;
+		padding: 0.4em;
+	}
+}
+
+.dropdown {
+	cursor: pointer;
+	display: inline-block;
+	background-color: $grey;
+	margin: 0.1em 0.1em 0.1em 0.6em;
+	border-radius: 5px;
+
+
+	.dropdown-top {
+		padding: 0.6em;
+		position: relative;
+		.dropdown-selected {
+			display: inline-block;
+			margin-right: 1.1em;
+		}
+
+		.dropdown-icon {
+			display: inline-block;
+			position: absolute;
+			right: 0.5em;
+		}
+	}
+
+	.dropdown-menu {
+		clear: left;
+		position: relative;
+
+
+		.dropdown-content {
+			overflow-y: hidden;
+			max-height: 0;
+			position: absolute;
+			min-width: 100%;
+			z-index: 20;
+
+			.dropdown-wrapper {
+				max-height: 25em;
+				overflow-y: auto;
+				border-color: $darkBlack;
+				border-style: solid;
+				border-width: 1px;
+				border-radius: 0 0 5px 5px;
+
+				padding: 0.1em;
+				background-color: $grey;
+
+				.dropdown-item {
+					display: block;
+					clear: left;
+					padding: 0.1em;
+				}
+			}
+		}
+	}
+}
+
+.dropdown.is-open {
+	border-radius: 5px 5px 0 0;
+}
+
+.is-open {
+	.dropdown-top{}
+		.dropdown-menu {
+			.dropdown-content {
+				max-height: fit-content;
+			}
+		}
+	}
+
+.pagination {
+	float: right;
+
+	.pagination-link{
+		margin: 0.2em;
+		cursor: pointer;
+	}
+
+	.current-page {
+		color:$yellow;
 	}
 }
 

@@ -31,18 +31,20 @@ export default class Dropdown extends Component<DropdownProps, DropdownState> {
         }
         return (
             <OutsideAlerter clicker={() => this.setState({open: false})}>
-                <div class={`dropdown ${this.state.open ? 'is-active' : ""} ${direction == "UP" ? "is-up" : ""}`} style={{marginLeft: "0.5em", marginRight: "0.5em", marginBottom: "0.2em"}} onClick={() => this.mounted && this.setState({open: !this.state.open})}>
-                    <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="mydropdown">
-                            <span>{selected? selected : <Text id={"misc.select_option"}/>}</span>
-                            <span class="icon is-small">
-                                <FontAwesomeIcon icon={faAngleDown}/>
-                        </span>
-                        </button>
+                <div class={`dropdown ${this.state.open ? 'is-open' : ""} ${direction == "UP" ? "is-up" : ""}`}
+                     onClick={() => this.mounted && this.setState({open: !this.state.open})}>
+                    <div class="dropdown-top">
+                        <div class="dropdown-selected">{selected ? selected : <Text id={"misc.select_option"}/>}</div>
+                        <div class="dropdown-icon">
+                            <FontAwesomeIcon icon={faAngleDown}/>
+                        </div>
                     </div>
-                    <div class="dropdown-menu" id="mydropdown" role="menu">
-                        <div class="dropdown-content" style={{overflowY: "auto", maxHeight: "25vh"}}>
-                            {assembled}
+
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                            <div class="dropdown-wrapper">
+                                {assembled}
+                            </div>
                         </div>
                     </div>
                 </div>

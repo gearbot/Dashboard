@@ -58,9 +58,9 @@ export default class Header extends Component<HeaderProps, HeaderState> {
                     <span class="logoText"><b>GEAR</b>BOT</span>
                 </Link>
                 <div class="altnav">
-                    <a onclick={this.toggleActive}><FontAwesomeIcon icon={faBars}/></a>
+                    <a onClick={this.toggleActive}><FontAwesomeIcon icon={faBars}/></a>
                 </div>
-                <div class={`navgroup ${this.state.menuActive ? "active" : ""}`}>
+                <div class={`sliding navgroup ${this.state.menuActive ? "active" : ""}`}>
                     <div class="navmiddle">
                         <div class="navitems">
                             {

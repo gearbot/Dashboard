@@ -13,18 +13,18 @@ export default class Pagination extends Component<PaginationProps, {}> {
     render() {
         const {page, pages} = this.props;
         return (
-            <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
-                <a class="pagination-previous" data-page={page - 1} onclick={this.gotoPage} disabled={page == 1}><Text id="navigation.prev"/></a>
-                <a class="pagination-next" data-page={page + 1} onclick={this.gotoPage}  disabled={page == pages}><Text id="navigation.next"/></a>
-                <ul class="pagination-list">
-                    {pages >= 2 && page != 1 ? <li><a class="pagination-link" data-page={1} onclick={this.gotoPage}>1</a></li> : null}
-                    {page > 3 ? <li><span class="pagination-ellipsis">&hellip;</span></li> : null}
-                    {page >= 3 ? <li><a class="pagination-link" data-page={page - 1} onclick={this.gotoPage}>{page - 1}</a></li> : null}
-                    <li><a class="pagination-link is-current" aria-current="page">{page}</a></li>
-                    {pages > page ? <li><a class="pagination-link" data-page={page + 1} onclick={this.gotoPage}>{page + 1}</a></li> : null}
-                    {pages > page + 2 ? <li><span class="pagination-ellipsis">&hellip;</span></li> : null}
-                    {pages >= page + 2? <li><a class="pagination-link" data-page={pages} onclick={this.gotoPage}>{pages}</a></li> : null }
-                </ul>
+            <nav class="pagination">
+                {/*<a class="pagination-previous" data-page={page - 1} onClick={this.gotoPage} disabled={page == 1}><Text id="navigation.prev"/></a>*/}
+                {/*<a class="pagination-next" data-page={page + 1} onClick={this.gotoPage}  disabled={page == pages}><Text id="navigation.next"/></a>*/}
+                <div class="pagination-list">
+                    {pages >= 2 && page != 1 ? <a class="pagination-link" data-page={1} onClick={this.gotoPage}>1</a> : null}
+                    {page > 3 ? <div class="pagination-ellipsis">&heldivp;</div> : null}
+                    {page >= 3 ? <a class="pagination-link" data-page={page - 1} onClick={this.gotoPage}>{page - 1}</a> : null}
+                    <a class="pagination-link current-page" aria-current="page">{page}</a>
+                    {pages > page ? <a class="pagination-link" data-page={page + 1} onClick={this.gotoPage}>{page + 1}</a> : null}
+                    {pages > page + 2 ? <div class="pagination-ellipsis">&heldivp;</div> : null}
+                    {pages >= page + 2? <a class="pagination-link" data-page={pages} onClick={this.gotoPage}>{pages}</a> : null }
+                </div>
             </nav>
         );
     }

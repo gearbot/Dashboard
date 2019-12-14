@@ -97,7 +97,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
                         <Carousel items={with_gearbot} title={<h2><Text id="guilds.with_gearbot"/></h2>}/> :
                         <div class="card centered">
                             <p><Text id="guilds.no_with_gearbot"/></p>
-                            <img src="../assets/gearWhat.png"/>
+                            <img src="../assets/gears/gearWhat.png"/>
                         </div>
                     }
 
@@ -112,7 +112,7 @@ class GuildListRoute extends Component<{}, GuildListRouteState> {
                         :
                         <div class="card centered">
                             <p><Text id="guilds.no_without_gearbot"/></p>
-                            <img src="../assets/gearWhat.png"/>
+                            <img src="../assets/gears/gearWhat.png"/>
                         </div>
                     }
                 </div> :

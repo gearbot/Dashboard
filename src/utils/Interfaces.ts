@@ -21,7 +21,7 @@ export interface AppState extends LoadingInterface {
     lang_strings: any;
     websocket?: WebSocketHolder;
     pluralRules: Intl.PluralRules;
-    usernameCache?: UsernameMap;
+    usernameCache?: UserInfoMap;
 }
 
 export interface HeaderProps {
@@ -339,8 +339,8 @@ interface Stats {
 
 export interface StatsRouteState extends LoadingInterface {
     stats: Stats;
-    uptime_parts: readonly Component[];
     interval;
+    uptime: number;
 }
 
 export interface Infraction {
@@ -377,13 +377,17 @@ export interface InfractionTableProps {
     infractions: readonly Infraction[]
 }
 
-export interface UsernameMap {
-    readonly [id: string]: string
+export interface UserInfo {
+    username: string;
+    avatar: string;
+}
+
+export interface UserInfoMap {
+    readonly [id: string]: UserInfo
 }
 
 export interface UsernameProps {
     id: string;
-    hideId?: boolean
 }
 
 export interface SortTitleProps {
@@ -452,13 +456,6 @@ export interface FilterProperties {
     value?: string;
 }
 
-export interface CheckedInput {
-    value?: string | number;
-
-    setter(value: string | number): void;
-
-    validator(value: string | number): boolean;
-}
 
 export interface FilterOptions {
     readonly [name: string]: readonly string[]
@@ -507,4 +504,17 @@ export interface CarouselProps {
 export interface CarouselState {
     leftDisabled: boolean;
     rightDisabled: boolean;
+}
+
+export interface InfractionProps {
+    infraction: Infraction;
+}
+
+export interface InfractionState {
+    open: boolean;
+}
+
+export interface TimeDisplayProps {
+    time: number;
+    partLimit ?: number;
 }

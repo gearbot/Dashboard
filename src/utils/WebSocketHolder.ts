@@ -1,5 +1,5 @@
 import {sleep} from "./dashAPI";
-import {receive_usernames} from "../components/main/Username";
+import {receive_users_info} from "../components/main/UserDisplay";
 
 export default class WebSocketHolder {
 
@@ -15,7 +15,7 @@ export default class WebSocketHolder {
             hello: login,
             pong: this.heartbeat,
             reply: this.answerbox,
-            usernames: receive_usernames,
+            users_info: receive_users_info,
             error: (data) => alert(data)
         };
     }
@@ -40,6 +40,8 @@ export default class WebSocketHolder {
     // we got mail! send it to the right receiver
     private receiver = (event) => {
         const message = JSON.parse(event.data);
+        if (! this.handlers[message.type])
+            console.error("unhandled reply!", message.type)
         this.handlers[message.type](message.content)
     };
 

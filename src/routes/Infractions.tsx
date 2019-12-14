@@ -4,7 +4,7 @@ import {InfractionsRouteProps, InfractionsRouteState, Filter as F} from "../util
 import {useContext} from "preact/hooks";
 import {Guild, WS} from "../components/wrappers/Context";
 import Loading from "../components/main/Loading";
-import Username from "../components/main/Username";
+import UserDisplay from "../components/main/UserDisplay";
 import SortTitle from "../components/infractions/SortTitle";
 import Pagination from "../components/navigation/Pagination";
 import GearIcon from "../components/main/GearIcon";
@@ -13,6 +13,7 @@ import {areArraysSame} from "../utils/Utils";
 import Dropdown from "../components/Configuration/Dropdown";
 import Filter from "../components/infractions/Filter";
 import {FILTER_TYPES, BLANK_FILTER} from "../utils/FilterDefinitions";
+import Infraction from "../components/infractions/Infraction";
 
 
 const separators = [
@@ -64,7 +65,7 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                 //TODO: HANDLE NEW INFRACTIONS
             }
         });
-        this.updateInfractions();
+        this.updateInfractions(true);
 
     }
 
@@ -171,12 +172,12 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         return true
     }
 
-    updateInfractions(): void {
+    updateInfractions(load=false): void {
         this.updateUrl();
         const {filter, order_by, page, per_page} = this.state;
         const websocket = useContext(WS);
         const guild = useContext(Guild);
-        this.setState({updating: true});
+        load ? this.state = {...this.state, updating: true} : this.setState({updating: true});
 
         websocket.ask_the_api("infraction_search",
             {
@@ -222,26 +223,14 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
         if (loading)
             return <Loading/>;
 
-        const rows = infraction_list.map((i) => (
-                <tr>
-                    <td>{i.id}</td>
-                    <td><Username id={i.user_id}/></td>
-                    <td><Username id={i.mod_id}/></td>
-                    <td>{i.type}</td>
-                    <td>{i.reason}</td>
-                    <td>{i.start}</td>
-                    <td>{i.end}</td>
-                    <td><GearIcon name={i.active ? "yes" : "no"} size={2}/></td>
-                </tr>
-            )
-        );
+        const infractions = infraction_list.map(i => <Infraction infraction={i}/>);
 
         const parts = [];
 
         parts.push(<Filter filter={filter} setter={this.setFilter} level={1}/>);
 
         if (validFilter)
-            if (rows.length == 0)
+            if (infractions.length == 0)
                 if (filter.subFilters.length == 0 && filter.set.length == 0)
                     parts.push(
                         <div style={{verticalAlign: "top", display: "block", textAlign: "center"}}><GearIcon
@@ -258,44 +247,9 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                     );
             else
                 parts.push(
-                    <table class="inf_table">
-                        <thead>
-                        <tr>
-                            <th>
-                                <SortTitle name="id" sorting={order_by} langPrefix="infractions"
-                                           setter={this.set_sort}/>
-                            </th>
-                            <th>
-                                <SortTitle name="user_id" sorting={order_by} langPrefix={"infractions"}
-                                           setter={this.set_sort}/></th>
-                            <th>
-                                <SortTitle name="mod_id" sorting={order_by} langPrefix={"infractions"}
-                                           setter={this.set_sort}/></th>
-                            <th>
-                                <SortTitle name="type" sorting={order_by} langPrefix="infractions"
-                                           setter={this.set_sort}/>
-                            </th>
-                            <th>
-                                <SortTitle name="reason" sorting={order_by} langPrefix="infractions"
-                                           setter={this.set_sort}/></th>
-                            <th>
-                                <SortTitle name="start" sorting={order_by} langPrefix="infractions"
-                                           setter={this.set_sort}/>
-                            </th>
-                            <th>
-                                <SortTitle name="end" sorting={order_by} langPrefix="infractions"
-                                           setter={this.set_sort}/>
-                            </th>
-                            <th><
-                                SortTitle name="active" sorting={order_by} langPrefix="infractions"
-                                          setter={this.set_sort}/>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {rows}
-                        </tbody>
-                    </table>
+                    <div class="infractions">
+                        {infractions}
+                    </div>
                 );
         else
             parts.push(
@@ -311,30 +265,19 @@ export default class Infractions extends Component<InfractionsRouteProps, Infrac
                     <Pagination page={page} pages={Math.ceil(infraction_count / per_page)}
                                 mover={this.setPage}/>
                 );
-            parts.push(
-                <div class={"level"} style={{marginTop: "0.5em"}}>
-                    <div class="level-left">
-                        <div class="level-item">
-                            <Text id="infractions.per_page"/>
-                            <Dropdown options={[10, 20, 30, 40, 50]} selected={per_page}
-                                      setter={this.setPerPage} direction="UP"/>
-                        </div>
-                    </div>
-                    <div class="level-right">
-                        <div class="level-item">
-                            <Text id="infractions.to_page"/>
-                            <Dropdown options={pages} selected={page} setter={this.setPage}
-                                      direction="UP"/>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
+        //     parts.push(
+        //         <>
+        //                     <Text id="infractions.per_page"/>
+        //                     <Dropdown options={[10, 20, 30, 40, 50]} selected={per_page}
+        //                               setter={this.setPerPage} direction="UP"/>
+        //                 </>
+        //     );
+         }
 
         return (
-            <>
+            <div>
                 {parts}
-            </>
+            </div>
         );
     }
 }
