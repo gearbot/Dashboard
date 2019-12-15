@@ -1,0 +1,4 @@
+[submodule "src/assets/Docs"]
+	path = src/assets/Docs
+	url = https://github.com/gearbot/Docs
+	branch = master
