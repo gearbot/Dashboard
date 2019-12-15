@@ -19,6 +19,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Get translations from Crowdin
+        run: |
+          curl https://api.crowdin.com/api/project/gearbot/export?login=gearbot&account-key=${{secrets.crowdin_api_key}}
+          wget -O all.zip "https://api.crowdin.com/api/project/gearbot/download/all.zip?login=gearbot&account-key=${{secrets.crowdin_api_key}}"
+          unzip all.zip -d src/assets
       - run: npm install
       - run: npm run build
         env:

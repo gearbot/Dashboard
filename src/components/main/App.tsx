@@ -25,6 +25,7 @@ import WebSocketHolder from "../../utils/WebSocketHolder";
 import Stats from "../../routes/StatsRoute";
 import * as React from "preact/compat";
 import Footer from "../layout/Footer";
+import Docs from "../../routes/Docs";
 
 const INITIAL_STATE = {
     loading: true,
@@ -34,6 +35,7 @@ const INITIAL_STATE = {
     websocket: null,
     pluralRules: null,
     usernameCache: {},
+    url: ""
 };
 
 class App extends Component<UserHolder, AppState> {
@@ -49,61 +51,65 @@ class App extends Component<UserHolder, AppState> {
     }
 
     componentDidMount(): void {
-        // we got some loading to do!
-        const todo = [];
+        //skip initalizing if we are prerendering
+        if (!process.env.PRERENDER) {
 
-        //restore info from localstorage
-        set_theme_colors(localStorage.getItem('theme') || "dark", false);
-        this.setState({
-            user: JSON.parse(localStorage.getItem("user"))
-        });
+            // we got some loading to do!
+            const todo = [];
+
+            //restore info from localstorage
+            set_theme_colors(localStorage.getItem('theme') || "dark", false);
+            this.setState({
+                user: JSON.parse(localStorage.getItem("user"))
+            });
 
 
-        //check for a new version, self destruct and reload if one is found
-        todo.push(fetch("/assets/version.txt").then(
-            response => response.text().then(
-                text => {
-                    if (text != process.env.VERSION && process.env.VERSIONCHECK == "true") {
-                        navigator.serviceWorker.getRegistration().then(function (reg) {
-                            if (reg) {
-                                reg.unregister().then(function () {
+            //check for a new version, self destruct and reload if one is found
+            todo.push(fetch("/assets/version.txt").then(
+                response => response.text().then(
+                    text => {
+                        if (text != process.env.VERSION && process.env.VERSIONCHECK == "true") {
+                            navigator.serviceWorker.getRegistration().then(function (reg) {
+                                if (reg) {
+                                    reg.unregister().then(function () {
+                                        location.reload(true);
+                                    });
+                                } else {
                                     location.reload(true);
-                                });
-                            } else {
-                                location.reload(true);
-                            }
-                        });
-                    }
-                })));
+                                }
+                            });
+                        }
+                    })));
 
 
-        get_info({
-            method: "GET",
-            endpoint: "whoami"
-        }).then(
-            info => {
-                useContext(AuthUserSetter)(info)
-            }).catch(ex => {
-            useContext(AuthUserSetter)(null)
-        });
-        get_info({
-            method: "GET",
-            endpoint: "general_info"
-        }).then(
-            info => {
-                this.setState({generalInfo: info})
-            }
-        );
+            get_info({
+                method: "GET",
+                endpoint: "whoami"
+            }).then(
+                info => {
+                    useContext(AuthUserSetter)(info)
+                }).catch(ex => {
+                useContext(AuthUserSetter)(null)
+            });
+            get_info({
+                method: "GET",
+                endpoint: "general_info"
+            }).then(
+                info => {
+                    this.setState({generalInfo: info})
+                }
+            );
 
-        todo.push(this.setLang(localStorage.getItem('LANG') || "en_US"));
+            todo.push(this.setLang(localStorage.getItem('LANG') || "en-US"));
 
-        //wait till we got everything sorted
-        Promise.all(todo).then(() => this.setState({loading: false}))
+            //wait till we got everything sorted
+            Promise.all(todo).then(() => this.setState({loading: false}))
+        }
     }
 
     setLang(lang) {
         localStorage.setItem("LANG", lang);
-        this.setState({pluralRules: new Intl.PluralRules(lang.replace("_", "-"))});
+        this.setState({pluralRules: new Intl.PluralRules(lang)});
         return fetch(`/assets/lang/${lang}.json`).then(
             response => response.json().then(
                 text => {
@@ -130,7 +136,6 @@ class App extends Component<UserHolder, AppState> {
 
 
     render() {
-        const [url, setUrl] = useState(null);
         return (
             <WS.Provider value={this.state.websocket} children={
                 <AuthUser.Provider value={this.state.user} children={
@@ -142,20 +147,21 @@ class App extends Component<UserHolder, AppState> {
 
                                     <IntlProvider definition={this.state.lang_strings}
                                                   provider={this.pluralProvider}>
-                                        {this.state.loading ? <Loading/> :
-                                            <div class="container">
-                                                <Header/>
 
-                                                <Router onChange={(url) => setUrl(url.url)} url={url}>
-                                                    <Home path={ROUTES.HOME}/>
-                                                    <PopupCloser path={ROUTES.CLOSER}/>
-                                                    <GuildListRoute path={ROUTES.GUILDS}/>
-                                                    <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
-                                                    <Stats path={ROUTES.STATS}/>
-                                                </Router>
-                                                <Footer/>
-                                            </div>
-                                        }
+                                        <div class="container">
+                                            <Header/>
+
+                                            <Router onChange={(url) => this.setState({url: url.url})} url={this.state.url}>
+                                                <Home path={ROUTES.HOME}/>
+                                                <PopupCloser path={ROUTES.CLOSER}/>
+                                                <GuildListRoute path={ROUTES.GUILDS}/>
+                                                <GuildRoute path={`${ROUTES.GUILD_DETAILS}/:?/:?`}/>
+                                                <Stats path={ROUTES.STATS}/>
+                                                <Docs path={ROUTES.DOCS}/>
+                                            </Router>
+                                            <Footer/>
+                                        </div>
+
                                     </IntlProvider>
                                 }/>
                             }/>

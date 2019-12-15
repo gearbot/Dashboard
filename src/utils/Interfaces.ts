@@ -22,6 +22,7 @@ export interface AppState extends LoadingInterface {
     websocket?: WebSocketHolder;
     pluralRules: Intl.PluralRules;
     usernameCache?: UserInfoMap;
+    url: string;
 }
 
 export interface HeaderProps {
@@ -523,4 +524,9 @@ export interface DocsProps {
     category?: string;
     folder?: string;
     page?: string;
+}
+
+export interface DocsState {
+    content?: string;
+    target: string;
 }

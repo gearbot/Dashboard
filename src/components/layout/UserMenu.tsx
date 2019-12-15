@@ -19,7 +19,7 @@ export default class UserMenu extends Component<{}, UserMenuState> {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            theme: localStorage.getItem("theme") as ("light" | "dark") || "dark",
+            theme: process.env.PRERENDER ? "dark" : localStorage.getItem("theme") as ("light" | "dark") || "dark",
             open: false
         }
     }
