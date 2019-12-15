@@ -14,7 +14,8 @@ const ROUTES = {
     STATS: "/stats",
     COMMANDS: "/commands",
     ADD_GEARBOT: "https://discordapp.com/oauth2/authorize?client_id=365497403928870914&scope=bot&permissions=1476783350",
-    FAQ: "/faq"
+    FAQ: "/faq",
+    DOCS: "/docs/:category?/:folder?/:page?"
 };
 
 export default ROUTES

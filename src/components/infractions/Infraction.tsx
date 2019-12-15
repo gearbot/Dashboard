@@ -13,7 +13,7 @@ const ICONS = {
     unmute: "innocent",
     forced_ban: "ban",
     tempban: "ban",
-    "softban": "ban"
+    softban: "ban"
 };
 
 const INITIAL_STATE = {

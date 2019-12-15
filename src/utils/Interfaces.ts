@@ -518,3 +518,9 @@ export interface TimeDisplayProps {
     time: number;
     partLimit ?: number;
 }
+
+export interface DocsProps {
+    category?: string;
+    folder?: string;
+    page?: string;
+}
