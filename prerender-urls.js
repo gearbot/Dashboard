@@ -21,7 +21,7 @@ module.exports = () => {
 	];
 	const docs = walkSync("Docs/pages/");
 	for (let i = 0; i < docs.length; i++) {
-		let name = docs[i].substring(15, docs[i].length - 3); //cut off /src/docs/pages and .md
+		let name = docs[i].substring(11, docs[i].length - 3); //cut off /docs/pages and .md
 		if (name.endsWith("index")) // cut off the index part
 			name = name.substring(0, name.length - 5);
 		pages.push({url: `/docs/${name}`})
