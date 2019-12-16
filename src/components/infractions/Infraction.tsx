@@ -1,7 +1,7 @@
 import {Component} from "preact";
 import {InfractionProps, InfractionState} from "../../utils/Interfaces";
 import UserDisplay from "../main/UserDisplay";
-import {Text, translate} from "preact-i18n"
+import {Text} from "preact-i18n"
 import GearIcon from "../main/GearIcon";
 import TimeDisplay from "../main/TimeDisplay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -30,7 +30,7 @@ export default class Infraction extends Component<InfractionProps, InfractionSta
 
     render() {
         const {open} = this.state;
-        const {id, user_id, active, start, reason, type, mod_id, guild_id, end} = this.props.infraction;
+        const {id, user_id, start, reason, type, mod_id, end} = this.props.infraction;
         const t = type.toLocaleLowerCase().replace(" ", "_");
         const start_parsed = new Date(`${start}+00:00`);
         let end_parsed = undefined;

@@ -5,7 +5,7 @@ import Dropdown from "../main/Dropdown";
 import {FILTER_OPTIONS, BLANK_FILTER} from "../../utils/FilterDefinitions";
 import FilterRow from "./FilterRow";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import "../../style/infractions/filter.scss"
 
 export default class Filter extends Component<FilterProps, {}> {

@@ -22,7 +22,7 @@ export default class GuildRoleSelector extends Component<GuildRoleSelectorProps,
             <div class="field" style={{clear: "left"} }>
                 <label class="label"><Text id={`config.roles.${name.toLowerCase()}`}/></label>
                     <div class={changed? "select is-success" : "select"}>
-                        <select disabled={disabled} onchange={(event) => setter(name, event.target.value)}>
+                        <select disabled={disabled} onChange={(event) => setter(name, event.target.value)}>
                             {assembed}
                         </select>
                 </div>

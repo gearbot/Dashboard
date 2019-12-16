@@ -10,7 +10,7 @@ export default class CheckmarkField extends Component<SettingsComponentProps, {}
         return (
             <div class="field">
                 <label class="checkbox">
-                    <input type="checkbox" checked={value} onclick={(event) => setter(name, event.target.checked)} disabled={disabled}/>
+                    <input type="checkbox" checked={value} onClick={(event) => setter(name, event.target.checked)} disabled={disabled}/>
                         <Text id={`config.basic.${name.toLowerCase()}`}/>
                         <InfoTooltip name={name.toLowerCase()}/>
                 </label>

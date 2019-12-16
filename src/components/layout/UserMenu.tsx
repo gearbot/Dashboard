@@ -3,11 +3,8 @@ import {useContext} from "preact/hooks";
 import {AuthUser, AuthUserSetter} from "../wrappers/Context";
 import {UserMenuState} from "../../utils/Interfaces";
 import {set_theme_colors} from "../../utils/theme";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import {API_ROOT, get_info} from "../../utils/dashAPI";
 import {route} from "preact-router";
-import {faSignInAlt} from "@fortawesome/free-solid-svg-icons";
 import OutsideAlerter from "../wrappers/OutsideAlerter";
 import {Text} from 'preact-i18n';
 import "../../style/layout/usermenu"
@@ -60,7 +57,7 @@ export default class UserMenu extends Component<{}, UserMenuState> {
                     <div class="userHolder">
                         { user ?
                             <>
-                        <img src={user.avatar_url} class="userImage"/>
+                        <img src={user.avatar_url} alt="user avatar" class="userImage"/>
                         <span>{user.username}<span class="discrim">#{user.discrim}</span></span>
                             </> : <a href={`${API_ROOT}/discord/login`} class="button yellowButton loginButton" native><Text id="navbar.login"/></a> }
                     </div>

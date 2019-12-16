@@ -31,13 +31,13 @@ export default class ChannelSelector extends Component<ChannelSelectorProps, {}>
             <div class="field is-grouped">
                 <label class="label">{name}</label>
                 <div class="select">
-                    <select disabled={disabled} onchange={(e) => setter(e.target.value)}>
+                    <select disabled={disabled} onChange={(e) => setter(e.target.value)}>
                         {assembed}
                     </select>
                 </div>
                 {remover ?
                     <div class="control">
-                        <button class="button is-danger" onclick={deleter}>
+                        <button class="button is-danger" onClick={deleter}>
                             <Text id="config.parts.delete"/>
                         </button>
                     </div> : <div/>}

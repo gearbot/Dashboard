@@ -2,7 +2,6 @@ import {Component} from "preact";
 import {GuildSettingsSectionProps, GuildSettingsSectionState} from "../../utils/Interfaces";
 import {useContext} from "preact/hooks";
 import {Guild, UserPerms, WS} from "../wrappers/Context";
-import {get_info} from "../../utils/dashAPI";
 import {Text} from 'preact-i18n';
 import Loading from "../main/Loading";
 
@@ -136,12 +135,11 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         const {loading, old_values, new_values, saving} = this.state;
         const perms = useContext(UserPerms);
         if (!loading) {
-            const guild = useContext(Guild);
             for (let key in this.props.fields) {
                 let {name, info, Component, visible, validator, extra_props} = this.props.fields[key];
                 extra_props = extra_props || {};
-                visible = visible || ((v) => true);
-                validator = validator || ((v) => true);
+                visible = visible || (() => true);
+                validator = validator || (() => true);
                 const changed = old_values[name] != new_values[name];
                 if (visible(new_values)) {
                     // @ts-ignore
@@ -155,7 +153,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
         return (
             loading ?
                 <Loading/> :
-                <form onsubmit={this.on_submit}>
+                <form onSubmit={this.on_submit}>
                     {assembled}
 
                     <div class="field is-grouped" style={{marginTop: "1em"}}>
@@ -165,7 +163,7 @@ export default class ConfigSection extends Component<GuildSettingsSectionProps, 
                         </div>
                         <div class="control">
                             <button class="button is-link" disabled={!this.can_submit() || saving}
-                                    onclick={this.reset}>
+                                    onClick={this.reset}>
                                 <Text id="config.parts.reset"/></button>
                         </div>
                     </div>

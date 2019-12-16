@@ -1,6 +1,5 @@
 import {Component} from "preact";
 import {FilterRowFieldProps} from "../../utils/Interfaces";
-import {FILTER_TYPES} from "../../utils/FilterDefinitions";
 
 export default class NumberFilter extends Component<FilterRowFieldProps, {}> {
     render() {

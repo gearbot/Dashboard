@@ -3,7 +3,6 @@ import {RoleComponentProps} from "../../utils/Interfaces";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 import {faLock} from "@fortawesome/free-solid-svg-icons/faLock";
-import {icon} from "@fortawesome/fontawesome-svg-core";
 export default class RoleComponent extends Component<RoleComponentProps, {}> {
 
     luminanace = (r, g, b) => {
@@ -18,7 +17,7 @@ export default class RoleComponent extends Component<RoleComponentProps, {}> {
     contrast = (rgb1, rgb2) => {
         return (this.luminanace(rgb1[0], rgb1[1], rgb1[2]) + 0.05)
             / (this.luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
-    }
+    };
 
 
     render() {
@@ -39,7 +38,7 @@ export default class RoleComponent extends Component<RoleComponentProps, {}> {
             iconcolor = "#cccccc";
 
 
-        const markerContent = remover ? <a onClick={() => remover(this.props.role.id)} style={{padding: "0.35em", color: iconcolor}}><FontAwesomeIcon icon={faTimes}/></a> : <div style={{padding: "0 0.25em"}}><FontAwesomeIcon icon={faLock}/></div>
+        const markerContent = remover ? <a onClick={() => remover(this.props.role.id)} style={{padding: "0.35em", color: iconcolor}}><FontAwesomeIcon icon={faTimes}/></a> : <div style={{padding: "0 0.25em"}}><FontAwesomeIcon icon={faLock}/></div>;
 
         return (
             <div class="level roleLevel" style={{float: "left", marginRight: "1em", backgroundColor: bgcolor}}>

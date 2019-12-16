@@ -15,7 +15,7 @@ export default class BasicInput extends Component<BasicInputComponentProps, {}> 
                 <label class="label"><Text id={`config.basic.${name.toLocaleLowerCase()}`}/> <InfoTooltip name={name.toLowerCase()}/></label>
                 <div class="control">
                     <input class={c} type={type} value={value} disabled={disabled} step={1}
-                           onchange={(event) => setter(name, type == "number" ? parseInt(event.target.value) : event.target.value)}/>
+                           onChange={(event) => setter(name, type == "number" ? parseInt(event.target.value) : event.target.value)}/>
                 </div>
                 <p class="help is-danger">{valid ? " " : error}</p>
             </div>
