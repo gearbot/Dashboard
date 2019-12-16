@@ -28,7 +28,7 @@ jobs:
           unzip all.zip -d src/assets
       - run: npm install
       - name: preact env info
-        run: preact info
+        run: npm run info
       - run: npm run build
         env:
           CI: true

@@ -8,6 +8,7 @@
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
     "build": "preact build --prerenderUrls ./prerender-urls.js && git rev-parse --short HEAD > build/assets/version.txt",
+    "info": "preact info",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "test": "jest"
