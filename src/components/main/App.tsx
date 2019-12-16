@@ -12,7 +12,7 @@ import {
     UserInfoCacheSetter,
     WS
 } from "../wrappers/Context";
-import {useContext, useState} from "preact/hooks";
+import {useContext} from "preact/hooks";
 import PopupCloser from "./PopupCloser";
 import ROUTES from "../../utils/routes";
 import GuildListRoute from "../../routes/GuildListRoute";
@@ -20,7 +20,6 @@ import {get_info} from "../../utils/dashAPI";
 import GuildRoute from "../../routes/GuildRoute";
 import {set_theme_colors} from "../../utils/theme";
 import {IntlProvider} from 'preact-i18n';
-import Loading from "./Loading";
 import WebSocketHolder from "../../utils/WebSocketHolder";
 import Stats from "../../routes/StatsRoute";
 import * as React from "preact/compat";
@@ -42,6 +41,7 @@ class App extends Component<UserHolder, AppState> {
 
     constructor(props, state) {
         super(props, state);
+        console.log(`GearBot dashboard version ${process.env.VERSION} initializing!`);
         this.state =
             {
                 ...INITIAL_STATE,
@@ -88,7 +88,7 @@ class App extends Component<UserHolder, AppState> {
             }).then(
                 info => {
                     useContext(AuthUserSetter)(info)
-                }).catch(ex => {
+                }).catch(() => {
                 useContext(AuthUserSetter)(null)
             });
             get_info({
