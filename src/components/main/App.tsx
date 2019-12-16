@@ -126,7 +126,8 @@ class App extends Component<UserHolder, AppState> {
     };
 
     pluralProvider = (dict, plural) => {
-        return dict[this.state.pluralRules.select(plural)];
+        console.log(dict)
+        return dict && dict[this.state.pluralRules.select(plural)];
     };
 
     usernameCacheSetter = (newCache) => {
