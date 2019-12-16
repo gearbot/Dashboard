@@ -37,19 +37,19 @@ jobs:
           CORS: false
           SENTRY_DSN: ${{secrets.SENTRY_DSN}}
       - name: deploy to server
-          uses: AEnterprise/rsync-deploy@v1.0
-          env:
-            DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
-            ARGS: "-e -c -r --delete"
-            SERVER_PORT: ${{ secrets.SERVER_PORT }}
-            FOLDER: "build/"
-            SERVER_IP: ${{ secrets.SERVER_IP }}
-            USERNAME: ${{ secrets.USERNAME }}
-            SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION_STAGING }}
-            VERSIONCHECK: true
-            - name: Purge Cloudflare Cache
-              uses: jakejarvis/cloudflare-purge-action@v0.1.1
-              env:
-                CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-                CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-                CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          FOLDER: "build/"
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION_STAGING }}
+          VERSIONCHECK: true
+      - name: Purge Cloudflare Cache
+        uses: jakejarvis/cloudflare-purge-action@v0.1.1
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
