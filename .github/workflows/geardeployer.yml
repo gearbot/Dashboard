@@ -27,6 +27,8 @@ jobs:
           wget -O all.zip "https://api.crowdin.com/api/project/gearbot/download/all.zip?login=gearbot&account-key=${{secrets.crowdin_api_key}}"
           unzip all.zip -d src/assets
       - run: npm install
+      - name: preact env info
+        run: preact info
       - run: npm run build
         env:
           CI: true
