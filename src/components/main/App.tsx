@@ -113,10 +113,16 @@ class App extends Component<UserHolder, AppState> {
         return fetch(`/assets/lang/${lang}.json`).then(
             response => response.json().then(
                 text => {
+                    console.log(`${lang} file received`);
+                    console.log(text);
                     this.setState({lang_strings: text})
                 }));
     }
 
+
+    componentDidUpdate(previousProps: Readonly<UserHolder>, previousState: Readonly<AppState>, snapshot: any): void {
+        console.log(this.state)
+    }
 
     setUser = user => {
         this.setState({user: user});
