@@ -48,8 +48,4 @@ jobs:
           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
           VERSIONCHECK: true
       - name: Purge Cloudflare Cache
-        uses: jakejarvis/cloudflare-purge-action@v0.1.1
-        env:
-          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+        run: curl -X POST "https://api.cloudflare.com/client/v4/zones/${{secrets.CLOUDFLARE_ZONE}}/purge_cache" -H "X-Auth-Email ${{ secrets.CLOUDFLARE_EMAIL }}" -H "X-Auth-Key ${{ secrets.CLOUDFLARE_KEY }}" -H "Content-Type application/json" --data '{"purge_everything":true}'
