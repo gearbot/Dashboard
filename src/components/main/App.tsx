@@ -126,7 +126,6 @@ class App extends Component<UserHolder, AppState> {
     };
 
     pluralProvider = (dict, plural) => {
-        console.log(dict)
         return dict && dict[this.state.pluralRules.select(plural)];
     };
 
